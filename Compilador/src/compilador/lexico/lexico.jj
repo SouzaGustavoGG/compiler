@@ -2,7 +2,29 @@ options{
     STATIC = false;
 }
 
-//{ } : . , + - * / % %% ** = ! < <= > >= != & | ( ) :-
+//palavras reservadas
+TOKEN : {
+	 < PROGRAM: "program">
+	| < DEFINE: "define">
+	| < NOT: "not">
+	| < VARIABLE: "variable">
+	| < IS: "is">
+	| < NATURAL: "natural">
+	| < REAL: "real">
+	| < CHAR: "char">
+	| < BOOLEAN: "boolean">
+	| < EXECUTE: "execute">
+	| < SET: "set">
+	| < TO: "to">
+	| < GET: "get">
+	| < PUT: "put">
+	| < LOOP: "loop">
+	| < WHILE: "while">
+	| < TRUE: "true">
+	| < FALSE: "false">
+	| < DO: "do">
+}
+
 //caracteres especiais
 TOKEN : {
 	< OPEN_KEY: "{" >
