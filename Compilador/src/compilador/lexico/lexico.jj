@@ -1,0 +1,31 @@
+options{
+    STATIC = false;
+}
+
+//{ } : . , + - * / % %% ** = ! < <= > >= != & | ( ) :-
+//caracteres especiais
+TOKEN : {
+	< OPEN_KEY: "{" >
+	| < CLOSE_KEY: "}" >
+	| < DOT: "." >
+	| < COMMA: "," >
+	| < PLUS: "+" >
+	| < MINUS: "-" >
+	| < MULTIPLY: "*" >
+	| < DIVIDER: "/" >
+	| < PERCENT: "%" >
+	| < MOD: "%" >
+	| < POW: "**" >
+	| < EQUALS: "=" > 
+	| < EXCLAMATION: "!" >
+	| < LESS: "<" >
+	| < LESS_EQUAL: "<=" >
+	| < GREATER: ">" >
+	| < GREATER_EQUAL: ">=" >
+    | < DIFFERENT: "!=" >
+	| < AMPERSAND: "&" >	
+	| < PIPE: "|" >	
+	| < OPENPARENTHESIS: "(" >
+	| < CLOSEPARENTHESIS: ")" >
+	| < COMMENT: ":-">
+}
