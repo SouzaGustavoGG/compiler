@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package compilador20191;
+package compiler.compilador20191;
 
 /**
  *
@@ -32,6 +32,20 @@ public class Compilador extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextEntrada = new javax.swing.JTextArea();
         jLabelNomeArquivo = new javax.swing.JLabel();
+        jButtonSalvarComoIcon = new javax.swing.JButton();
+        jButtonSairIcon = new javax.swing.JButton();
+        jToolBar1 = new javax.swing.JToolBar();
+        jToolBar2 = new javax.swing.JToolBar();
+        jButtonOpenIcon = new javax.swing.JButton();
+        jButtonNovoIcon = new javax.swing.JButton();
+        jButtonSalvarIcon = new javax.swing.JButton();
+        jButtonCopiarIcon = new javax.swing.JButton();
+        jButtonColarIcon = new javax.swing.JButton();
+        jButtonRecortarIcon = new javax.swing.JButton();
+        jButtonCompilarIcon = new javax.swing.JButton();
+        jButtonExecutarIcon = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAquivo = new javax.swing.JMenu();
         jMenuNovo = new javax.swing.JMenuItem();
@@ -50,6 +64,7 @@ public class Compilador extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Compilador");
 
+        jTextSaída.setEditable(false);
         jTextSaída.setColumns(20);
         jTextSaída.setRows(5);
         jScrollPane1.setViewportView(jTextSaída);
@@ -57,6 +72,70 @@ public class Compilador extends javax.swing.JFrame {
         jTextEntrada.setColumns(20);
         jTextEntrada.setRows(5);
         jScrollPane2.setViewportView(jTextEntrada);
+
+        jButtonSalvarComoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/save-as.png"))); // NOI18N
+        jButtonSalvarComoIcon.setToolTipText("Salvar Como");
+        jButtonSalvarComoIcon.setBorder(null);
+
+        jButtonSairIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/exit.png"))); // NOI18N
+        jButtonSairIcon.setToolTipText("Sair");
+        jButtonSairIcon.setBorder(null);
+
+        jToolBar1.setRollover(true);
+
+        jToolBar2.setRollover(true);
+
+        jButtonOpenIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/open.png"))); // NOI18N
+        jButtonOpenIcon.setToolTipText("Abrir");
+        jButtonOpenIcon.setBorderPainted(false);
+        jButtonOpenIcon.setFocusable(false);
+        jButtonOpenIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonOpenIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jButtonNovoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/new.png"))); // NOI18N
+        jButtonNovoIcon.setToolTipText("Novo");
+        jButtonNovoIcon.setFocusable(false);
+        jButtonNovoIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonNovoIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jButtonSalvarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/save.png"))); // NOI18N
+        jButtonSalvarIcon.setToolTipText("Salvar");
+
+        jButtonCopiarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/copy.png"))); // NOI18N
+        jButtonCopiarIcon.setToolTipText("Copiar");
+        jButtonCopiarIcon.setFocusable(false);
+        jButtonCopiarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonCopiarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jButtonColarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/paste.png"))); // NOI18N
+        jButtonColarIcon.setToolTipText("Colar");
+        jButtonColarIcon.setFocusable(false);
+        jButtonColarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonColarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jButtonRecortarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/cut.png"))); // NOI18N
+        jButtonRecortarIcon.setToolTipText("Recortar");
+        jButtonRecortarIcon.setFocusable(false);
+        jButtonRecortarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonRecortarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jButtonCompilarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/compile.png"))); // NOI18N
+        jButtonCompilarIcon.setToolTipText("Compilar");
+        jButtonCompilarIcon.setFocusable(false);
+        jButtonCompilarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonCompilarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jButtonExecutarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/run.png"))); // NOI18N
+        jButtonExecutarIcon.setToolTipText("Executar");
+        jButtonExecutarIcon.setFocusable(false);
+        jButtonExecutarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonExecutarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jMenuBar1.setBackground(new java.awt.Color(204, 204, 255));
 
         jMenuAquivo.setText("Arquivo");
         jMenuAquivo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -130,17 +209,62 @@ public class Compilador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 709, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelNomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelNomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonNovoIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonOpenIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonSalvarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonSalvarComoIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonSairIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonCopiarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonColarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonRecortarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonCompilarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonExecutarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 240, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButtonNovoIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSalvarIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSalvarComoIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonOpenIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSairIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCopiarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonColarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonRecortarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCompilarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonExecutarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -196,6 +320,16 @@ public class Compilador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonColarIcon;
+    private javax.swing.JButton jButtonCompilarIcon;
+    private javax.swing.JButton jButtonCopiarIcon;
+    private javax.swing.JButton jButtonExecutarIcon;
+    private javax.swing.JButton jButtonNovoIcon;
+    private javax.swing.JButton jButtonOpenIcon;
+    private javax.swing.JButton jButtonRecortarIcon;
+    private javax.swing.JButton jButtonSairIcon;
+    private javax.swing.JButton jButtonSalvarComoIcon;
+    private javax.swing.JButton jButtonSalvarIcon;
     private javax.swing.JLabel jLabelNomeArquivo;
     private javax.swing.JMenuItem jMenuAbrir;
     private javax.swing.JMenu jMenuAquivo;
@@ -213,7 +347,11 @@ public class Compilador extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuSalvarComo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextEntrada;
     private javax.swing.JTextArea jTextSaída;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar jToolBar2;
     // End of variables declaration//GEN-END:variables
 }
