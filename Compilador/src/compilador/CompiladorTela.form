@@ -256,7 +256,7 @@
     <Component class="javax.swing.JButton" name="jButtonSalvarComoIcon">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/compiler/compilador20191/&#xed;cons/save-as.png"/>
+          <Image iconType="3" name="/icons/save-as.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Salvar Como"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -267,7 +267,7 @@
     <Component class="javax.swing.JButton" name="jButtonSairIcon">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/compiler/compilador20191/&#xed;cons/exit.png"/>
+          <Image iconType="3" name="/icons/exit.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Sair"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -292,7 +292,7 @@
     <Component class="javax.swing.JButton" name="jButtonOpenIcon">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/compiler/compilador20191/&#xed;cons/open.png"/>
+          <Image iconType="3" name="/icons/open.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Abrir"/>
         <Property name="borderPainted" type="boolean" value="false"/>
@@ -304,7 +304,7 @@
     <Component class="javax.swing.JButton" name="jButtonNovoIcon">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/compiler/compilador20191/&#xed;cons/new.png"/>
+          <Image iconType="3" name="/icons/new.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Novo"/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -315,7 +315,7 @@
     <Component class="javax.swing.JButton" name="jButtonSalvarIcon">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/compiler/compilador20191/&#xed;cons/save.png"/>
+          <Image iconType="3" name="/icons/save.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Salvar"/>
       </Properties>
@@ -323,7 +323,7 @@
     <Component class="javax.swing.JButton" name="jButtonCopiarIcon">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/compiler/compilador20191/&#xed;cons/copy.png"/>
+          <Image iconType="3" name="/icons/copy.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Copiar"/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -334,7 +334,7 @@
     <Component class="javax.swing.JButton" name="jButtonColarIcon">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/compiler/compilador20191/&#xed;cons/paste.png"/>
+          <Image iconType="3" name="/icons/paste.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Colar"/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -345,7 +345,7 @@
     <Component class="javax.swing.JButton" name="jButtonRecortarIcon">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/compiler/compilador20191/&#xed;cons/cut.png"/>
+          <Image iconType="3" name="/icons/cut.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Recortar"/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -356,7 +356,7 @@
     <Component class="javax.swing.JButton" name="jButtonCompilarIcon">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/compiler/compilador20191/&#xed;cons/compile.png"/>
+          <Image iconType="3" name="/icons/compile.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Compilar"/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -367,13 +367,16 @@
     <Component class="javax.swing.JButton" name="jButtonExecutarIcon">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/compiler/compilador20191/&#xed;cons/run.png"/>
+          <Image iconType="3" name="/icons/run.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Executar"/>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExecutarIconActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
       <Properties>

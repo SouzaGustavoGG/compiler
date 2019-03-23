@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package compiler.compilador20191;
+package compilador20191;
 
 /**
  *
  * @author eerissi
  */
-public class Compilador extends javax.swing.JFrame {
+public class CompiladorTela extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public Compilador() {
+    public CompiladorTela() {
         initComponents();
     }
 
@@ -73,11 +73,11 @@ public class Compilador extends javax.swing.JFrame {
         jTextEntrada.setRows(5);
         jScrollPane2.setViewportView(jTextEntrada);
 
-        jButtonSalvarComoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/save-as.png"))); // NOI18N
+        jButtonSalvarComoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save-as.png"))); // NOI18N
         jButtonSalvarComoIcon.setToolTipText("Salvar Como");
         jButtonSalvarComoIcon.setBorder(null);
 
-        jButtonSairIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/exit.png"))); // NOI18N
+        jButtonSairIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exit.png"))); // NOI18N
         jButtonSairIcon.setToolTipText("Sair");
         jButtonSairIcon.setBorder(null);
 
@@ -85,51 +85,56 @@ public class Compilador extends javax.swing.JFrame {
 
         jToolBar2.setRollover(true);
 
-        jButtonOpenIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/open.png"))); // NOI18N
+        jButtonOpenIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/open.png"))); // NOI18N
         jButtonOpenIcon.setToolTipText("Abrir");
         jButtonOpenIcon.setBorderPainted(false);
         jButtonOpenIcon.setFocusable(false);
         jButtonOpenIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonOpenIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jButtonNovoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/new.png"))); // NOI18N
+        jButtonNovoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/new.png"))); // NOI18N
         jButtonNovoIcon.setToolTipText("Novo");
         jButtonNovoIcon.setFocusable(false);
         jButtonNovoIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonNovoIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jButtonSalvarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/save.png"))); // NOI18N
+        jButtonSalvarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
         jButtonSalvarIcon.setToolTipText("Salvar");
 
-        jButtonCopiarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/copy.png"))); // NOI18N
+        jButtonCopiarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/copy.png"))); // NOI18N
         jButtonCopiarIcon.setToolTipText("Copiar");
         jButtonCopiarIcon.setFocusable(false);
         jButtonCopiarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCopiarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jButtonColarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/paste.png"))); // NOI18N
+        jButtonColarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/paste.png"))); // NOI18N
         jButtonColarIcon.setToolTipText("Colar");
         jButtonColarIcon.setFocusable(false);
         jButtonColarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonColarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jButtonRecortarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/cut.png"))); // NOI18N
+        jButtonRecortarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cut.png"))); // NOI18N
         jButtonRecortarIcon.setToolTipText("Recortar");
         jButtonRecortarIcon.setFocusable(false);
         jButtonRecortarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonRecortarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jButtonCompilarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/compile.png"))); // NOI18N
+        jButtonCompilarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/compile.png"))); // NOI18N
         jButtonCompilarIcon.setToolTipText("Compilar");
         jButtonCompilarIcon.setFocusable(false);
         jButtonCompilarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCompilarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jButtonExecutarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compiler/compilador20191/ícons/run.png"))); // NOI18N
+        jButtonExecutarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/run.png"))); // NOI18N
         jButtonExecutarIcon.setToolTipText("Executar");
         jButtonExecutarIcon.setFocusable(false);
         jButtonExecutarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonExecutarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonExecutarIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExecutarIconActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -283,6 +288,10 @@ public class Compilador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuAbrirActionPerformed
 
+    private void jButtonExecutarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExecutarIconActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonExecutarIconActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -300,21 +309,23 @@ public class Compilador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Compilador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CompiladorTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Compilador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CompiladorTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Compilador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CompiladorTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Compilador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CompiladorTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Compilador().setVisible(true);
+                new CompiladorTela().setVisible(true);
             }
         });
     }
