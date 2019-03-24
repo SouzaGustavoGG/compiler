@@ -5,6 +5,8 @@
  */
 package compilador;
 
+import com.sun.javafx.scene.text.TextLine;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -118,18 +120,33 @@ public class CompiladorTela extends javax.swing.JFrame {
         jButtonCopiarIcon.setFocusable(false);
         jButtonCopiarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCopiarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonCopiarIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCopiarIconActionPerformed(evt);
+            }
+        });
 
         jButtonColarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/paste.png"))); // NOI18N
         jButtonColarIcon.setToolTipText("Colar");
         jButtonColarIcon.setFocusable(false);
         jButtonColarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonColarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonColarIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonColarIconActionPerformed(evt);
+            }
+        });
 
         jButtonRecortarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cut.png"))); // NOI18N
         jButtonRecortarIcon.setToolTipText("Recortar");
         jButtonRecortarIcon.setFocusable(false);
         jButtonRecortarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonRecortarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonRecortarIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRecortarIconActionPerformed(evt);
+            }
+        });
 
         jButtonCompilarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/compile.png"))); // NOI18N
         jButtonCompilarIcon.setToolTipText("Compilar");
@@ -310,23 +327,11 @@ public class CompiladorTela extends javax.swing.JFrame {
     private void jMenuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbrirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuAbrirActionPerformed
-    
-    private void jButtonRecortarIconActionPerformed(java.awt.event.ActionEvent evt) {                                           
-    	jTextEntrada.cut();
-    }
-    
-    private void jButtonCopiarIconActionPerformed(java.awt.event.ActionEvent evt) {                                           
-    	jTextEntrada.copy();
-    }
-    
-    private void jButtonColarIconActionPerformed(java.awt.event.ActionEvent evt) {                                           
-    	jTextEntrada.paste();
-    }
-
+//ok
     private void jButtonExecutarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExecutarIconActionPerformed
         
     }//GEN-LAST:event_jButtonExecutarIconActionPerformed
-
+//ok
     private void jButtonNovoIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoIconActionPerformed
         setTitle(filename);
             try {
@@ -337,29 +342,23 @@ public class CompiladorTela extends javax.swing.JFrame {
                 Logger.getLogger(CompiladorTela.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_jButtonNovoIconActionPerformed
-
+//ok
     private void jMenuNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoActionPerformed
         jButtonNovoIconActionPerformed(evt);
     }//GEN-LAST:event_jMenuNovoActionPerformed
-
-    private void jButtonOpenIconActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-    	try {
-                        
-                        File file = null;
-                        //file.setDialogType(JFileChooser.OPEN_DIALOG); 
-                        //file.setDialogTitle("Abrir Arquivo"); 
-                        //FileFilter filter = new ExtensionFileFilter("JPG e PNG", new String[]
-                       // jFrame1.setVisible(true);
-                       // jFileChooser1.setDialogType(OPEN_DIALOG);
-                       // jFileChooser1.setSelectedFile(file);
-                       // File nome_do_arquivo = jFileChooser1.getSelectedFile();
-                        //System.out.println(nome_do_arquivo.getName());
-			controller.loadFile("", jTextEntrada); //carrega o arq p a entrada
-			//jLabelNomeArquivo.setText(""); //inclui o nome do arq na janela
-		} catch (MenuException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Erro" , JOptionPane.PLAIN_MESSAGE);
-		}
-    }
+//ok
+    private void jButtonRecortarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRecortarIconActionPerformed
+      jTextEntrada.cut();
+    }//GEN-LAST:event_jButtonRecortarIconActionPerformed
+//ok
+    private void jButtonColarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonColarIconActionPerformed
+        jTextEntrada.paste();
+    }//GEN-LAST:event_jButtonColarIconActionPerformed
+//ok
+    private void jButtonCopiarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopiarIconActionPerformed
+        jTextEntrada.copy();
+    }//GEN-LAST:event_jButtonCopiarIconActionPerformed
+        
     
     /**
      * @param args the command line arguments
