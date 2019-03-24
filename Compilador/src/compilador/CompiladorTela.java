@@ -220,16 +220,31 @@ public class CompiladorTela extends javax.swing.JFrame {
         jMenuCopiar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuCopiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/copy.png"))); // NOI18N
         jMenuCopiar.setText("Copiar");
+        jMenuCopiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCopiarActionPerformed(evt);
+            }
+        });
         jMenuEdicao.add(jMenuCopiar);
 
         jMenuColar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jMenuColar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/paste.png"))); // NOI18N
         jMenuColar.setText("Colar");
+        jMenuColar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuColarActionPerformed(evt);
+            }
+        });
         jMenuEdicao.add(jMenuColar);
 
         jMenuRecortar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         jMenuRecortar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cut.png"))); // NOI18N
         jMenuRecortar.setText("Recortar");
+        jMenuRecortar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuRecortarActionPerformed(evt);
+            }
+        });
         jMenuEdicao.add(jMenuRecortar);
 
         jMenuBar1.add(jMenuEdicao);
@@ -358,6 +373,18 @@ public class CompiladorTela extends javax.swing.JFrame {
     private void jButtonCopiarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopiarIconActionPerformed
         jTextEntrada.copy();
     }//GEN-LAST:event_jButtonCopiarIconActionPerformed
+//ok
+    private void jMenuCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCopiarActionPerformed
+        jButtonCopiarIconActionPerformed(evt);
+    }//GEN-LAST:event_jMenuCopiarActionPerformed
+//ok
+    private void jMenuColarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuColarActionPerformed
+        jButtonColarIconActionPerformed(evt);
+    }//GEN-LAST:event_jMenuColarActionPerformed
+
+    private void jMenuRecortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRecortarActionPerformed
+        jButtonRecortarIconActionPerformed(evt);
+    }//GEN-LAST:event_jMenuRecortarActionPerformed
         
     
     /**

@@ -95,6 +95,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Copiar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCopiarActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuColar">
               <Properties>
@@ -106,6 +109,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Colar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuColarActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuRecortar">
               <Properties>
@@ -117,6 +123,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Recortar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuRecortarActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
