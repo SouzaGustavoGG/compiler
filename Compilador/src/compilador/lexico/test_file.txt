@@ -1,0 +1,16 @@
+program {
+    define {
+        not variable
+            real is Ident_12_23_231_efewfwefw_32_23_ 12234.12 .
+            boolean is Identificador, Identificador true .
+        variable
+            real is Identificador{4} .
+            boolean is Identificador,Identificador .
+    }
+
+    :- comentario
+
+    :-- COMENTATRI
+    FEWFEWFWEF
+    EWFWEFWE --:
+}
