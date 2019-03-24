@@ -30,37 +30,24 @@ public class ControladorIde implements IdeInterface{
 
 	}
 
-        public void verifyEntry(JTextArea entrada, JTextArea saida, String filename) throws IOException, MenuException{
-            if (entrada.getText().equals("")) {
-                saida.setText("");
-            } else {
-                Object[] options = {"Sim", "Não", "Cancelar"};
-                int option = JOptionPane.showOptionDialog(null, filename + " foi alterado, salvar alterações?", "Deseja salvar as alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
-                if (option == 1) { //nao salvar
-                    entrada.setText("");
-                    saida.setText("");
-                } else if (option == 0){ //salvar
-                    String entrada_conv = ""+entrada.getText();
-                    saveFile(filename,entrada_conv);
-                    entrada.setText("");
-                    saida.setText("");
-                }
-            }
-        }
         
 	@Override
 	public void newFile(JTextArea input, JTextArea output) throws MenuException {
+		MenuException e = null;
 		if(isEdited(input)) {
 			if(getCurrentFile().equals("")) { //arquivo novo nao salvo - salvar como
-				throw new MenuException(MenuException.NEW_FILE_NOT_SAVED, input.getText());
+				e = new MenuException(MenuException.NEW_FILE_NOT_SAVED, input.getText());
 			} else { //salvar
-				throw new MenuException(MenuException.FILE_NOT_SAVED, getCurrentFile(), input.getText());
+				e = new MenuException(MenuException.FILE_NOT_SAVED, getCurrentFile(), input.getText());
 			}
 		} 
 		input.setText("");
 		output.setText("");
 		setCurrentFile("");
-                
+		
+		if ( e != null ) {
+			throw e;
+		}
 	}
 
 	@Override
@@ -239,5 +226,24 @@ public class ControladorIde implements IdeInterface{
 	public List<String> getExtensions() {
 		return extensions;
 	}
+        
+        
+        public void verifyEntry(JTextArea entrada, JTextArea saida, String filename) throws IOException, MenuException{
+            if (entrada.getText().equals("")) {
+                saida.setText("");
+            } else {
+                Object[] options = {"Sim", "Não", "Cancelar"};
+                int option = JOptionPane.showOptionDialog(null, filename + " foi alterado, salvar alterações?", "Deseja salvar as alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
+                if (option == 1) { //nao salvar
+                    entrada.setText("");
+                    saida.setText("");
+                } else if (option == 0){ //salvar
+                    String entrada_conv = ""+entrada.getText();
+                    saveFile(filename,entrada_conv);
+                    entrada.setText("");
+                    saida.setText("");
+                }
+            }
+        }
 
 }
