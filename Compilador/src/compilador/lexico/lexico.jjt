@@ -32,7 +32,7 @@ import java.text.ParseException;public class Parser{
 PARSER_END(Parser)
 
 //codigo de parser
-JAVACODE void program() {
+JAVACODE void start() {
     Token tok;
     int nesting = 1;
     while (true) {
