@@ -29,16 +29,21 @@ public class ControladorIde implements IdeInterface{
 
 	@Override
 	public void newFile(JTextArea input, JTextArea output) throws MenuException {
+		MenuException e = null;
 		if(isEdited(input)) {
 			if(getCurrentFile().equals("")) { //arquivo novo nao salvo - salvar como
-				throw new MenuException(MenuException.NEW_FILE_NOT_SAVED, input.getText());
+				e = new MenuException(MenuException.NEW_FILE_NOT_SAVED, input.getText());
 			} else { //salvar
-				throw new MenuException(MenuException.FILE_NOT_SAVED, getCurrentFile(), input.getText());
+				e = new MenuException(MenuException.FILE_NOT_SAVED, getCurrentFile(), input.getText());
 			}
 		} 
 		input.setText("");
 		output.setText("");
 		setCurrentFile("");
+		
+		if ( e != null ) {
+			throw e;
+		}
 	}
 
 	@Override
