@@ -5,12 +5,17 @@
  */
 package compilador;
 
+import java.io.IOException;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author eerissi
  */
 public class CompiladorTela extends javax.swing.JFrame {
 
+	private ControladorIde controller = new ControladorIde(); 
     /**
      * Creates new form NewJFrame
      */
@@ -91,12 +96,22 @@ public class CompiladorTela extends javax.swing.JFrame {
         jButtonOpenIcon.setFocusable(false);
         jButtonOpenIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonOpenIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonOpenIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOpenIconActionPerformed(evt);
+            }
+        });
 
         jButtonNovoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/new.png"))); // NOI18N
         jButtonNovoIcon.setToolTipText("Novo");
         jButtonNovoIcon.setFocusable(false);
         jButtonNovoIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonNovoIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonNovoIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	jButtonNovoIconActionPerformed(evt);
+            }
+        });
 
         jButtonSalvarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
         jButtonSalvarIcon.setToolTipText("Salvar");
@@ -106,18 +121,33 @@ public class CompiladorTela extends javax.swing.JFrame {
         jButtonCopiarIcon.setFocusable(false);
         jButtonCopiarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCopiarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonCopiarIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	jButtonCopiarIconActionPerformed(evt);
+            }
+        });
 
         jButtonColarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/paste.png"))); // NOI18N
         jButtonColarIcon.setToolTipText("Colar");
         jButtonColarIcon.setFocusable(false);
         jButtonColarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonColarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonRecortarIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	jButtonRecortarIconActionPerformed(evt);
+            }
+        });
 
         jButtonRecortarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cut.png"))); // NOI18N
         jButtonRecortarIcon.setToolTipText("Recortar");
         jButtonRecortarIcon.setFocusable(false);
         jButtonRecortarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonRecortarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonRecortarIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	jButtonRecortarIconActionPerformed(evt);
+            }
+        });
 
         jButtonCompilarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/compile.png"))); // NOI18N
         jButtonCompilarIcon.setToolTipText("Compilar");
@@ -287,11 +317,53 @@ public class CompiladorTela extends javax.swing.JFrame {
     private void jMenuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbrirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuAbrirActionPerformed
+    
+    private void jButtonRecortarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbrirActionPerformed
+    	jTextEntrada.cut();
+    }
+    
+    private void jButtonCopiarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbrirActionPerformed
+    	jTextEntrada.copy();
+    }
+    
+    private void jButtonColarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbrirActionPerformed
+    	jTextEntrada.paste();
+    }
 
     private void jButtonExecutarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExecutarIconActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonExecutarIconActionPerformed
 
+    private void jButtonOpenIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExecutarIconActionPerformed
+    	try {
+			controller.loadFile("", jTextEntrada);
+			jLabelNomeArquivo.setText("");
+		} catch (MenuException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Erro" , JOptionPane.PLAIN_MESSAGE);
+		}
+    }
+    
+    private void jButtonNovoIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExecutarIconActionPerformed
+    	try {
+			controller.newFile(jTextEntrada, jTextSaída);
+			jLabelNomeArquivo.setText("");
+			
+		} catch (MenuException e) {
+			String contentNotSaved = e.getOptional().get(1);
+			if( e.getMessage().equals(MenuException.FILE_NOT_SAVED)) { //salvar
+				try {
+					String fileName = e.getOptional().get(0);
+					controller.saveFile(fileName, contentNotSaved);
+				} catch (IOException | MenuException e1) {}
+			} else if(e.getMessage().equals(MenuException.NEW_FILE_NOT_SAVED)){ //salvar como //FORM PERGUTANDO NOME
+				try {
+					controller.saveFile("", contentNotSaved);
+				} catch (IOException | MenuException e1) {}
+			} else {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Erro" , JOptionPane.PLAIN_MESSAGE);
+			}
+		}
+    }
     /**
      * @param args the command line arguments
      */
