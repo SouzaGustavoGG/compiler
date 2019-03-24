@@ -1,5 +1,6 @@
 package compilador;
 
+import java.awt.TextArea;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.Closeable;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import javax.swing.JTextArea;
 
@@ -27,6 +30,24 @@ public class ControladorIde implements IdeInterface{
 
 	}
 
+        public void verifyEntry(JTextArea entrada, JTextArea saida, String filename) throws IOException, MenuException{
+            if (entrada.getText().equals("")) {
+                saida.setText("");
+            } else {
+                Object[] options = {"Sim", "Não", "Cancelar"};
+                int option = JOptionPane.showOptionDialog(null, filename + " foi alterado, salvar alterações?", "Deseja salvar as alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[2]);
+                if (option == 1) { //nao salvar
+                    entrada.setText("");
+                    saida.setText("");
+                } else if (option == 0){ //salvar
+                    String entrada_conv = ""+entrada.getText();
+                    saveFile(filename,entrada_conv);
+                    entrada.setText("");
+                    saida.setText("");
+                }
+            }
+        }
+        
 	@Override
 	public void newFile(JTextArea input, JTextArea output) throws MenuException {
 		if(isEdited(input)) {
@@ -39,6 +60,7 @@ public class ControladorIde implements IdeInterface{
 		input.setText("");
 		output.setText("");
 		setCurrentFile("");
+                
 	}
 
 	@Override
@@ -69,25 +91,69 @@ public class ControladorIde implements IdeInterface{
 		
 	}
 
-	@Override
 	public void saveFile(String fileName, String content) throws IOException, MenuException {
-		validateExtension(fileName);
+		//validateExtension(fileName);
+		JFileChooser fileChooser = new JFileChooser();
+                Scanner reader = null;
+                //filePath = originalPath;
+                String originalName = fileName;
+                //String dir = getPath(filePath);
+                //fileChooser.setSelectedFile(new File(dir));
+                fileChooser.setSelectedFile(new File(""));// olhar aqui dps
+                
+                if (fileChooser.showSaveDialog(fileChooser) == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                String filePath = file.getPath();
 		
-        BufferedWriter bw = null;
-        Scanner reader = null;
-		try {
-			bw = new BufferedWriter(new FileWriter(fileName));
-	        reader = new Scanner(content);
-	        while (reader.hasNextLine()) {
-	            bw.write(reader.nextLine());
-	            bw.newLine();
-	        }
+                File selectedFile = new File(filePath);
+                fileName = selectedFile.getName();
+                
+                if (selectedFile.exists()) {
+                Object[] options = {"Sim", "Não", "Cancelar"};
+                    int option = JOptionPane.showOptionDialog(null, fileName + " já existe, Deseja substituí-lo?", "Confirmar Salvar Como", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                    if (option == 0) { try ( //salvar
+                            BufferedWriter bw = new BufferedWriter(new FileWriter(selectedFile))
+                            ) {
+                            reader = new Scanner(content);
+                        while (reader.hasNextLine()) {
+                            bw.write(reader.nextLine());
+                            bw.newLine();
+                        }
+                        // jf.setTitle("Compilador - " + fileName);
+                    }
+                    } else { // nao salvar
+                       // filePath = originalPath;
+                        fileName = originalName;
+                    }
+                } else {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(selectedFile))) {
+                        //Scanner reader;
+                        reader = new Scanner(content);
+                        while (reader.hasNextLine()) {
+                            bw.write(reader.nextLine());
+                            bw.newLine();
+                        }
+                        //jf.setTitle("Compilador - " + fileName);
+                    }
+                }
+                
+                /*try {
+                    bw = new BufferedWriter(new FileWriter(fileName));
+                    reader = new Scanner(content);
+                    while (reader.hasNextLine()) {
+                        bw.write(reader.nextLine());
+                        bw.newLine();
+                    }
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 	        closeAllStreams(bw, reader);
-		}
-	}
+		}*/
+            }
+        }
+
+                
+                
 
 	@Override
 	public void compile(String content) {

@@ -1,0 +1,82 @@
+options{
+    STATIC = false;
+}
+
+//ignorar
+SKIP : {
+    " "
+	| "\t"
+    | "\n"
+    | "\r"
+    | "\f"
+}
+
+SKIP : {
+	":-" : linecomment | blockcomment
+}
+
+
+<linecomment> SKIP : {
+	<["\n", "\r"]> : DEFAULT
+}
+
+<blockcomment> SKIP : {
+	"-:": DEFAULT
+}
+
+//palavras reservadas
+TOKEN : {
+	 < PROGRAM: "program">
+	| < DEFINE: "define">
+	| < NOT: "not">
+	| < VARIABLE: "variable">
+	| < IS: "is">
+	| < NATURAL: "natural">
+	| < REAL: "real">
+	| < CHAR: "char">
+	| < BOOLEAN: "boolean">
+	| < EXECUTE: "execute">
+	| < SET: "set">
+	| < TO: "to">
+	| < GET: "get">
+	| < PUT: "put">
+	| < LOOP: "loop">
+	| < WHILE: "while">
+	| < TRUE: "true">
+	| < FALSE: "false">
+	| < DO: "do">
+}
+
+//caracteres especiais
+TOKEN : {
+	< OPEN_KEY: "{" >
+	| < CLOSE_KEY: "}" >
+	| < DOT: "." >
+	| < COMMA: "," >
+	| < PLUS: "+" >
+	| < MINUS: "-" >
+	| < MULTIPLY: "*" >
+	| < DIVIDER: "/" >
+	| < PERCENT: "%" >
+	| < MOD: "%" >
+	| < POW: "**" >
+	| < EQUALS: "=" > 
+	| < EXCLAMATION: "!" >
+	| < LESS: "<" >
+	| < LESS_EQUAL: "<=" >
+	| < GREATER: ">" >
+	| < GREATER_EQUAL: ">=" >
+    | < DIFFERENT: "!=" >
+	| < AMPERSAND: "&" >	
+	| < PIPE: "|" >	
+	| < OPENPARENTHESIS: "(" >
+	| < CLOSEPARENTHESIS: ")" >
+}
+
+// numbers
+TOKEN : {
+	< #DIGIT: ["0"-"9"] >
+	| < DECIMAL: <DOT><DIGIT>(<DIGIT>)?
+	| < INTEGER: <DIGIT>(<DIGIT>)?(<DIGIT>)? > 
+	| < REAL: <DIGIT>((<DIGIT>)?){4}<DECIMAL>
+}
