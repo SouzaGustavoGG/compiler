@@ -1,0 +1,143 @@
+options{
+    STATIC = false;
+}
+
+PARSER_BEGIN(Parser)
+
+import java.text.ParseException;public class Parser{
+
+    public Parser() {
+
+    }
+
+    public static void main(String[] args) throws ParseException {
+        Parser parser = new Parser(System.in);
+        parser.start();
+    }
+
+    static public String im(int x) {
+    		int k;
+    		String s;
+    		s = tokenImage[x];
+    		k = s.lastIndexOf("\"");
+    		try {
+    			s = s.substring(1, k);
+    		} catch (StringIndexOutOfBoundsException e) {
+
+    		}
+    		return s;
+    	}
+
+}
+PARSER_END(Parser)
+
+//codigo de parser
+JAVACODE void program() {
+    Token tok;
+    int nesting = 1;
+    while (true) {
+        tok = getToken(1);
+        if (tok.kind == OPEN_KEY) nesting++;
+        if (tok.kind == CLOSE_KEY) {
+          nesting--;
+          if (nesting == 0) break;
+        }
+        tok = getNextToken();
+    }
+}
+
+//contador de erros
+TOKEN_MGR_DECLS : {
+    int countLexError = 0;
+    public int foundLexError()
+    {
+    return countLexError;
+    }
+}
+
+//ignorar
+SKIP : {
+    " "
+	| "\t"
+    | "\n"
+    | "\r"
+    | "\f"
+}
+
+SKIP : {
+	":-" : linecomment
+}
+
+SKIP : {
+	":-" : blockcomment
+}
+
+<linecomment> SKIP : {
+	<["\n", "\r"]> : DEFAULT
+}
+
+<blockcomment> SKIP : {
+	"-:": DEFAULT
+}
+
+//palavras reservadas
+TOKEN : {
+	 < PROGRAM: "program">
+	| < DEFINE: "define">
+	| < NOT: "not">
+	| < VARIABLE: "variable">
+	| < IS: "is">
+	| < NATURAL: "natural">
+	| < REAL: "real">
+	| < CHAR: "char">
+	| < BOOLEAN: "boolean">
+	| < EXECUTE: "execute">
+	| < SET: "set">
+	| < TO: "to">
+	| < GET: "get">
+	| < PUT: "put">
+	| < LOOP: "loop">
+	| < WHILE: "while">
+	| < TRUE: "true">
+	| < FALSE: "false">
+	| < DO: "do">
+}
+
+//constante literal
+TOKEN: {
+   <LITERAL_CONST: "\"" (~[ "\"", "\n", "\r"])* "\"">
+}
+
+//caracteres especiais
+TOKEN : {
+	< OPEN_KEY: "{" >
+	| < CLOSE_KEY: "}" >
+	| < DOT: "." >
+	| < COMMA: "," >
+	| < PLUS: "+" >
+	| < MINUS: "-" >
+	| < MULTIPLY: "*" >
+	| < DIVIDER: "/" >
+	| < PERCENT: "%" >
+	| < MOD: "%%" >
+	| < POW: "**" >
+	| < EQUALS: "=" > 
+	| < EXCLAMATION: "!" >
+	| < LESS: "<" >
+	| < LESS_EQUAL: "<=" >
+	| < GREATER: ">" >
+	| < GREATER_EQUAL: ">=" >
+    | < DIFFERENT: "!=" >
+	| < AMPERSAND: "&" >	
+	| < PIPE: "|" >	
+	| < OPENPARENTHESIS: "(" >
+	| < CLOSEPARENTHESIS: ")" >
+}
+
+// numbers
+TOKEN : {
+	< #DIGIT: ["0"-"9"] >
+	| < DECIMAL_CONST: <DOT><DIGIT>(<DIGIT>)? >
+	| < INTEGER_CONST: <DIGIT>(<DIGIT>)?(<DIGIT>)? >
+	| < REAL_CONST: <DIGIT>((<DIGIT>)?){4}<DECIMAL_CONST> >
+}
