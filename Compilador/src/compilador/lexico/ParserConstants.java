@@ -99,11 +99,11 @@ public interface ParserConstants {
   /** RegularExpression Id. */
   int DIGIT = 55;
   /** RegularExpression Id. */
-  int DECIMAL_CONST = 56;
+  int DECIMAL_NUMBER = 56;
   /** RegularExpression Id. */
-  int INTEGER_CONST = 57;
+  int NATURAL_NUMBER = 57;
   /** RegularExpression Id. */
-  int REAL_CONST = 58;
+  int REAL_NUMBER = 58;
   /** RegularExpression Id. */
   int IDENTIFICATOR = 59;
   /** RegularExpression Id. */
@@ -112,6 +112,12 @@ public interface ParserConstants {
   int LETTER = 61;
   /** RegularExpression Id. */
   int UPL = 62;
+  /** RegularExpression Id. */
+  int INVALID_SYMBOLS = 63;
+  /** RegularExpression Id. */
+  int INVALID_NATURAL_NUMBER = 64;
+  /** RegularExpression Id. */
+  int INVALID_REAL_NUMBER = 65;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -178,13 +184,16 @@ public interface ParserConstants {
     "\"(\"",
     "\")\"",
     "<DIGIT>",
-    "<DECIMAL_CONST>",
-    "<INTEGER_CONST>",
-    "<REAL_CONST>",
+    "<DECIMAL_NUMBER>",
+    "<NATURAL_NUMBER>",
+    "<REAL_NUMBER>",
     "<IDENTIFICATOR>",
     "\"_\"",
     "<LETTER>",
     "<UPL>",
+    "<INVALID_SYMBOLS>",
+    "<INVALID_NATURAL_NUMBER>",
+    "<INVALID_REAL_NUMBER>",
   };
 
 }

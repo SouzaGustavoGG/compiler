@@ -106,15 +106,26 @@ TOKEN : {
 // numbers
 TOKEN : {
 	< #DIGIT: ["0"-"9"] >
-	| < DECIMAL_CONST: <DOT><DIGIT>(<DIGIT>)? >{Dados.addDado("CONSTANTE DECIMAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
-	| < INTEGER_CONST: <DIGIT>(<DIGIT>)?(<DIGIT>)? >{Dados.addDado("CONSTANTE INTEIRA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
-	| < REAL_CONST: <DIGIT>((<DIGIT>)?){4}<DECIMAL_CONST> >{Dados.addDado("CONSTANTE REAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < #DECIMAL_NUMBER: <DOT><DIGIT>(<DIGIT>)?>
+	| < NATURAL_NUMBER: <DIGIT>(<DIGIT>)?(<DIGIT>)? >{Dados.addDado("NUMERO NATURAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < REAL_NUMBER: <DIGIT>((<DIGIT>)?){4}<DECIMAL_NUMBER> >{Dados.addDado("NUMERO REAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 }
 
-// identificadores
+// identificador
 TOKEN :{
 	<IDENTIFICATOR: <UPL>(<SP>)?((<LETTER>(<SP>)?)|(<DIGIT>(<DIGIT>)?(<LETTER>|<SP>)))* > {Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
     | <#SP: "_">
     | <#LETTER:["A"-"Z", "a"-"z"]>
     | <#UPL: ["A"-"Z"]>
+}
+
+// erros
+TOKEN : {
+    <INVALID_SYMBOLS: (~["a"-"z", "A"-"Z", "0"-"9", "\"", "(", ")", "[", "]", "{", "}", ";", ",", ".", "=", ">", "<", "!",
+    "+", "-", "*", "/", "%", " ", "\t", "\n", "\r", "\f"])+>{Dados.addError("ERRO LEXICO", image.toString(), input_stream.getEndLine(),
+     input_stream.getBeginColumn(), jjmatchedKind);}
+    |<INVALID_NATURAL_NUMBER: (<DIGIT>)+>{Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
+       input_stream.getBeginColumn(), jjmatchedKind);}
+    | <INVALID_REAL_NUMBER: (<DIGIT>)+<DOT>(<DIGIT>)*>{Dados.addError("NUMERO REAL INVALIDO", image.toString(), input_stream.getEndLine(),
+      input_stream.getBeginColumn(), jjmatchedKind);}
 }

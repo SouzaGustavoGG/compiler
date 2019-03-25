@@ -14,7 +14,7 @@ public class Dados {
     
     public static void addError(String tipoToken, String token, int linha, int coluna, int id){
         erros += 1;
-        dados.add("ERRO -> " + tipoToken + token + " na linha " + linha + ", coluna " + coluna + "| ID: " + id);
+        dados.add("ERRO -> " + tipoToken + " '" + token + "' na linha " + linha + ", coluna " + coluna + "| ID: " + id);
     }
     
     public static void removeErro(){
