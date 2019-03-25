@@ -11,51 +11,15 @@ public class Parser{
 
     }
 
-    public static void main(String[] args) throws ParseException {
-       Parser parser;
-       if(args.length == 0){
-           System.out.println("Reading from standard input!");
-           parser = new Parser(System.in);
-       } else if(args.length == 1){
-           try{
-                parser = new Parser(new java.io.FileInputStream(args[0]));
-           } catch(java.io.FileNotFoundException e){
-                System.err.println(args[0] + " was not found." );
-                System.err.println(e);
-                return;
-           }
-       } else{
-            System.out.println("Use:\njava Parser < inputFile");
-            System.out.println("or java Parser inputFile");
-            return;
-        }
+    public void executarAnalise() throws ParseException{
+        Token token = getNextToken();
 
-        try {
-            parser.Program();
-            System.out.println("Compilado com sucesso.");
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Foram encontrados erros.");
+        while(token.kind != 0){
+            token = getNextToken();
         }
     }
 }
 PARSER_END(Parser)
-
-TOKEN_MGR_DECLS : {
-    int countLexError = 0;
-
-    public int foundLexError() {
-        return countLexError;
-    }
-}
-
-JAVACODE void Program() {
-    Token token = getNextToken();
-
-    while(token.kind != 0){
-        token = getNextToken();
-    }
- }
 
 //ignorar
 SKIP : {
@@ -86,69 +50,70 @@ SKIP : {
 
 //palavras reservadas
 TOKEN : {
-	 < PROGRAM: "program">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < DEFINE: "define">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < NOT: "not">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < VARIABLE: "variable">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < IS: "is">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < NATURAL: "natural">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < REAL: "real">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < CHAR: "char">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < BOOLEAN: "boolean">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < EXECUTE: "execute">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < SET: "set">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < TO: "to">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < GET: "get">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < PUT: "put">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < LOOP: "loop">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < WHILE: "while">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < TRUE: "true">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < FALSE: "false">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < DO: "do">{System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
+	 < PROGRAM: "program">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < DEFINE: "define">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < NOT: "not">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < VARIABLE: "variable">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < IS: "is">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < NATURAL: "natural">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < REAL: "real">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < CHAR: "char">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < BOOLEAN: "boolean">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < EXECUTE: "execute">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < SET: "set">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < TO: "to">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < GET: "get">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < PUT: "put">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < LOOP: "loop">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < WHILE: "while">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < TRUE: "true">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < FALSE: "false">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < DO: "do">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < VERIFY: "verify">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 }
 
 //constante literal
 TOKEN: {
-   <LITERAL_CONST: "\"" (~[ "\"", "\n", "\r"])* "\"">{System.out.println("CONSTANTE LITERAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
+   <LITERAL_CONST: "\"" (~[ "\"", "\n", "\r"])* "\"">{Dados.addDado("CONSTANTE LITERAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 }
 
 //caracteres especiais
 TOKEN : {
-	< OPEN_KEY: "{" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < CLOSE_KEY: "}" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < DOT: "." >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < COMMA: "," >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < PLUS: "+" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < MINUS: "-" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < MULTIPLY: "*" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < DIVIDER: "/" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < PERCENT: "%" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < MOD: "%%" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < POW: "**" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < EQUALS: "==" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < EXCLAMATION: "!" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < LESS: "<" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < LESS_EQUAL: "<=" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < GREATER: ">" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < GREATER_EQUAL: ">=" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-    | < DIFFERENT: "!=" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < AMPERSAND: "&" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < PIPE: "|" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < OPEN_PARENTHESIS: "(" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < CLOSE_PARENTHESIS: ")" >{System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
+	< OPEN_KEY: "{" >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < CLOSE_KEY: "}" >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < DOT: "." >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < COMMA: "," >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < PLUS: "+" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < MINUS: "-" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < MULTIPLY: "*" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < DIVIDER: "/" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < PERCENT: "%" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < MOD: "%%" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < POW: "**" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < EQUALS: "==" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < EXCLAMATION: "!" >{Dados.addDado("OPERADOR LOGICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < LESS: "<" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < LESS_EQUAL: "<=" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < GREATER: ">" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < GREATER_EQUAL: ">=" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+    | < DIFFERENT: "!=" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < AMPERSAND: "&" >{Dados.addDado("OPERADOR LOGICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < PIPE: "|" >{Dados.addDado("OPERADOR LOGICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < OPEN_PARENTHESIS: "(" >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < CLOSE_PARENTHESIS: ")" >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 }
 
 // numbers
 TOKEN : {
 	< #DIGIT: ["0"-"9"] >
-	| < DECIMAL_CONST: <DOT><DIGIT>(<DIGIT>)? >{System.out.println("CONSTANTE DECIMAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < INTEGER_CONST: <DIGIT>(<DIGIT>)?(<DIGIT>)? >{System.out.println("CONSTANTE INTEIRA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
-	| < REAL_CONST: <DIGIT>((<DIGIT>)?){4}<DECIMAL_CONST> >{System.out.println("CONSTANTE REAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
+	| < DECIMAL_CONST: <DOT><DIGIT>(<DIGIT>)? >{Dados.addDado("CONSTANTE DECIMAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < INTEGER_CONST: <DIGIT>(<DIGIT>)?(<DIGIT>)? >{Dados.addDado("CONSTANTE INTEIRA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < REAL_CONST: <DIGIT>((<DIGIT>)?){4}<DECIMAL_CONST> >{Dados.addDado("CONSTANTE REAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 }
 
 // identificadores
 TOKEN :{
-	<IDENTIFICATOR: <UPL>(<SP>)?((<LETTER>(<SP>)?)|(<DIGIT>(<DIGIT>)?(<LETTER>|<SP>)))* > {System.out.println("IDENTIFICADOR -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);}
+	<IDENTIFICATOR: <UPL>(<SP>)?((<LETTER>(<SP>)?)|(<DIGIT>(<DIGIT>)?(<LETTER>|<SP>)))* > {Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
     | <#SP: "_">
     | <#LETTER:["A"-"Z", "a"-"z"]>
     | <#UPL: ["A"-"Z"]>

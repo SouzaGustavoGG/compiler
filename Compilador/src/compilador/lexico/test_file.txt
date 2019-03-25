@@ -1,7 +1,7 @@
 program {
     define {
         not variable
-            real is Ident_12_23_231_efewfwefw_32_23_ 12234.12 .
+            real is Identificador 12234.12 .
             boolean is Identificador, Identificador true .
         variable
             real is Identificador{4} .
@@ -13,4 +13,24 @@ program {
     :-- COMENTATRI
     FEWFEWFWEF
     EWFWEFWE --:
+
+    execute {
+        set Identificador < Identificador to Identificador .
+
+        get { Identificador, Identificador} .
+        put { Identificador, Identificador} .
+
+        verify Identificador <= Identificador
+            is  true { put {Identificador}}
+            is  false { put {Identificador}} .
+
+        loop
+            get { Identificador, Identificador} .
+            put { Identificador, Identificador} .
+        while Identificador < Identificador is true .
+
+        while Identificador < Identificador is true do
+            get { Identificador, Identificador} .
+    }
+
 }

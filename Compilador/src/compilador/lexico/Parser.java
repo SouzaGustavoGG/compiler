@@ -7,41 +7,13 @@ public class Parser implements ParserConstants {
 
     }
 
-    public static void main(String[] args) throws ParseException {
-       Parser parser;
-       if(args.length == 0){
-           System.out.println("Reading from standard input!");
-           parser = new Parser(System.in);
-       } else if(args.length == 1){
-           try{
-                parser = new Parser(new java.io.FileInputStream(args[0]));
-           } catch(java.io.FileNotFoundException e){
-                System.err.println(args[0] + " was not found." );
-                System.err.println(e);
-                return;
-           }
-       } else{
-            System.out.println("Use:\u005cnjava Parser < inputFile");
-            System.out.println("or java Parser inputFile");
-            return;
-        }
+    public void executarAnalise() throws ParseException{
+        Token token = getNextToken();
 
-        try {
-            parser.Program();
-            System.out.println("Compilado com sucesso.");
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Foram encontrados erros.");
+        while(token.kind != 0){
+            token = getNextToken();
         }
     }
-
-  void Program() throws ParseException {
-    Token token = getNextToken();
-
-    while(token.kind != 0){
-        token = getNextToken();
-    }
-  }
 
   /** Generated Token Manager. */
   public ParserTokenManager token_source;
@@ -180,7 +152,7 @@ public class Parser implements ParserConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[62];
+    boolean[] la1tokens = new boolean[63];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -197,7 +169,7 @@ public class Parser implements ParserConstants {
         }
       }
     }
-    for (int i = 0; i < 62; i++) {
+    for (int i = 0; i < 63; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

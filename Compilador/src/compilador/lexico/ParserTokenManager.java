@@ -4,11 +4,6 @@ package compilador.lexico;
 /** Token Manager. */
 public class ParserTokenManager implements ParserConstants
 {
-    int countLexError = 0;
-
-    public int foundLexError() {
-        return countLexError;
-    }
 
   /** Debug output. */
   public  java.io.PrintStream debugStream = System.out;
@@ -19,7 +14,7 @@ private final int jjStopStringLiteralDfa_0(int pos, long active0)
    switch (pos)
    {
       case 0:
-         if ((active0 & 0x400000000L) != 0L)
+         if ((active0 & 0x800000000L) != 0L)
             return 4;
          return -1;
       default :
@@ -41,40 +36,40 @@ private int jjMoveStringLiteralDfa0_0()
    switch(curChar)
    {
       case 33:
-         jjmatchedKind = 44;
-         return jjMoveStringLiteralDfa1_0(0x2000000000000L);
+         jjmatchedKind = 45;
+         return jjMoveStringLiteralDfa1_0(0x4000000000000L);
       case 37:
-         jjmatchedKind = 40;
-         return jjMoveStringLiteralDfa1_0(0x20000000000L);
-      case 38:
-         return jjStopAtPos(0, 50);
-      case 40:
-         return jjStopAtPos(0, 52);
-      case 41:
-         return jjStopAtPos(0, 53);
-      case 42:
-         jjmatchedKind = 38;
+         jjmatchedKind = 41;
          return jjMoveStringLiteralDfa1_0(0x40000000000L);
+      case 38:
+         return jjStopAtPos(0, 51);
+      case 40:
+         return jjStopAtPos(0, 53);
+      case 41:
+         return jjStopAtPos(0, 54);
+      case 42:
+         jjmatchedKind = 39;
+         return jjMoveStringLiteralDfa1_0(0x80000000000L);
       case 43:
-         return jjStopAtPos(0, 36);
-      case 44:
-         return jjStopAtPos(0, 35);
-      case 45:
          return jjStopAtPos(0, 37);
+      case 44:
+         return jjStopAtPos(0, 36);
+      case 45:
+         return jjStopAtPos(0, 38);
       case 46:
-         return jjStartNfaWithStates_0(0, 34, 4);
+         return jjStartNfaWithStates_0(0, 35, 4);
       case 47:
-         return jjStopAtPos(0, 39);
+         return jjStopAtPos(0, 40);
       case 58:
          return jjMoveStringLiteralDfa1_0(0xc0L);
       case 60:
-         jjmatchedKind = 45;
-         return jjMoveStringLiteralDfa1_0(0x400000000000L);
+         jjmatchedKind = 46;
+         return jjMoveStringLiteralDfa1_0(0x800000000000L);
       case 61:
-         return jjMoveStringLiteralDfa1_0(0x80000000000L);
+         return jjMoveStringLiteralDfa1_0(0x100000000000L);
       case 62:
-         jjmatchedKind = 47;
-         return jjMoveStringLiteralDfa1_0(0x1000000000000L);
+         jjmatchedKind = 48;
+         return jjMoveStringLiteralDfa1_0(0x2000000000000L);
       case 98:
          return jjMoveStringLiteralDfa1_0(0x100000L);
       case 99:
@@ -102,15 +97,15 @@ private int jjMoveStringLiteralDfa0_0()
       case 116:
          return jjMoveStringLiteralDfa1_0(0x10800000L);
       case 118:
-         return jjMoveStringLiteralDfa1_0(0x8000L);
+         return jjMoveStringLiteralDfa1_0(0x80008000L);
       case 119:
          return jjMoveStringLiteralDfa1_0(0x8000000L);
       case 123:
-         return jjStopAtPos(0, 32);
-      case 124:
-         return jjStopAtPos(0, 51);
-      case 125:
          return jjStopAtPos(0, 33);
+      case 124:
+         return jjStopAtPos(0, 52);
+      case 125:
+         return jjStopAtPos(0, 34);
       default :
          return jjMoveNfa_0(0, 0);
    }
@@ -125,12 +120,12 @@ private int jjMoveStringLiteralDfa1_0(long active0)
    switch(curChar)
    {
       case 37:
-         if ((active0 & 0x20000000000L) != 0L)
-            return jjStopAtPos(1, 41);
-         break;
-      case 42:
          if ((active0 & 0x40000000000L) != 0L)
             return jjStopAtPos(1, 42);
+         break;
+      case 42:
+         if ((active0 & 0x80000000000L) != 0L)
+            return jjStopAtPos(1, 43);
          break;
       case 45:
          if ((active0 & 0x80L) != 0L)
@@ -140,19 +135,19 @@ private int jjMoveStringLiteralDfa1_0(long active0)
          }
          return jjMoveStringLiteralDfa2_0(active0, 0x40L);
       case 61:
-         if ((active0 & 0x80000000000L) != 0L)
-            return jjStopAtPos(1, 43);
-         else if ((active0 & 0x400000000000L) != 0L)
-            return jjStopAtPos(1, 46);
-         else if ((active0 & 0x1000000000000L) != 0L)
-            return jjStopAtPos(1, 48);
+         if ((active0 & 0x100000000000L) != 0L)
+            return jjStopAtPos(1, 44);
+         else if ((active0 & 0x800000000000L) != 0L)
+            return jjStopAtPos(1, 47);
          else if ((active0 & 0x2000000000000L) != 0L)
             return jjStopAtPos(1, 49);
+         else if ((active0 & 0x4000000000000L) != 0L)
+            return jjStopAtPos(1, 50);
          break;
       case 97:
          return jjMoveStringLiteralDfa2_0(active0, 0x20028000L);
       case 101:
-         return jjMoveStringLiteralDfa2_0(active0, 0x1442000L);
+         return jjMoveStringLiteralDfa2_0(active0, 0x81442000L);
       case 104:
          return jjMoveStringLiteralDfa2_0(active0, 0x8080000L);
       case 111:
@@ -204,7 +199,7 @@ private int jjMoveStringLiteralDfa2_0(long old0, long active0)
       case 111:
          return jjMoveStringLiteralDfa3_0(active0, 0x4101000L);
       case 114:
-         return jjMoveStringLiteralDfa3_0(active0, 0x8000L);
+         return jjMoveStringLiteralDfa3_0(active0, 0x80008000L);
       case 116:
          if ((active0 & 0x4000L) != 0L)
             return jjStopAtPos(2, 14);
@@ -242,7 +237,7 @@ private int jjMoveStringLiteralDfa3_0(long old0, long active0)
       case 103:
          return jjMoveStringLiteralDfa4_0(active0, 0x1000L);
       case 105:
-         return jjMoveStringLiteralDfa4_0(active0, 0xa000L);
+         return jjMoveStringLiteralDfa4_0(active0, 0x8000a000L);
       case 108:
          if ((active0 & 0x40000L) != 0L)
             return jjStopAtPos(3, 18);
@@ -283,6 +278,8 @@ private int jjMoveStringLiteralDfa4_0(long old0, long active0)
          else if ((active0 & 0x20000000L) != 0L)
             return jjStopAtPos(4, 29);
          return jjMoveStringLiteralDfa5_0(active0, 0x100000L);
+      case 102:
+         return jjMoveStringLiteralDfa5_0(active0, 0x80000000L);
       case 110:
          return jjMoveStringLiteralDfa5_0(active0, 0x2000L);
       case 114:
@@ -315,6 +312,10 @@ private int jjMoveStringLiteralDfa5_0(long old0, long active0)
          break;
       case 116:
          return jjMoveStringLiteralDfa6_0(active0, 0x200000L);
+      case 121:
+         if ((active0 & 0x80000000L) != 0L)
+            return jjStopAtPos(5, 31);
+         break;
       default :
          break;
    }
@@ -404,8 +405,8 @@ private int jjMoveNfa_0(int startState, int curPos)
                case 0:
                   if ((0x3ff000000000000L & l) != 0L)
                   {
-                     if (kind > 56)
-                        kind = 56;
+                     if (kind > 57)
+                        kind = 57;
                      jjCheckNAddStates(0, 2);
                   }
                   else if (curChar == 46)
@@ -418,8 +419,8 @@ private int jjMoveNfa_0(int startState, int curPos)
                      jjCheckNAddTwoStates(1, 2);
                   break;
                case 2:
-                  if (curChar == 34 && kind > 31)
-                     kind = 31;
+                  if (curChar == 34 && kind > 32)
+                     kind = 32;
                   break;
                case 3:
                   if (curChar == 46)
@@ -428,13 +429,13 @@ private int jjMoveNfa_0(int startState, int curPos)
                case 4:
                   if ((0x3ff000000000000L & l) == 0L)
                      break;
-                  if (kind > 55)
-                     kind = 55;
+                  if (kind > 56)
+                     kind = 56;
                   jjstateSet[jjnewStateCnt++] = 5;
                   break;
                case 5:
-                  if ((0x3ff000000000000L & l) != 0L && kind > 55)
-                     kind = 55;
+                  if ((0x3ff000000000000L & l) != 0L && kind > 56)
+                     kind = 56;
                   break;
                case 9:
                   if ((0x3ff000000000000L & l) != 0L)
@@ -447,8 +448,8 @@ private int jjMoveNfa_0(int startState, int curPos)
                case 12:
                   if ((0x3ff000000000000L & l) == 0L)
                      break;
-                  if (kind > 56)
-                     kind = 56;
+                  if (kind > 57)
+                     kind = 57;
                   jjCheckNAddStates(0, 2);
                   break;
                case 13:
@@ -458,13 +459,13 @@ private int jjMoveNfa_0(int startState, int curPos)
                case 14:
                   if ((0x3ff000000000000L & l) == 0L)
                      break;
-                  if (kind > 57)
-                     kind = 57;
+                  if (kind > 58)
+                     kind = 58;
                   jjstateSet[jjnewStateCnt++] = 15;
                   break;
                case 15:
-                  if ((0x3ff000000000000L & l) != 0L && kind > 57)
-                     kind = 57;
+                  if ((0x3ff000000000000L & l) != 0L && kind > 58)
+                     kind = 58;
                   break;
                case 16:
                   if ((0x3ff000000000000L & l) != 0L)
@@ -485,13 +486,13 @@ private int jjMoveNfa_0(int startState, int curPos)
                case 20:
                   if ((0x3ff000000000000L & l) == 0L)
                      break;
-                  if (kind > 56)
-                     kind = 56;
+                  if (kind > 57)
+                     kind = 57;
                   jjstateSet[jjnewStateCnt++] = 21;
                   break;
                case 21:
-                  if ((0x3ff000000000000L & l) != 0L && kind > 56)
-                     kind = 56;
+                  if ((0x3ff000000000000L & l) != 0L && kind > 57)
+                     kind = 57;
                   break;
                default : break;
             }
@@ -507,8 +508,8 @@ private int jjMoveNfa_0(int startState, int curPos)
                case 0:
                   if ((0x7fffffeL & l) == 0L)
                      break;
-                  if (kind > 58)
-                     kind = 58;
+                  if (kind > 59)
+                     kind = 59;
                   jjCheckNAddStates(10, 12);
                   break;
                case 1:
@@ -517,22 +518,22 @@ private int jjMoveNfa_0(int startState, int curPos)
                case 7:
                   if (curChar != 95)
                      break;
-                  if (kind > 58)
-                     kind = 58;
+                  if (kind > 59)
+                     kind = 59;
                   jjCheckNAddTwoStates(8, 9);
                   break;
                case 8:
                   if ((0x7fffffe07fffffeL & l) == 0L)
                      break;
-                  if (kind > 58)
-                     kind = 58;
+                  if (kind > 59)
+                     kind = 59;
                   jjCheckNAddStates(15, 17);
                   break;
                case 11:
                   if ((0x7fffffe87fffffeL & l) == 0L)
                      break;
-                  if (kind > 58)
-                     kind = 58;
+                  if (kind > 59)
+                     kind = 59;
                   jjCheckNAddTwoStates(8, 9);
                   break;
                default : break;
@@ -689,10 +690,10 @@ public static final String[] jjstrLiteralImages = {
 "\166\141\162\151\141\142\154\145", "\151\163", "\156\141\164\165\162\141\154", "\162\145\141\154", 
 "\143\150\141\162", "\142\157\157\154\145\141\156", "\145\170\145\143\165\164\145", 
 "\163\145\164", "\164\157", "\147\145\164", "\160\165\164", "\154\157\157\160", 
-"\167\150\151\154\145", "\164\162\165\145", "\146\141\154\163\145", "\144\157", null, "\173", "\175", 
-"\56", "\54", "\53", "\55", "\52", "\57", "\45", "\45\45", "\52\52", "\75\75", "\41", 
-"\74", "\74\75", "\76", "\76\75", "\41\75", "\46", "\174", "\50", "\51", null, null, 
-null, null, null, null, null, null, };
+"\167\150\151\154\145", "\164\162\165\145", "\146\141\154\163\145", "\144\157", 
+"\166\145\162\151\146\171", null, "\173", "\175", "\56", "\54", "\53", "\55", "\52", "\57", "\45", 
+"\45\45", "\52\52", "\75\75", "\41", "\74", "\74\75", "\76", "\76\75", "\41\75", "\46", 
+"\174", "\50", "\51", null, null, null, null, null, null, null, null, };
 
 /** Lexer state names. */
 public static final String[] lexStateNames = {
@@ -705,10 +706,10 @@ public static final String[] lexStateNames = {
 public static final int[] jjnewLexState = {
    -1, -1, -1, -1, -1, -1, 1, 2, 0, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
-   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
 };
 static final long[] jjtoToken = {
-   0x7bffffffffff001L, 
+   0xf7ffffffffff001L, 
 };
 static final long[] jjtoSkip = {
    0xffeL, 
@@ -900,227 +901,232 @@ void TokenLexicalActions(Token matchedToken)
       case 12 :
         image.append(jjstrLiteralImages[12]);
         lengthOfMatch = jjstrLiteralImages[12].length();
-                               System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                               Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 13 :
         image.append(jjstrLiteralImages[13]);
         lengthOfMatch = jjstrLiteralImages[13].length();
-                              System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                              Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 14 :
         image.append(jjstrLiteralImages[14]);
         lengthOfMatch = jjstrLiteralImages[14].length();
-                        System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                        Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 15 :
         image.append(jjstrLiteralImages[15]);
         lengthOfMatch = jjstrLiteralImages[15].length();
-                                  System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                                  Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 16 :
         image.append(jjstrLiteralImages[16]);
         lengthOfMatch = jjstrLiteralImages[16].length();
-                      System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                      Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 17 :
         image.append(jjstrLiteralImages[17]);
         lengthOfMatch = jjstrLiteralImages[17].length();
-                                System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                                Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 18 :
         image.append(jjstrLiteralImages[18]);
         lengthOfMatch = jjstrLiteralImages[18].length();
-                          System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                          Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 19 :
         image.append(jjstrLiteralImages[19]);
         lengthOfMatch = jjstrLiteralImages[19].length();
-                          System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                          Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 20 :
         image.append(jjstrLiteralImages[20]);
         lengthOfMatch = jjstrLiteralImages[20].length();
-                                System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                                Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 21 :
         image.append(jjstrLiteralImages[21]);
         lengthOfMatch = jjstrLiteralImages[21].length();
-                                System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                                Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 22 :
         image.append(jjstrLiteralImages[22]);
         lengthOfMatch = jjstrLiteralImages[22].length();
-                        System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                        Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 23 :
         image.append(jjstrLiteralImages[23]);
         lengthOfMatch = jjstrLiteralImages[23].length();
-                      System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                      Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 24 :
         image.append(jjstrLiteralImages[24]);
         lengthOfMatch = jjstrLiteralImages[24].length();
-                        System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                        Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 25 :
         image.append(jjstrLiteralImages[25]);
         lengthOfMatch = jjstrLiteralImages[25].length();
-                        System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                        Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 26 :
         image.append(jjstrLiteralImages[26]);
         lengthOfMatch = jjstrLiteralImages[26].length();
-                          System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                          Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 27 :
         image.append(jjstrLiteralImages[27]);
         lengthOfMatch = jjstrLiteralImages[27].length();
-                            System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                            Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 28 :
         image.append(jjstrLiteralImages[28]);
         lengthOfMatch = jjstrLiteralImages[28].length();
-                          System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                          Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 29 :
         image.append(jjstrLiteralImages[29]);
         lengthOfMatch = jjstrLiteralImages[29].length();
-                            System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                            Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 30 :
         image.append(jjstrLiteralImages[30]);
         lengthOfMatch = jjstrLiteralImages[30].length();
-                      System.out.println("PALAVRA RESERVADA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                      Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 31 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                                      System.out.println("CONSTANTE LITERAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+        image.append(jjstrLiteralImages[31]);
+        lengthOfMatch = jjstrLiteralImages[31].length();
+                              Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 32 :
-        image.append(jjstrLiteralImages[32]);
-        lengthOfMatch = jjstrLiteralImages[32].length();
-                          System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                                                      Dados.addDado("CONSTANTE LITERAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 33 :
         image.append(jjstrLiteralImages[33]);
         lengthOfMatch = jjstrLiteralImages[33].length();
-                             System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                          Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 34 :
         image.append(jjstrLiteralImages[34]);
         lengthOfMatch = jjstrLiteralImages[34].length();
-                       System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                             Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 35 :
         image.append(jjstrLiteralImages[35]);
         lengthOfMatch = jjstrLiteralImages[35].length();
-                         System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                       Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 36 :
         image.append(jjstrLiteralImages[36]);
         lengthOfMatch = jjstrLiteralImages[36].length();
-                        System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                         Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 37 :
         image.append(jjstrLiteralImages[37]);
         lengthOfMatch = jjstrLiteralImages[37].length();
-                         System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                        Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 38 :
         image.append(jjstrLiteralImages[38]);
         lengthOfMatch = jjstrLiteralImages[38].length();
-                            System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                         Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 39 :
         image.append(jjstrLiteralImages[39]);
         lengthOfMatch = jjstrLiteralImages[39].length();
-                           System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                            Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 40 :
         image.append(jjstrLiteralImages[40]);
         lengthOfMatch = jjstrLiteralImages[40].length();
-                           System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                           Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 41 :
         image.append(jjstrLiteralImages[41]);
         lengthOfMatch = jjstrLiteralImages[41].length();
-                        System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                           Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 42 :
         image.append(jjstrLiteralImages[42]);
         lengthOfMatch = jjstrLiteralImages[42].length();
-                        System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                        Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 43 :
         image.append(jjstrLiteralImages[43]);
         lengthOfMatch = jjstrLiteralImages[43].length();
-                           System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                        Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 44 :
         image.append(jjstrLiteralImages[44]);
         lengthOfMatch = jjstrLiteralImages[44].length();
-                               System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                           Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 45 :
         image.append(jjstrLiteralImages[45]);
         lengthOfMatch = jjstrLiteralImages[45].length();
-                        System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                               Dados.addDado("OPERADOR LOGICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 46 :
         image.append(jjstrLiteralImages[46]);
         lengthOfMatch = jjstrLiteralImages[46].length();
-                               System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                        Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 47 :
         image.append(jjstrLiteralImages[47]);
         lengthOfMatch = jjstrLiteralImages[47].length();
-                           System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                               Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 48 :
         image.append(jjstrLiteralImages[48]);
         lengthOfMatch = jjstrLiteralImages[48].length();
-                                  System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                           Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 49 :
         image.append(jjstrLiteralImages[49]);
         lengthOfMatch = jjstrLiteralImages[49].length();
-                          System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                                  Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 50 :
         image.append(jjstrLiteralImages[50]);
         lengthOfMatch = jjstrLiteralImages[50].length();
-                             System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                          Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 51 :
         image.append(jjstrLiteralImages[51]);
         lengthOfMatch = jjstrLiteralImages[51].length();
-                        System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                             Dados.addDado("OPERADOR LOGICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 52 :
         image.append(jjstrLiteralImages[52]);
         lengthOfMatch = jjstrLiteralImages[52].length();
-                                    System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                        Dados.addDado("OPERADOR LOGICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 53 :
         image.append(jjstrLiteralImages[53]);
         lengthOfMatch = jjstrLiteralImages[53].length();
-                                     System.out.println("CARACTER ESPECIAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                                    Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
-      case 55 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                                    System.out.println("CONSTANTE DECIMAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+      case 54 :
+        image.append(jjstrLiteralImages[54]);
+        lengthOfMatch = jjstrLiteralImages[54].length();
+                                     Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 56 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                                         System.out.println("CONSTANTE INTEIRA -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                                                    Dados.addDado("CONSTANTE DECIMAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 57 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                                                System.out.println("CONSTANTE REAL -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                                                         Dados.addDado("CONSTANTE INTEIRA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 58 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                                                                               System.out.println("IDENTIFICADOR -> " + image + " na linha "+input_stream.getEndLine()+", coluna "+input_stream.getBeginColumn()+ "| ID: "+jjmatchedKind);
+                                                                Dados.addDado("CONSTANTE REAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
+         break;
+      case 59 :
+        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                                                                                               Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
          break;
       default :
          break;
