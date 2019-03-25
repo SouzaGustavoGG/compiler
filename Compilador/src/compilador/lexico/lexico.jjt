@@ -122,7 +122,7 @@ TOKEN :{
 // erros
 TOKEN : {
     <INVALID_SYMBOLS: (~["a"-"z", "A"-"Z", "0"-"9", "\"", "(", ")", "[", "]", "{", "}", ";", ",", ".", "=", ">", "<", "!",
-    "+", "-", "*", "/", "%", " ", "\t", "\n", "\r", "\f"])+>{Dados.addError("ERRO LEXICO", image.toString(), input_stream.getEndLine(),
+    "+", "-", "*", "/", "%"])+>{Dados.addError("ERRO LEXICO", image.toString(), input_stream.getEndLine(),
      input_stream.getBeginColumn(), jjmatchedKind);}
     |<INVALID_NATURAL_NUMBER: (<DIGIT>)+>{Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
        input_stream.getBeginColumn(), jjmatchedKind);}

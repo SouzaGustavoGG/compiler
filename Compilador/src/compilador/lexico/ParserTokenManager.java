@@ -19,7 +19,7 @@ private final int jjStopStringLiteralDfa_0(int pos, long active0)
             jjmatchedKind = 63;
             return 9;
          }
-         if ((active0 & 0x18000000000000L) != 0L)
+         if ((active0 & 0x1800000000003eL) != 0L)
             return 9;
          return -1;
       default :
@@ -40,6 +40,16 @@ private int jjMoveStringLiteralDfa0_0()
 {
    switch(curChar)
    {
+      case 9:
+         return jjStartNfaWithStates_0(0, 2, 9);
+      case 10:
+         return jjStartNfaWithStates_0(0, 3, 9);
+      case 12:
+         return jjStartNfaWithStates_0(0, 5, 9);
+      case 13:
+         return jjStartNfaWithStates_0(0, 4, 9);
+      case 32:
+         return jjStartNfaWithStates_0(0, 1, 9);
       case 33:
          jjmatchedKind = 45;
          return jjMoveStringLiteralDfa1_0(0x4000000000000L);
@@ -408,7 +418,7 @@ private int jjMoveNfa_0(int startState, int curPos)
             switch(jjstateSet[--i])
             {
                case 0:
-                  if ((0x840000d8ffffc9ffL & l) != 0L)
+                  if ((0x840000d9ffffffffL & l) != 0L)
                   {
                      if (kind > 63)
                         kind = 63;
@@ -440,7 +450,7 @@ private int jjMoveNfa_0(int startState, int curPos)
                      jjCheckNAdd(8);
                   break;
                case 9:
-                  if ((0x840000d8ffffc9ffL & l) == 0L)
+                  if ((0x840000d9ffffffffL & l) == 0L)
                      break;
                   if (kind > 63)
                      kind = 63;
@@ -879,11 +889,6 @@ public Token getNextToken()
    switch(curLexState)
    {
      case 0:
-       try { input_stream.backup(0);
-          while (curChar <= 32 && (0x100003600L & (1L << curChar)) != 0L)
-             curChar = input_stream.BeginToken();
-       }
-       catch (java.io.IOException e1) { continue EOFLoop; }
        jjmatchedKind = 0x7fffffff;
        jjmatchedPos = 0;
        curPos = jjMoveStringLiteralDfa0_0();
@@ -1181,7 +1186,7 @@ void TokenLexicalActions(Token matchedToken)
          break;
       case 63 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                                             Dados.addError("ERRO LEXICO", image.toString(), input_stream.getEndLine(),
+                                Dados.addError("ERRO LEXICO", image.toString(), input_stream.getEndLine(),
      input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 64 :
