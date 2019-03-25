@@ -22,6 +22,12 @@ public class Dados {
         dados.remove(dados.size()-1);
     }
 
+    public static void limpar(){
+        erros = 0;
+        oks = 0;
+        dados.clear();
+    }
+
     public static int getErros() {
         return erros;
     }

@@ -144,7 +144,7 @@ public class ControladorIde implements IdeInterface{
 
 	@Override
 	public void compile(String content) {
-		// TODO Auto-generated method stub
+
 		
 	}
 

@@ -25,6 +25,7 @@ public class LexicAnalyzer {
                 output.append(a).append("\n");
             output.append("Número de erros: ").append(compilador.lexico.Dados.getErros()).append("\n");
             output.append("Número de oks: ").append(compilador.lexico.Dados.getOks());
+            compilador.lexico.Dados.limpar();
         }catch(Exception e){}
 
 
