@@ -405,7 +405,7 @@ public class CompiladorTela extends javax.swing.JFrame {
         //abrir jFileChooser
         //controller.loadFile(filename, jTextEntrada);
     }//GEN-LAST:event_jButtonOpenIconActionPerformed
-
+//ok
     private void jButtonSalvarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarIconActionPerformed
         ArrayList<String> obj_salvar = controller.salvar(nome_arquivo, diretorio, jTextEntrada, this);
         

@@ -1,17 +1,18 @@
 package compilador;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.JFrame;
 
 import javax.swing.JTextArea;
 
 public interface IdeInterface {
 
-	public void newFile(JTextArea input, JTextArea output) throws MenuException;
-	public void loadFile(String fileName, JTextArea textArea) throws MenuException; 
-	public void saveFile(String fileName, String content) throws IOException, MenuException;
-	public void compile(String content);
-	public void showLog(String log, JTextArea textArea);
-	public boolean checkFileExists(String fileName);
-	public boolean isEdited(JTextArea input);
+	public String novoArquivo(JTextArea entrada, JTextArea saida, JFrame tela, String nome_arquivo, String diretorio) throws MenuException;
+	public ArrayList<String> salvar(String nome_arquivo, String diretorio, JTextArea entrada,JFrame tela); 
+	public ArrayList<String> salvarComo( JTextArea entrada, String nome_arquivo, String diretorio, JFrame tela) throws IOException, MenuException;
+	public boolean arquivoAlterado(JTextArea entrada, String nome_arquivo);
+        //abrir
+        //exit
 	
 }
