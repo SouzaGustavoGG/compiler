@@ -15,6 +15,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import javax.swing.JTextArea;
@@ -227,7 +228,7 @@ public class ControladorIde implements IdeInterface {
     public List<String> getExtensions() {
         return extensions;
     }
-
+//ver dps p mudar
     public void verifyEntry(JTextArea entrada, JTextArea saida, String filename) throws IOException, MenuException {
         if (entrada.getText().equals("")) {
             saida.setText("");
@@ -246,7 +247,46 @@ public class ControladorIde implements IdeInterface {
         }
     }
 
-    	public boolean arquivoAlterado(JTextArea entrada, String nome_arquivo) {
+    public String novoArquivo(JTextArea entrada, JTextArea saida, JFrame tela, String nome_arquivo, String diretorio) {
+        if (nome_arquivo.equals("novo.djt")) {
+            if ("".equals(entrada.getText())) {
+                nome_arquivo = "novo.djt";
+                tela.setTitle("Compilador - " + nome_arquivo);
+                saida.setText("");
+            } else {
+                Object[] alternativas = {"Sim", "Não", "Cancelar"};
+                int opcao = JOptionPane.showOptionDialog(null, nome_arquivo + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, alternativas, alternativas[2]);
+                if (opcao == 0) //salvar
+                {
+                    salvar(nome_arquivo, diretorio, entrada, tela);
+                }
+            }
+        } else {
+            System.out.println(nome_arquivo);
+            System.out.println(diretorio);
+            if (arquivoAlterado(entrada, diretorio)) {
+                Object[] alternativas = {"Sim", "Não", "Cancelar"};
+                int opcao = JOptionPane.showOptionDialog(null, nome_arquivo + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, alternativas, alternativas[2]);
+                if (opcao == 0) {//salvar
+                    salvar(nome_arquivo, diretorio, entrada, tela);
+					diretorio = ("");
+				}else if (opcao == 1){
+					diretorio = ("");
+				}
+			}else{
+				diretorio = ("");
+			}
+
+        }
+        entrada.setText("");
+        saida.setText("");
+	nome_arquivo = "novo.djt";
+        tela.setTitle("Compilador - "+ nome_arquivo);
+                
+        return nome_arquivo;
+    }
+    
+    public boolean arquivoAlterado(JTextArea entrada, String nome_arquivo) {
         try {
             boolean isModificado = false;
             //Inicializações
@@ -302,5 +342,107 @@ public class ControladorIde implements IdeInterface {
         while (leitor.hasNextLine () ) {
                 atual.add(leitor.nextLine());
         }
+    }
+    
+    public ArrayList<String> salvar(String nome_arquivo, String diretorio, JTextArea entrada,JFrame tela){
+        String caminho;
+        ArrayList<String> salvar = new ArrayList<>();
+	caminho = retornaCaminho(diretorio);
+        try {
+            if (nome_arquivo.equalsIgnoreCase("novo.djt")) {
+		
+		ArrayList<String> salvar_como = salvarComo(entrada, nome_arquivo, diretorio, tela);
+                nome_arquivo = salvar_como.get(0);
+                diretorio = salvar_como.get(1);
+		salvar.add(nome_arquivo);
+		salvar.add(diretorio);
+            } else {
+                BufferedWriter buff_escrita = new BufferedWriter(new FileWriter(caminho));
+                Scanner leitor = new Scanner(entrada.getText());
+                while (leitor.hasNextLine()) {
+                    buff_escrita.write(leitor.nextLine());
+                    buff_escrita.newLine();
+                }
+                buff_escrita.close();
+                tela.setTitle("Compilador - " + nome_arquivo);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ControladorIde.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return salvar;
+    }
+    
+    	private String retornaCaminho(String diretorio) {
+        File extensao;
+        extensao = new File(".");
+        String caminho;
+        caminho = "";
+        if (diretorio.equals("")) {
+            caminho = extensao.getAbsolutePath();
+        } else {
+            extensao = new File(diretorio);
+            caminho = extensao.getAbsolutePath();
+        }
+        return caminho;
+    }
+        
+    public ArrayList<String> salvarComo( JTextArea entrada, String nome_arquivo, String diretorio, JFrame tela){
+        ArrayList<String> salvar_como = new ArrayList<>();
+        String caminho;
+	String caminho_original;
+        String nome_original;
+	File arquivo_selecionado;
+        JFileChooser fileChooser = new JFileChooser();
+  	caminho_original = diretorio;
+        nome_original = nome_arquivo;
+        FileNameExtensionFilter extensao = new FileNameExtensionFilter("DJT (*.djt)", "djt");
+	caminho = retornaCaminho(diretorio);
+        fileChooser.setSelectedFile(new File(caminho));
+        fileChooser.setFileFilter(extensao);
+        fileChooser.setSelectedFile(new File(diretorio));
+
+        try {
+            if (fileChooser.showSaveDialog(fileChooser) == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                diretorio = file.getPath();
+                if (!diretorio.contains(".djt")) {
+                    diretorio += ".djt";
+                }
+
+                arquivo_selecionado = new File(diretorio);
+                nome_arquivo = arquivo_selecionado.getName();
+		salvar_como.add(nome_arquivo);
+		salvar_como.add(diretorio);
+
+                if (arquivo_selecionado.exists()) {
+                    Object[] alternativas = {"Sim", "Não", "Cancelar"};
+                    int opcao = JOptionPane.showOptionDialog(null, nome_arquivo + " já existe, Deseja substituí-lo?", "Confirmar Salvar Como", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, alternativas, alternativas[0]);
+                    if (opcao == 0) {
+                        substitui(tela, nome_arquivo, entrada, arquivo_selecionado);
+                    } else {
+                        diretorio = caminho_original;
+                        nome_arquivo = nome_original;
+			salvar_como.add(nome_arquivo);
+			salvar_como.add(diretorio);
+                    }
+                } else {
+                    substitui(tela, nome_arquivo, entrada, arquivo_selecionado);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ControladorIde.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return salvar_como;
+    }
+    
+    private void substitui(JFrame tela, String nome_arquivo, JTextArea entrada, File arquivo_selecionado) throws IOException{
+	BufferedWriter buff_escrita = new BufferedWriter(new FileWriter(arquivo_selecionado));
+        Scanner leitor = new Scanner(entrada.getText());
+        while (leitor.hasNextLine()) {
+            buff_escrita.write(leitor.nextLine());
+            buff_escrita.newLine();
+        }
+        buff_escrita.close();
+        tela.setTitle("Compilador - " + nome_arquivo);
     }
 }

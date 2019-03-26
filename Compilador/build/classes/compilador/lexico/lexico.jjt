@@ -34,13 +34,13 @@ SKIP : {
     ":--": multilinecomment
 }
 
-SKIP : {
-    ":-": singlelinecomment
-}
-
 <multilinecomment> SKIP : {
 	"--:": DEFAULT
 	| <~[]>
+}
+
+SKIP : {
+    ":-": singlelinecomment
 }
 
 <singlelinecomment> SKIP : {
@@ -113,19 +113,21 @@ TOKEN : {
 
 // identificador
 TOKEN :{
-	<IDENTIFICATOR: <UPL>(<SP>)?((<LETTER>(<SP>)?)|(<DIGIT>(<DIGIT>)?(<LETTER>|<SP>)))* > {Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
-    | <#SP: "_">
+	<IDENTIFICATOR: <UPL>(<UNDER>)?((<LETTER>(<UNDER>)?)|(<DIGIT>(<DIGIT>)?(<LETTER>|<UNDER>)))* > {Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+    | <#UNDER: "_">
     | <#LETTER:["A"-"Z", "a"-"z"]>
     | <#UPL: ["A"-"Z"]>
 }
 
 // erros
-TOKEN : {
+SPECIAL_TOKEN : {
     <INVALID_SYMBOLS: (~["a"-"z", "A"-"Z", "0"-"9", "\"", "(", ")", "[", "]", "{", "}", ";", ",", ".", "=", ">", "<", "!",
-    "+", "-", "*", "/", "%"])+>{Dados.addError("ERRO LEXICO", image.toString(), input_stream.getEndLine(),
+    "+", "-", "*", "/", "%", "\n", "\r", "\f", "\t", " "])+>{Dados.addError("SIMBOLO INVALIDO", image.toString(), input_stream.getEndLine(),
      input_stream.getBeginColumn(), jjmatchedKind);}
     |<INVALID_NATURAL_NUMBER: (<DIGIT>)+>{Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
        input_stream.getBeginColumn(), jjmatchedKind);}
     | <INVALID_REAL_NUMBER: (<DIGIT>)+<DOT>(<DIGIT>)*>{Dados.addError("NUMERO REAL INVALIDO", image.toString(), input_stream.getEndLine(),
       input_stream.getBeginColumn(), jjmatchedKind);}
+    | <INVALID_LITERAL_CONST: "\"" (~["\n","\r","\""])* ~["\""]>{Dados.addError("CONSTANTE LITERAL INVALIDA", image.toString(), input_stream.getEndLine(),
+                                    input_stream.getBeginColumn(), jjmatchedKind);}
 }

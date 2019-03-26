@@ -6,6 +6,7 @@
 package compilador;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +22,7 @@ public class CompiladorTela extends javax.swing.JFrame {
      */
     public CompiladorTela() {
         initComponents();
-        setTitle("sem nome.djt");
+        setTitle("novo.djt");
     }
 
     /**
@@ -80,6 +81,11 @@ public class CompiladorTela extends javax.swing.JFrame {
         jButtonSalvarComoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save-as.png"))); // NOI18N
         jButtonSalvarComoIcon.setToolTipText("Salvar Como");
         jButtonSalvarComoIcon.setBorder(null);
+        jButtonSalvarComoIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarComoIconActionPerformed(evt);
+            }
+        });
 
         jButtonSairIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exit.png"))); // NOI18N
         jButtonSairIcon.setToolTipText("Sair");
@@ -154,12 +160,6 @@ public class CompiladorTela extends javax.swing.JFrame {
         jButtonCompilarIcon.setFocusable(false);
         jButtonCompilarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCompilarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonCompilarIcon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCompilarIconActionPerformed(evt);
-            }
-        });
-
 
         jButtonExecutarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/run.png"))); // NOI18N
         jButtonExecutarIcon.setToolTipText("Executar");
@@ -210,11 +210,21 @@ public class CompiladorTela extends javax.swing.JFrame {
         jMenuSalvar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
         jMenuSalvar.setText("Salvar");
+        jMenuSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSalvarActionPerformed(evt);
+            }
+        });
         jMenuAquivo.add(jMenuSalvar);
 
         jMenuSalvarComo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         jMenuSalvarComo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save-as.png"))); // NOI18N
         jMenuSalvarComo.setText("Salvar Como");
+        jMenuSalvarComo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSalvarComoActionPerformed(evt);
+            }
+        });
         jMenuAquivo.add(jMenuSalvarComo);
 
         jMenuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
@@ -264,11 +274,6 @@ public class CompiladorTela extends javax.swing.JFrame {
         jMenuCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/compile.png"))); // NOI18N
         jMenuCompilar.setText("Compilar");
         jMenuCompilacao.add(jMenuCompilar);
-        jMenuCompilar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCompilarActionPerformed(evt);
-            }
-        });
 
         jMenuExecutar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/run.png"))); // NOI18N
@@ -359,14 +364,8 @@ public class CompiladorTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExecutarIconActionPerformed
 //ok
     private void jButtonNovoIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoIconActionPerformed
-        setTitle(filename);
-            try {
-                controller.verifyEntry((jTextEntrada),(jTextSaída), filename);
-            } catch (IOException ex) {
-                Logger.getLogger(CompiladorTela.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (MenuException ex) {
-                Logger.getLogger(CompiladorTela.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        controller.novoArquivo(jTextEntrada,jTextSaída, this, nome_arquivo, diretorio);
+        diretorio = "";
     }//GEN-LAST:event_jButtonNovoIconActionPerformed
 //ok
     private void jMenuNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoActionPerformed
@@ -408,20 +407,35 @@ public class CompiladorTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonOpenIconActionPerformed
 
     private void jButtonSalvarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarIconActionPerformed
-            
-        //pegar o filename atual
-            try {
-                controller.saveFile(filename, jTextEntrada.getText());
-            } catch (IOException ex) {
-                Logger.getLogger(CompiladorTela.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (MenuException ex) {
-                Logger.getLogger(CompiladorTela.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        ArrayList<String> obj_salvar = controller.salvar(nome_arquivo, diretorio, jTextEntrada, this);
+        
+        if (obj_salvar.size()==2){
+            nome_arquivo = obj_salvar.get(0);
+            diretorio = obj_salvar.get(1);
+        }
+        
     }//GEN-LAST:event_jButtonSalvarIconActionPerformed
         
     private void jMenuCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuColarActionPerformed
         jButtonCompilarIconActionPerformed(evt);
     }//GEN-LAST:event_jMenuColarActionPerformed
+
+    private void jMenuSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalvarActionPerformed
+        jButtonSalvarIconActionPerformed(evt);
+    }//GEN-LAST:event_jMenuSalvarActionPerformed
+
+    private void jButtonSalvarComoIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarComoIconActionPerformed
+        ArrayList<String> obj_salvar_como = controller.salvarComo(jTextEntrada, nome_arquivo, diretorio, this);
+        
+        if (obj_salvar_como.size()==2){
+            nome_arquivo = obj_salvar_como.get(0);
+            diretorio = obj_salvar_como.get(1);
+        }
+    }//GEN-LAST:event_jButtonSalvarComoIconActionPerformed
+
+    private void jMenuSalvarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalvarComoActionPerformed
+        jButtonSalvarComoIconActionPerformed(evt);
+    }//GEN-LAST:event_jMenuSalvarComoActionPerformed
     
     /**
      * @param args the command line arguments
@@ -494,6 +508,7 @@ public class CompiladorTela extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextEntrada;
     private javax.swing.JTextArea jTextSaída;
     // End of variables declaration//GEN-END:variables
-String filename = "sem nome.djt";
+String nome_arquivo = "novo.djt";
+String diretorio = "";
     
 }
