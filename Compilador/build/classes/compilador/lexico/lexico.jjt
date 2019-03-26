@@ -1,0 +1,131 @@
+options{
+    STATIC = false;
+}
+
+PARSER_BEGIN(Parser)
+package compilador.lexico;
+
+public class Parser{
+
+    public Parser() {
+
+    }
+
+    public void executarAnalise() throws ParseException{
+        Token token = getNextToken();
+
+        while(token.kind != 0){
+            token = getNextToken();
+        }
+    }
+}
+PARSER_END(Parser)
+
+//ignorar
+SKIP : {
+    " "
+	| "\t"
+    | "\n"
+    | "\r"
+    | "\f"
+}
+
+SKIP : {
+    ":--": multilinecomment
+}
+
+SKIP : {
+    ":-": singlelinecomment
+}
+
+<multilinecomment> SKIP : {
+	"--:": DEFAULT
+	| <~[]>
+}
+
+<singlelinecomment> SKIP : {
+	<["\n", "\r"]> : DEFAULT
+	| <~[]>
+}
+
+//palavras reservadas
+TOKEN : {
+	 < PROGRAM: "program">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < DEFINE: "define">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < NOT: "not">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < VARIABLE: "variable">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < IS: "is">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < NATURAL: "natural">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < REAL: "real">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < CHAR: "char">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < BOOLEAN: "boolean">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < EXECUTE: "execute">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < SET: "set">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < TO: "to">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < GET: "get">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < PUT: "put">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < LOOP: "loop">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < WHILE: "while">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < TRUE: "true">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < FALSE: "false">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < DO: "do">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < VERIFY: "verify">{Dados.addDado("PALAVRA RESERVADA", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+}
+
+//constante literal
+TOKEN: {
+   <LITERAL_CONST: "\"" (~[ "\"", "\n", "\r"])* "\"">{Dados.addDado("CONSTANTE LITERAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+}
+
+//caracteres especiais
+TOKEN : {
+	< OPEN_KEY: "{" >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < CLOSE_KEY: "}" >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < DOT: "." >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < COMMA: "," >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < PLUS: "+" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < MINUS: "-" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < MULTIPLY: "*" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < DIVIDER: "/" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < PERCENT: "%" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < MOD: "%%" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < POW: "**" >{Dados.addDado("OPERADOR ARITMETICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < EQUALS: "==" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < EXCLAMATION: "!" >{Dados.addDado("OPERADOR LOGICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < LESS: "<" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < LESS_EQUAL: "<=" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < GREATER: ">" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < GREATER_EQUAL: ">=" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+    | < DIFFERENT: "!=" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < AMPERSAND: "&" >{Dados.addDado("OPERADOR LOGICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < PIPE: "|" >{Dados.addDado("OPERADOR LOGICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < OPEN_PARENTHESIS: "(" >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < CLOSE_PARENTHESIS: ")" >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+}
+
+// numbers
+TOKEN : {
+	< #DIGIT: ["0"-"9"] >
+	| < #DECIMAL_NUMBER: <DOT><DIGIT>(<DIGIT>)?>
+	| < NATURAL_NUMBER: <DIGIT>(<DIGIT>)?(<DIGIT>)? >{Dados.addDado("NUMERO NATURAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+	| < REAL_NUMBER: <DIGIT>((<DIGIT>)?){4}<DECIMAL_NUMBER> >{Dados.addDado("NUMERO REAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+}
+
+// identificador
+TOKEN :{
+	<IDENTIFICATOR: <UPL>(<SP>)?((<LETTER>(<SP>)?)|(<DIGIT>(<DIGIT>)?(<LETTER>|<SP>)))* > {Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+    | <#SP: "_">
+    | <#LETTER:["A"-"Z", "a"-"z"]>
+    | <#UPL: ["A"-"Z"]>
+}
+
+// erros
+TOKEN : {
+    <INVALID_SYMBOLS: (~["a"-"z", "A"-"Z", "0"-"9", "\"", "(", ")", "[", "]", "{", "}", ";", ",", ".", "=", ">", "<", "!",
+    "+", "-", "*", "/", "%"])+>{Dados.addError("ERRO LEXICO", image.toString(), input_stream.getEndLine(),
+     input_stream.getBeginColumn(), jjmatchedKind);}
+    |<INVALID_NATURAL_NUMBER: (<DIGIT>)+>{Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
+       input_stream.getBeginColumn(), jjmatchedKind);}
+    | <INVALID_REAL_NUMBER: (<DIGIT>)+<DOT>(<DIGIT>)*>{Dados.addError("NUMERO REAL INVALIDO", image.toString(), input_stream.getEndLine(),
+      input_stream.getBeginColumn(), jjmatchedKind);}
+}
