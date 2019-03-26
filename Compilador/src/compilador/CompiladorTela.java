@@ -26,6 +26,7 @@ public class CompiladorTela extends javax.swing.JFrame {
      */
     public CompiladorTela() {
         initComponents();
+        setTitle("sem nome.djt");
     }
 
     /**
@@ -43,8 +44,6 @@ public class CompiladorTela extends javax.swing.JFrame {
         jTextEntrada = new javax.swing.JTextArea();
         jButtonSalvarComoIcon = new javax.swing.JButton();
         jButtonSairIcon = new javax.swing.JButton();
-        jToolBar1 = new javax.swing.JToolBar();
-        jToolBar2 = new javax.swing.JToolBar();
         jButtonOpenIcon = new javax.swing.JButton();
         jButtonNovoIcon = new javax.swing.JButton();
         jButtonSalvarIcon = new javax.swing.JButton();
@@ -55,6 +54,7 @@ public class CompiladorTela extends javax.swing.JFrame {
         jButtonExecutarIcon = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAquivo = new javax.swing.JMenu();
         jMenuNovo = new javax.swing.JMenuItem();
@@ -90,16 +90,17 @@ public class CompiladorTela extends javax.swing.JFrame {
         jButtonSairIcon.setToolTipText("Sair");
         jButtonSairIcon.setBorder(null);
 
-        jToolBar1.setRollover(true);
-
-        jToolBar2.setRollover(true);
-
         jButtonOpenIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/open.png"))); // NOI18N
         jButtonOpenIcon.setToolTipText("Abrir");
         jButtonOpenIcon.setBorderPainted(false);
         jButtonOpenIcon.setFocusable(false);
         jButtonOpenIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonOpenIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonOpenIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOpenIconActionPerformed(evt);
+            }
+        });
 
         jButtonNovoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/new.png"))); // NOI18N
         jButtonNovoIcon.setToolTipText("Novo");
@@ -114,6 +115,11 @@ public class CompiladorTela extends javax.swing.JFrame {
 
         jButtonSalvarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
         jButtonSalvarIcon.setToolTipText("Salvar");
+        jButtonSalvarIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarIconActionPerformed(evt);
+            }
+        });
 
         jButtonCopiarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/copy.png"))); // NOI18N
         jButtonCopiarIcon.setToolTipText("Copiar");
@@ -168,6 +174,8 @@ public class CompiladorTela extends javax.swing.JFrame {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -275,8 +283,7 @@ public class CompiladorTela extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(19, 19, 19)
                         .addComponent(jButtonNovoIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonOpenIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -300,31 +307,29 @@ public class CompiladorTela extends javax.swing.JFrame {
                         .addComponent(jButtonCompilarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonExecutarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 246, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 251, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButtonNovoIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSalvarIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSalvarComoIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonOpenIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSairIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonCopiarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonColarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonRecortarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonCompilarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonExecutarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonNovoIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonSalvarIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonSalvarComoIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonOpenIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonSairIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonCopiarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonColarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonRecortarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonCompilarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonExecutarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -381,10 +386,27 @@ public class CompiladorTela extends javax.swing.JFrame {
     private void jMenuColarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuColarActionPerformed
         jButtonColarIconActionPerformed(evt);
     }//GEN-LAST:event_jMenuColarActionPerformed
-
+//ok
     private void jMenuRecortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRecortarActionPerformed
         jButtonRecortarIconActionPerformed(evt);
     }//GEN-LAST:event_jMenuRecortarActionPerformed
+
+    private void jButtonOpenIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpenIconActionPerformed
+        //abrir jFileChooser
+        //controller.loadFile(filename, jTextEntrada);
+    }//GEN-LAST:event_jButtonOpenIconActionPerformed
+
+    private void jButtonSalvarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarIconActionPerformed
+            
+        //pegar o filename atual
+            try {
+                controller.saveFile(filename, jTextEntrada.getText());
+            } catch (IOException ex) {
+                Logger.getLogger(CompiladorTela.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (MenuException ex) {
+                Logger.getLogger(CompiladorTela.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_jButtonSalvarIconActionPerformed
         
     
     /**
@@ -454,10 +476,9 @@ public class CompiladorTela extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextArea jTextEntrada;
     private javax.swing.JTextArea jTextSaída;
-    private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JToolBar jToolBar2;
     // End of variables declaration//GEN-END:variables
 String filename = "sem nome.djt";
     

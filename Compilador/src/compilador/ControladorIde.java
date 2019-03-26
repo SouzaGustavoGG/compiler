@@ -1,6 +1,5 @@
 package compilador;
 
-import java.awt.TextArea;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.Closeable;
@@ -8,6 +7,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +21,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import javax.swing.JTextArea;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * @author gustavo
@@ -78,30 +84,34 @@ public class ControladorIde implements IdeInterface{
 		
 	}
 
-	public void saveFile(String fileName, String content) throws IOException, MenuException {
+	public void saveFile(String nome_arquivo, String conteudo) throws IOException, MenuException {
 		//validateExtension(fileName);
 		JFileChooser fileChooser = new JFileChooser();
                 Scanner reader = null;
                 //filePath = originalPath;
-                String originalName = fileName;
+                String originalName = nome_arquivo;
                 //String dir = getPath(filePath);
                 //fileChooser.setSelectedFile(new File(dir));
+                FileNameExtensionFilter extension = new FileNameExtensionFilter("DJT (*.djt)", "djt");
+                fileChooser.setFileFilter(extension);
                 fileChooser.setSelectedFile(new File(""));// olhar aqui dps
                 
                 if (fileChooser.showSaveDialog(fileChooser) == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
                 String filePath = file.getPath();
-		
+		if (!filePath.contains(".djt")) {
+                    filePath += ".djt";
+                }
                 File selectedFile = new File(filePath);
-                fileName = selectedFile.getName();
+                nome_arquivo = selectedFile.getName();
                 
                 if (selectedFile.exists()) {
                 Object[] options = {"Sim", "Não", "Cancelar"};
-                    int option = JOptionPane.showOptionDialog(null, fileName + " já existe, Deseja substituí-lo?", "Confirmar Salvar Como", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                    int option = JOptionPane.showOptionDialog(null, nome_arquivo + " já existe, Deseja substituí-lo?", "Confirmar Salvar Como", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
                     if (option == 0) { try ( //salvar
                             BufferedWriter bw = new BufferedWriter(new FileWriter(selectedFile))
                             ) {
-                            reader = new Scanner(content);
+                            reader = new Scanner(conteudo);
                         while (reader.hasNextLine()) {
                             bw.write(reader.nextLine());
                             bw.newLine();
@@ -110,12 +120,12 @@ public class ControladorIde implements IdeInterface{
                     }
                     } else { // nao salvar
                        // filePath = originalPath;
-                        fileName = originalName;
+                        nome_arquivo = originalName;
                     }
                 } else {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(selectedFile))) {
                         //Scanner reader;
-                        reader = new Scanner(content);
+                        reader = new Scanner(conteudo);
                         while (reader.hasNextLine()) {
                             bw.write(reader.nextLine());
                             bw.newLine();
@@ -245,5 +255,4 @@ public class ControladorIde implements IdeInterface{
                 }
             }
         }
-
 }
