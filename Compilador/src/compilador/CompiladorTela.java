@@ -5,14 +5,9 @@
  */
 package compilador;
 
-import com.sun.javafx.scene.text.TextLine;
-import java.awt.Color;
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -159,6 +154,12 @@ public class CompiladorTela extends javax.swing.JFrame {
         jButtonCompilarIcon.setFocusable(false);
         jButtonCompilarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCompilarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonCompilarIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCompilarIconActionPerformed(evt);
+            }
+        });
+
 
         jButtonExecutarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/run.png"))); // NOI18N
         jButtonExecutarIcon.setToolTipText("Executar");
@@ -263,6 +264,11 @@ public class CompiladorTela extends javax.swing.JFrame {
         jMenuCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/compile.png"))); // NOI18N
         jMenuCompilar.setText("Compilar");
         jMenuCompilacao.add(jMenuCompilar);
+        jMenuCompilar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCompilarActionPerformed(evt);
+            }
+        });
 
         jMenuExecutar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/run.png"))); // NOI18N
@@ -375,17 +381,22 @@ public class CompiladorTela extends javax.swing.JFrame {
         jTextEntrada.paste();
     }//GEN-LAST:event_jButtonColarIconActionPerformed
 //ok
-    private void jButtonCopiarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopiarIconActionPerformed
+    private void jButtonCopiarIconActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         jTextEntrada.copy();
+    }                                                 
+
+    private void jButtonCompilarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopiarIconActionPerformed
+        LexicAnalyzer analyzer = new LexicAnalyzer();
+        jTextSaída.setText(analyzer.analyze(jTextEntrada.getText()));
     }//GEN-LAST:event_jButtonCopiarIconActionPerformed
 //ok
     private void jMenuCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCopiarActionPerformed
         jButtonCopiarIconActionPerformed(evt);
     }//GEN-LAST:event_jMenuCopiarActionPerformed
 //ok
-    private void jMenuColarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuColarActionPerformed
+    private void jMenuColarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         jButtonColarIconActionPerformed(evt);
-    }//GEN-LAST:event_jMenuColarActionPerformed
+    }                                          
 //ok
     private void jMenuRecortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRecortarActionPerformed
         jButtonRecortarIconActionPerformed(evt);
@@ -408,6 +419,9 @@ public class CompiladorTela extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_jButtonSalvarIconActionPerformed
         
+    private void jMenuCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuColarActionPerformed
+        jButtonCompilarIconActionPerformed(evt);
+    }//GEN-LAST:event_jMenuColarActionPerformed
     
     /**
      * @param args the command line arguments
