@@ -14,12 +14,12 @@ private final int jjStopStringLiteralDfa_0(int pos, long active0)
    switch (pos)
    {
       case 0:
-         if ((active0 & 0xc0L) != 0L)
+         if ((active0 & 0x240L) != 0L)
          {
             jjmatchedKind = 63;
             return 9;
          }
-         if ((active0 & 0x1800000000003eL) != 0L)
+         if ((active0 & 0x18000000000000L) != 0L)
             return 9;
          return -1;
       default :
@@ -40,16 +40,6 @@ private int jjMoveStringLiteralDfa0_0()
 {
    switch(curChar)
    {
-      case 9:
-         return jjStartNfaWithStates_0(0, 2, 9);
-      case 10:
-         return jjStartNfaWithStates_0(0, 3, 9);
-      case 12:
-         return jjStartNfaWithStates_0(0, 5, 9);
-      case 13:
-         return jjStartNfaWithStates_0(0, 4, 9);
-      case 32:
-         return jjStartNfaWithStates_0(0, 1, 9);
       case 33:
          jjmatchedKind = 45;
          return jjMoveStringLiteralDfa1_0(0x4000000000000L);
@@ -76,7 +66,7 @@ private int jjMoveStringLiteralDfa0_0()
       case 47:
          return jjStopAtPos(0, 40);
       case 58:
-         return jjMoveStringLiteralDfa1_0(0xc0L);
+         return jjMoveStringLiteralDfa1_0(0x240L);
       case 60:
          jjmatchedKind = 46;
          return jjMoveStringLiteralDfa1_0(0x800000000000L);
@@ -143,9 +133,9 @@ private int jjMoveStringLiteralDfa1_0(long active0)
             return jjStopAtPos(1, 43);
          break;
       case 45:
-         if ((active0 & 0x80L) != 0L)
+         if ((active0 & 0x200L) != 0L)
          {
-            jjmatchedKind = 7;
+            jjmatchedKind = 9;
             jjmatchedPos = 1;
          }
          return jjMoveStringLiteralDfa2_0(active0, 0x40L);
@@ -418,7 +408,7 @@ private int jjMoveNfa_0(int startState, int curPos)
             switch(jjstateSet[--i])
             {
                case 0:
-                  if ((0x840000d9ffffffffL & l) != 0L)
+                  if ((0x840000d8ffffc9ffL & l) != 0L)
                   {
                      if (kind > 63)
                         kind = 63;
@@ -450,7 +440,7 @@ private int jjMoveNfa_0(int startState, int curPos)
                      jjCheckNAdd(8);
                   break;
                case 9:
-                  if ((0x840000d9ffffffffL & l) == 0L)
+                  if ((0x840000d8ffffc9ffL & l) == 0L)
                      break;
                   if (kind > 63)
                      kind = 63;
@@ -705,7 +695,7 @@ private int jjMoveStringLiteralDfa0_1()
    switch(curChar)
    {
       case 45:
-         return jjMoveStringLiteralDfa1_1(0x100L);
+         return jjMoveStringLiteralDfa1_1(0x80L);
       default :
          return 1;
    }
@@ -719,7 +709,7 @@ private int jjMoveStringLiteralDfa1_1(long active0)
    switch(curChar)
    {
       case 45:
-         return jjMoveStringLiteralDfa2_1(active0, 0x100L);
+         return jjMoveStringLiteralDfa2_1(active0, 0x80L);
       default :
          return 2;
    }
@@ -735,8 +725,8 @@ private int jjMoveStringLiteralDfa2_1(long old0, long active0)
    switch(curChar)
    {
       case 58:
-         if ((active0 & 0x100L) != 0L)
-            return jjStopAtPos(2, 8);
+         if ((active0 & 0x80L) != 0L)
+            return jjStopAtPos(2, 7);
          break;
       default :
          return 3;
@@ -769,15 +759,18 @@ public static final String[] lexStateNames = {
 
 /** Lex State array. */
 public static final int[] jjnewLexState = {
-   -1, -1, -1, -1, -1, -1, 1, 2, 0, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+   -1, -1, -1, -1, -1, -1, 1, 0, -1, 2, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
 };
 static final long[] jjtoToken = {
-   0x8e7ffffffffff001L, 0x3L, 
+   0xe7ffffffffff001L, 0x0L, 
 };
 static final long[] jjtoSkip = {
-   0xffeL, 0x0L, 
+   0x8000000000000ffeL, 0x3L, 
+};
+static final long[] jjtoSpecial = {
+   0x8000000000000000L, 0x3L, 
 };
 protected SimpleCharStream input_stream;
 private final int[] jjrounds = new int[24];
@@ -866,6 +859,7 @@ int jjmatchedKind;
 /** Get the next Token. */
 public Token getNextToken() 
 {
+  Token specialToken = null;
   Token matchedToken;
   int curPos = 0;
 
@@ -880,6 +874,7 @@ public Token getNextToken()
    {
       jjmatchedKind = 0;
       matchedToken = jjFillToken();
+      matchedToken.specialToken = specialToken;
       return matchedToken;
    }
    image = jjimage;
@@ -889,6 +884,11 @@ public Token getNextToken()
    switch(curLexState)
    {
      case 0:
+       try { input_stream.backup(0);
+          while (curChar <= 32 && (0x100003600L & (1L << curChar)) != 0L)
+             curChar = input_stream.BeginToken();
+       }
+       catch (java.io.IOException e1) { continue EOFLoop; }
        jjmatchedKind = 0x7fffffff;
        jjmatchedPos = 0;
        curPos = jjMoveStringLiteralDfa0_0();
@@ -897,9 +897,9 @@ public Token getNextToken()
        jjmatchedKind = 0x7fffffff;
        jjmatchedPos = 0;
        curPos = jjMoveStringLiteralDfa0_1();
-       if (jjmatchedPos == 0 && jjmatchedKind > 9)
+       if (jjmatchedPos == 0 && jjmatchedKind > 8)
        {
-          jjmatchedKind = 9;
+          jjmatchedKind = 8;
        }
        break;
      case 2:
@@ -919,6 +919,7 @@ public Token getNextToken()
         if ((jjtoToken[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L)
         {
            matchedToken = jjFillToken();
+           matchedToken.specialToken = specialToken;
            TokenLexicalActions(matchedToken);
        if (jjnewLexState[jjmatchedKind] != -1)
          curLexState = jjnewLexState[jjmatchedKind];
@@ -926,6 +927,20 @@ public Token getNextToken()
         }
         else
         {
+           if ((jjtoSpecial[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L)
+           {
+              matchedToken = jjFillToken();
+              if (specialToken == null)
+                 specialToken = matchedToken;
+              else
+              {
+                 matchedToken.specialToken = specialToken;
+                 specialToken = (specialToken.next = matchedToken);
+              }
+              SkipLexicalActions(matchedToken);
+           }
+           else
+              SkipLexicalActions(null);
          if (jjnewLexState[jjmatchedKind] != -1)
            curLexState = jjnewLexState[jjmatchedKind];
            continue EOFLoop;
@@ -954,6 +969,29 @@ public Token getNextToken()
   }
 }
 
+void SkipLexicalActions(Token matchedToken)
+{
+   switch(jjmatchedKind)
+   {
+      case 63 :
+         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                                                             Dados.addError("ERRO LEXICO", image.toString(), input_stream.getEndLine(),
+     input_stream.getBeginColumn(), jjmatchedKind);
+         break;
+      case 64 :
+         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                                          Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
+       input_stream.getBeginColumn(), jjmatchedKind);
+         break;
+      case 65 :
+         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+                                                       Dados.addError("NUMERO REAL INVALIDO", image.toString(), input_stream.getEndLine(),
+      input_stream.getBeginColumn(), jjmatchedKind);
+         break;
+      default :
+         break;
+   }
+}
 void TokenLexicalActions(Token matchedToken)
 {
    switch(jjmatchedKind)
@@ -1183,21 +1221,6 @@ void TokenLexicalActions(Token matchedToken)
       case 59 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
                                                                                                Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);
-         break;
-      case 63 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                Dados.addError("ERRO LEXICO", image.toString(), input_stream.getEndLine(),
-     input_stream.getBeginColumn(), jjmatchedKind);
-         break;
-      case 64 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                          Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
-       input_stream.getBeginColumn(), jjmatchedKind);
-         break;
-      case 65 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                                       Dados.addError("NUMERO REAL INVALIDO", image.toString(), input_stream.getEndLine(),
-      input_stream.getBeginColumn(), jjmatchedKind);
          break;
       default :
          break;
