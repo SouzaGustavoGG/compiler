@@ -388,8 +388,8 @@ public class CompiladorTela extends javax.swing.JFrame {
     }                                                 
 
     private void jButtonCompilarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopiarIconActionPerformed
-        LexicAnalyzer analyzer = new LexicAnalyzer();
-        jTextSaída.setText(analyzer.analyze(jTextEntrada.getText()));
+            LexicAnalyzer analyzer = new LexicAnalyzer();
+            jTextSaída.setText(analyzer.analyze(jTextEntrada.getText()));        
     }//GEN-LAST:event_jButtonCopiarIconActionPerformed
 //ok
     private void jMenuCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCopiarActionPerformed
