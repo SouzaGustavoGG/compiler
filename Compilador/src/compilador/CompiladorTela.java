@@ -20,7 +20,7 @@ public class CompiladorTela extends javax.swing.JFrame {
      */
     public CompiladorTela() {
         initComponents();
-        setTitle("novo.djt");
+        setTitle("Compilador - novo.djt");
     }
 
     /**
