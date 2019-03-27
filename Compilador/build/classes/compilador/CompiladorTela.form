@@ -13,9 +13,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Arquivo"/>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuAquivoMouseClicked"/>
-          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuNovo">
               <Properties>
@@ -83,6 +80,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuSairActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -200,7 +200,7 @@
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Component id="jButtonNovoIcon" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButtonOpenIcon" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jButtonAbrirIcon" min="-2" pref="35" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonSalvarIcon" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -238,7 +238,7 @@
                   <Component id="jButtonNovoIcon" alignment="0" max="32767" attributes="0"/>
                   <Component id="jButtonSalvarIcon" alignment="1" max="32767" attributes="0"/>
                   <Component id="jButtonSalvarComoIcon" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jButtonOpenIcon" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jButtonAbrirIcon" alignment="0" max="32767" attributes="0"/>
                   <Component id="jButtonSairIcon" alignment="1" max="32767" attributes="0"/>
                   <Component id="jButtonCopiarIcon" alignment="0" max="32767" attributes="0"/>
                   <Component id="jButtonColarIcon" alignment="0" max="32767" attributes="0"/>
@@ -313,8 +313,11 @@
           <Border info="null"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSairIconActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonOpenIcon">
+    <Component class="javax.swing.JButton" name="jButtonAbrirIcon">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icons/open.png"/>
@@ -326,7 +329,7 @@
         <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonOpenIconActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAbrirIconActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonNovoIcon">

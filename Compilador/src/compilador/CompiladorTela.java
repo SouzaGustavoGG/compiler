@@ -5,10 +5,7 @@
  */
 package compilador;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -40,7 +37,7 @@ public class CompiladorTela extends javax.swing.JFrame {
         jTextEntrada = new javax.swing.JTextArea();
         jButtonSalvarComoIcon = new javax.swing.JButton();
         jButtonSairIcon = new javax.swing.JButton();
-        jButtonOpenIcon = new javax.swing.JButton();
+        jButtonAbrirIcon = new javax.swing.JButton();
         jButtonNovoIcon = new javax.swing.JButton();
         jButtonSalvarIcon = new javax.swing.JButton();
         jButtonCopiarIcon = new javax.swing.JButton();
@@ -90,16 +87,21 @@ public class CompiladorTela extends javax.swing.JFrame {
         jButtonSairIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exit.png"))); // NOI18N
         jButtonSairIcon.setToolTipText("Sair");
         jButtonSairIcon.setBorder(null);
-
-        jButtonOpenIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/open.png"))); // NOI18N
-        jButtonOpenIcon.setToolTipText("Abrir");
-        jButtonOpenIcon.setBorderPainted(false);
-        jButtonOpenIcon.setFocusable(false);
-        jButtonOpenIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonOpenIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonOpenIcon.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSairIcon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOpenIconActionPerformed(evt);
+                jButtonSairIconActionPerformed(evt);
+            }
+        });
+
+        jButtonAbrirIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/open.png"))); // NOI18N
+        jButtonAbrirIcon.setToolTipText("Abrir");
+        jButtonAbrirIcon.setBorderPainted(false);
+        jButtonAbrirIcon.setFocusable(false);
+        jButtonAbrirIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonAbrirIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonAbrirIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAbrirIconActionPerformed(evt);
             }
         });
 
@@ -160,11 +162,6 @@ public class CompiladorTela extends javax.swing.JFrame {
         jButtonCompilarIcon.setFocusable(false);
         jButtonCompilarIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCompilarIcon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonCompilarIcon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCompilarActionPerformed(evt);
-            }
-        });
 
         jButtonExecutarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/run.png"))); // NOI18N
         jButtonExecutarIcon.setToolTipText("Executar");
@@ -186,11 +183,6 @@ public class CompiladorTela extends javax.swing.JFrame {
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 255));
 
         jMenuAquivo.setText("Arquivo");
-        jMenuAquivo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuAquivoMouseClicked(evt);
-            }
-        });
 
         jMenuNovo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         jMenuNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/new.png"))); // NOI18N
@@ -235,6 +227,11 @@ public class CompiladorTela extends javax.swing.JFrame {
         jMenuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         jMenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exit.png"))); // NOI18N
         jMenuSair.setText("Sair");
+        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSairActionPerformed(evt);
+            }
+        });
         jMenuAquivo.add(jMenuSair);
 
         jMenuBar1.add(jMenuAquivo);
@@ -279,11 +276,6 @@ public class CompiladorTela extends javax.swing.JFrame {
         jMenuCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/compile.png"))); // NOI18N
         jMenuCompilar.setText("Compilar");
         jMenuCompilacao.add(jMenuCompilar);
-        jMenuCompilar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCompilarActionPerformed(evt);
-            }
-        });
 
         jMenuExecutar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/run.png"))); // NOI18N
@@ -307,7 +299,7 @@ public class CompiladorTela extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addComponent(jButtonNovoIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonOpenIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonAbrirIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonSalvarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -341,7 +333,7 @@ public class CompiladorTela extends javax.swing.JFrame {
                     .addComponent(jButtonNovoIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonSalvarIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonSalvarComoIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonOpenIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAbrirIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonSairIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonCopiarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonColarIcon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -360,13 +352,8 @@ public class CompiladorTela extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuAquivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAquivoMouseClicked
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_jMenuAquivoMouseClicked
-
     private void jMenuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbrirActionPerformed
-        // TODO add your handling code here:
+        jButtonAbrirIconActionPerformed(evt);
     }//GEN-LAST:event_jMenuAbrirActionPerformed
 //ok
     private void jButtonExecutarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExecutarIconActionPerformed
@@ -411,10 +398,9 @@ public class CompiladorTela extends javax.swing.JFrame {
         jButtonRecortarIconActionPerformed(evt);
     }//GEN-LAST:event_jMenuRecortarActionPerformed
 
-    private void jButtonOpenIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpenIconActionPerformed
-        //abrir jFileChooser
-        //controller.loadFile(filename, jTextEntrada);
-    }//GEN-LAST:event_jButtonOpenIconActionPerformed
+    private void jButtonAbrirIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirIconActionPerformed
+        
+    }//GEN-LAST:event_jButtonAbrirIconActionPerformed
 //ok
     private void jButtonSalvarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarIconActionPerformed
         ArrayList<String> obj_salvar = controller.salvar(nome_arquivo, diretorio, jTextEntrada, this);
@@ -446,6 +432,14 @@ public class CompiladorTela extends javax.swing.JFrame {
     private void jMenuSalvarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalvarComoActionPerformed
         jButtonSalvarComoIconActionPerformed(evt);
     }//GEN-LAST:event_jMenuSalvarComoActionPerformed
+
+    private void jButtonSairIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairIconActionPerformed
+        controller.exit(jTextEntrada, nome_arquivo, diretorio, this);
+    }//GEN-LAST:event_jButtonSairIconActionPerformed
+
+    private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
+        jButtonSairIconActionPerformed(evt);
+    }//GEN-LAST:event_jMenuSairActionPerformed
     
     /**
      * @param args the command line arguments
@@ -486,12 +480,12 @@ public class CompiladorTela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAbrirIcon;
     private javax.swing.JButton jButtonColarIcon;
     private javax.swing.JButton jButtonCompilarIcon;
     private javax.swing.JButton jButtonCopiarIcon;
     private javax.swing.JButton jButtonExecutarIcon;
     private javax.swing.JButton jButtonNovoIcon;
-    private javax.swing.JButton jButtonOpenIcon;
     private javax.swing.JButton jButtonRecortarIcon;
     private javax.swing.JButton jButtonSairIcon;
     private javax.swing.JButton jButtonSalvarComoIcon;

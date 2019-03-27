@@ -49,21 +49,18 @@ public class ControladorIde implements IdeInterface {
                 }
             }
         } else {
-            System.out.println(nome_arquivo);
-            System.out.println(diretorio);
-            if (arquivoAlterado(entrada, diretorio)) {
-                Object[] alternativas = {"Sim", "Não", "Cancelar"};
-                int opcao = JOptionPane.showOptionDialog(null, nome_arquivo + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, alternativas, alternativas[2]);
-                if (opcao == 0) {//salvar
-                    salvar(nome_arquivo, diretorio, entrada, tela);
-					diretorio = ("");
-				}else if (opcao == 1){
-					diretorio = ("");
-				}
-			}else{
-				diretorio = ("");
-			}
-
+                if (arquivoAlterado(entrada, diretorio)) {
+                    Object[] alternativas = {"Sim", "Não", "Cancelar"};
+                    int opcao = JOptionPane.showOptionDialog(null, nome_arquivo + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, alternativas, alternativas[2]);
+                    if (opcao == 0) {//salvar
+                        salvar(nome_arquivo, diretorio, entrada, tela);
+                        diretorio = ("");
+                    }else if (opcao == 1){
+			diretorio = ("");
+                    }
+		}else{
+                    diretorio = ("");
+		}
         }
         entrada.setText("");
         saida.setText("");
@@ -233,5 +230,42 @@ public class ControladorIde implements IdeInterface {
         }
         buff_escrita.close();
         tela.setTitle("Compilador - " + nome_arquivo);
+    }
+    
+    public void exit(JTextArea entrada, String nome_arquivo, String diretorio, JFrame tela) {
+        boolean isArquivo;
+        if (nome_arquivo.equals("novo.djt")) {
+            isArquivo = false;
+            if ("".equals(entrada.getText())) {
+                System.exit(0);
+            } else {
+                salvaAlteracoes(nome_arquivo, isArquivo, diretorio, tela, entrada);
+            }
+        } else {
+            isArquivo = true;
+            if (arquivoAlterado(entrada, nome_arquivo)) {
+                salvaAlteracoes(nome_arquivo, isArquivo, diretorio, tela, entrada);
+            } else {
+                System.exit(0);
+            }
+        }
+    }
+	
+	
+	
+    private void salvaAlteracoes(String nome_arquivo, boolean isArquivo, String diretorio, JFrame tela, JTextArea entrada){
+	Object[] alternativas = {"Sim", "Não", "Cancelar"};
+        int opcao = JOptionPane.showOptionDialog(null, nome_arquivo + " foi alterado, salvar alterações?", "Salvar Alterações?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, alternativas, alternativas[2]);
+		if(opcao==0){
+			if(isArquivo){//se o arquivo foi modificado
+				salvar(nome_arquivo, diretorio, entrada, tela);
+			}else{
+				salvarComo(entrada, nome_arquivo, diretorio, tela);
+			}
+                        System.exit(0);
+		} else if (opcao == 1) //nao salvar, apenas sair
+                {
+			System.exit(0);
+                } 
     }
 }
