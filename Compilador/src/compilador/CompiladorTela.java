@@ -6,6 +6,7 @@
 package compilador;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -280,6 +281,11 @@ public class CompiladorTela extends javax.swing.JFrame {
         jMenuExecutar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/run.png"))); // NOI18N
         jMenuExecutar.setText("Executar");
+        jMenuExecutar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuExecutarActionPerformed(evt);
+            }
+        });
         jMenuCompilacao.add(jMenuExecutar);
 
         jMenuBar1.add(jMenuCompilacao);
@@ -357,7 +363,7 @@ public class CompiladorTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuAbrirActionPerformed
 //ok
     private void jButtonExecutarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExecutarIconActionPerformed
-        
+        JOptionPane.showMessageDialog(null, "A opção Executar será especificada posteriormente");
     }//GEN-LAST:event_jButtonExecutarIconActionPerformed
 //ok
     private void jButtonNovoIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoIconActionPerformed
@@ -440,6 +446,10 @@ public class CompiladorTela extends javax.swing.JFrame {
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
         jButtonSairIconActionPerformed(evt);
     }//GEN-LAST:event_jMenuSairActionPerformed
+
+    private void jMenuExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuExecutarActionPerformed
+        jButtonExecutarIconActionPerformed(evt);
+    }//GEN-LAST:event_jMenuExecutarActionPerformed
     
     /**
      * @param args the command line arguments
