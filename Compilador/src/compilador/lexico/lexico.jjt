@@ -129,7 +129,7 @@ TOKEN : {
 // erros
 SPECIAL_TOKEN : {
     <INVALID_SYMBOLS: (~["a"-"z", "A"-"Z", "0"-"9", "\"", "(", ")", "[", "]", "{", "}", ";", ",", ".", "=", ">", "<", "!",
-    "+", "-", "*", "/", "%", "\n", "\r", "\f", "\t", " "])+>{Dados.addError("SIMBOLO INVALIDO", image.toString(), input_stream.getEndLine(),
+    "+", "-", "_", "*", "/", "%", "\n", "\r", "\f", "\t", " "])+>{Dados.addError("SIMBOLO INVALIDO", image.toString(), input_stream.getEndLine(),
      input_stream.getBeginColumn(), jjmatchedKind);}
     |<INVALID_NATURAL_NUMBER: (<DIGIT>)+>{Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
        input_stream.getBeginColumn(), jjmatchedKind);}
@@ -137,9 +137,9 @@ SPECIAL_TOKEN : {
       input_stream.getBeginColumn(), jjmatchedKind);}
     | <INVALID_LITERAL_CONST: "\"" (~["\n","\r","\""])* ~["\""]>{Dados.addError("CONSTANTE LITERAL INVALIDA", image.toString(), input_stream.getEndLine(),
                                     input_stream.getBeginColumn(), jjmatchedKind);}
-    | <INVALID_IDENTIFIER: (<DIGIT>)+(<LETTER>|<DIGIT>|<UNDER>)+
-    | (<LETTER>|<DIGIT>|<UNDER>)*<UNDER><UNDER>(<LETTER>|<DIGIT>|<UNDER>)*
-    | (<LETTER>|<DIGIT>|<UNDER>)*<DIGIT><DIGIT>(<LETTER>|<DIGIT>|<UNDER>)*
-    | (<LETTER>|<DIGIT>|<UNDER>)+(<DIGIT>)+> {Dados.addError("IDENTIFICADOR INVALIDO", image.toString(), input_stream.getEndLine(),
+    | <INVALID_IDENTIFIER: <DIGIT>(<LETTER>|<DIGIT>|<UNDER>)+
+    | (<LETTER>|<DIGIT>|<UNDER>)*(<UNDER>){2}(<LETTER>|<DIGIT>|<UNDER>)*
+    | (<LETTER>|<DIGIT>|<UNDER>)*(<DIGIT>){2}(<LETTER>|<DIGIT>|<UNDER>)*
+    | (<LETTER>|<DIGIT>|<UNDER>)+<DIGIT>> {Dados.addError("IDENTIFICADOR INVALIDO", image.toString(), input_stream.getEndLine(),
                                                                                                       input_stream.getBeginColumn(), jjmatchedKind);}
 }
