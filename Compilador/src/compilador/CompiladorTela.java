@@ -434,12 +434,16 @@ public class CompiladorTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuRecortarActionPerformed
 
     private void jButtonAbrirIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirIconActionPerformed
-        
+        ArrayList<String> obj_abrir = new ArrayList<>();
+        obj_abrir  = controller.abrir(jTextEntrada, jTextSaída, nome_arquivo, diretorio, this);
+        if (obj_abrir.size()==2){
+            nome_arquivo = obj_abrir.get(0);
+            diretorio = obj_abrir.get(1);
+        }
     }//GEN-LAST:event_jButtonAbrirIconActionPerformed
 //ok
     private void jButtonSalvarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarIconActionPerformed
         ArrayList<String> obj_salvar = controller.salvar(nome_arquivo, diretorio, jTextEntrada, this);
-        
         if (obj_salvar.size()==2){
             nome_arquivo = obj_salvar.get(0);
             diretorio = obj_salvar.get(1);
@@ -457,7 +461,6 @@ public class CompiladorTela extends javax.swing.JFrame {
 
     private void jButtonSalvarComoIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarComoIconActionPerformed
         ArrayList<String> obj_salvar_como = controller.salvarComo(jTextEntrada, nome_arquivo, diretorio, this);
-        
         if (obj_salvar_como.size()==2){
             nome_arquivo = obj_salvar_como.get(0);
             diretorio = obj_salvar_como.get(1);
@@ -469,7 +472,8 @@ public class CompiladorTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSalvarComoActionPerformed
 
     private void jButtonSairIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairIconActionPerformed
-        controller.exit(jTextEntrada, nome_arquivo, diretorio, this);
+        System.out.println(diretorio);
+        controller.sair(jTextEntrada, nome_arquivo, diretorio, this);
     }//GEN-LAST:event_jButtonSairIconActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
