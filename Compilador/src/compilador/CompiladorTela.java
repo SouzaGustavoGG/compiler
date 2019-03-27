@@ -398,8 +398,12 @@ public class CompiladorTela extends javax.swing.JFrame {
     }                                                 
 
     private void jButtonCompilarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopiarIconActionPerformed
+        if("".equals(jTextEntrada.getText())){
+            JOptionPane.showMessageDialog(null, "Um arquivo vazio não pode ser compilado!");
+        }else{    
             LexicAnalyzer analyzer = new LexicAnalyzer();
-            jTextSaída.setText(analyzer.analyze(jTextEntrada.getText()));        
+            jTextSaída.setText(analyzer.analyze(jTextEntrada.getText()));
+        }
     }//GEN-LAST:event_jButtonCopiarIconActionPerformed
 //ok
     private void jMenuCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCopiarActionPerformed
