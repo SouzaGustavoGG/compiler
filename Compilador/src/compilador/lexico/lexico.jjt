@@ -112,11 +112,25 @@ TOKEN : {
 }
 
 // identificador
-TOKEN :{
-	<IDENTIFICATOR: <UPL>(<UNDER>)?((<LETTER>(<UNDER>)?)|(<DIGIT>(<DIGIT>)?(<LETTER>|<UNDER>)))* > {Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
-    | <#UNDER: "_">
-    | <#LETTER:["A"-"Z", "a"-"z"]>
-    | <#UPL: ["A"-"Z"]>
+//TOKEN :{
+	//<IDENTIFICATOR: <UPL>(<UNDER>)?((<LETTER>(<UNDER>)?)|(<DIGIT>(<DIGIT>)?(<LETTER>|<UNDER>)))* > {Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+    //| <#UNDER: "_">
+    //| <#LETTER:["A"-"Z", "a"-"z"]>
+    //| <#UPL: ["A"-"Z"]>
+//}
+
+TOKEN : {
+	  < #LETTER:["A"-"Z", "a"-"z"]>
+	| < #UNDER: "_">
+	| < UNDERLINE_NOT_REPEAT: <UNDER> ((<DIGIT><LETTER>)| <LETTER>) >
+	| < DIGIT_NOT_REPEAT: <DIGIT> ((<UNDER><LETTER>)|<LETTER>) > 
+	| < FINAL: (<LETTER>|<UNDER>) >
+
+	| < IDENTIFICADOR :
+   	<LETTER> (( <LETTER> | <UNDERLINE_NOT_REPEAT> | <DIGIT_NOT_REPEAT> )* <FINAL>)?   
+	|  <UNDER> (( <LETTER> | <DIGIT_NOT_REPEAT>) ( <LETTER> | <UNDERLINE_NOT_REPEAT> | <DIGIT_NOT_REPEAT> )* <FINAL>)?
+	|  <UNDER> (( <LETTER> | <DIGIT>) <FINAL>)? >
+	
 }
 
 // erros
