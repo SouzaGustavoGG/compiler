@@ -994,6 +994,15 @@ void SkipLexicalActions(Token matchedToken)
 {
    switch(jjmatchedKind)
    {
+      case 6 :
+         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+           Dados.addError("COMENTARIO DE BLOCO NAO FINALIZADO", image.toString(), input_stream.getEndLine(),
+               input_stream.getBeginColumn(), jjmatchedKind);
+         break;
+      case 7 :
+         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+               Dados.removeLastError();
+         break;
       case 63 :
          image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
                                                              Dados.addError("SIMBOLO INVALIDO", image.toString(), input_stream.getEndLine(),

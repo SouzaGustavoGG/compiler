@@ -17,6 +17,11 @@ public class Dados {
         dados.add("ERRO -> " + tipoToken + " '" + token + "' na linha " + linha + ", coluna " + coluna + " | ID: " + id);
     }
 
+    static void removeLastError(){
+        erros -= 1;
+        dados.remove(dados.size()-1);
+    }
+
     public static void limpar(){
         erros = 0;
         oks = 0;
