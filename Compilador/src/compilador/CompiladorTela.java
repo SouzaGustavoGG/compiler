@@ -443,6 +443,7 @@ public class CompiladorTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAbrirIconActionPerformed
 //ok
     private void jButtonSalvarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarIconActionPerformed
+
         ArrayList<String> obj_salvar = controller.salvar(nome_arquivo, diretorio, jTextEntrada, this);
         if (obj_salvar.size()==2){
             nome_arquivo = obj_salvar.get(0);
@@ -472,7 +473,6 @@ public class CompiladorTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSalvarComoActionPerformed
 
     private void jButtonSairIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairIconActionPerformed
-        System.out.println(diretorio);
         controller.sair(jTextEntrada, nome_arquivo, diretorio, this);
     }//GEN-LAST:event_jButtonSairIconActionPerformed
 

@@ -23,7 +23,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * @author gustavo
- *
+ * @author maykon
+ * @author évelyn
  */
 public class ControladorIde implements IdeInterface {
 
@@ -80,7 +81,6 @@ public class ControladorIde implements IdeInterface {
     public boolean arquivoAlterado(JTextArea entrada, String nome_arquivo) {
         try {
             boolean isModificado = false;
-            //Inicializações
             FileReader arquivo = new FileReader(nome_arquivo);
             BufferedReader leArquivo = new BufferedReader(arquivo);
             Scanner leitor = new Scanner(entrada.getText());
@@ -179,6 +179,7 @@ public class ControladorIde implements IdeInterface {
         return caminho;
     }
         
+    @Override
     public ArrayList<String> salvarComo( JTextArea entrada, String nome_arquivo, String diretorio, JFrame tela){
         ArrayList<String> salvar_como = new ArrayList<>();
         String caminho;
@@ -239,6 +240,7 @@ public class ControladorIde implements IdeInterface {
         tela.setTitle("Compilador - " + nome_arquivo);
     }
     
+    @Override
     public void sair(JTextArea entrada, String nome_arquivo, String diretorio, JFrame tela) {
         boolean isArquivo;
         if (nome_arquivo.equals("novo.djt")) {
@@ -327,6 +329,7 @@ public class ControladorIde implements IdeInterface {
 		return opcao;
     }
         
+    @Override
     public ArrayList<String> abrir(JTextArea entrada, JTextArea saida, String nome_arquivo, String diretorio, JFrame tela) {
         ArrayList<String> obj_aberto = new ArrayList<>();
 	String novo_arquivo = nome_arquivo;
