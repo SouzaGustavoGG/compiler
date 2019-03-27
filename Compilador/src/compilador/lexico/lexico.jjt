@@ -31,11 +31,12 @@ SKIP : {
 }
 
 SKIP : {
-    ":--": multilinecomment
+    ":--" {Dados.addError("COMENTARIO DE BLOCO NAO FINALIZADO", image.toString(), input_stream.getEndLine(),
+               input_stream.getBeginColumn(), jjmatchedKind);}: multilinecomment
 }
 
 <multilinecomment> SKIP : {
-	"--:": DEFAULT
+	"--:" {Dados.removeLastError();}: DEFAULT
 	| <~[]>
 }
 
