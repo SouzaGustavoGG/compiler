@@ -6,7 +6,11 @@
 package compilador;
 
 import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 
 /**
  *
@@ -64,6 +68,7 @@ public class CompiladorTela extends javax.swing.JFrame {
         jMenuCompilacao = new javax.swing.JMenu();
         jMenuCompilar = new javax.swing.JMenuItem();
         jMenuExecutar = new javax.swing.JMenuItem();
+        jLabelLinhaColuna = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Compilador");
@@ -72,9 +77,28 @@ public class CompiladorTela extends javax.swing.JFrame {
         jTextSaída.setColumns(20);
         jTextSaída.setRows(5);
         jScrollPane1.setViewportView(jTextSaída);
+        
+        jLabelLinhaColuna.setText("");
 
         jTextEntrada.setColumns(20);
         jTextEntrada.setRows(5);
+        jTextEntrada.addCaretListener(new CaretListener() {
+        	public void caretUpdate(CaretEvent e) {
+                JTextArea editArea = (JTextArea)e.getSource();
+                int linenum = 1;
+                int columnnum = 1;
+                try {
+
+                    int caretpos = editArea.getCaretPosition();
+                    linenum = editArea.getLineOfOffset(caretpos);
+                    columnnum = caretpos - editArea.getLineStartOffset(linenum);
+                    linenum += 1;
+                }
+                catch(Exception ex) { }
+                //jLabelLinhaColuna.setText("linha: "+ linenum + "| coluna: "+  columnnum);
+                System.out.println("linha: "+ linenum + "| coluna: "+  columnnum);
+            }
+        });
         jScrollPane2.setViewportView(jTextEntrada);
 
         jButtonSalvarComoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save-as.png"))); // NOI18N
@@ -559,6 +583,7 @@ public class CompiladorTela extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextArea jTextEntrada;
     private javax.swing.JTextArea jTextSaída;
+    private javax.swing.JLabel jLabelLinhaColuna;
     // End of variables declaration//GEN-END:variables
 String nome_arquivo = "novo.djt";
 String diretorio = "";
