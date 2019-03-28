@@ -13,11 +13,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import javax.swing.JTextArea;
+import javax.swing.event.CaretEvent;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -367,6 +368,23 @@ public class ControladorIde implements IdeInterface {
             }
         }
         return obj_aberto;
+    }
+    
+    @Override
+    public void updateLineColumn(CaretEvent e) {
+        JTextArea editArea = (JTextArea)e.getSource();
+        int linenum = 1;
+        int columnnum = 1;
+        try {
+
+            int caretpos = editArea.getCaretPosition();
+            linenum = editArea.getLineOfOffset(caretpos);
+            columnnum = caretpos - editArea.getLineStartOffset(linenum);
+            linenum += 1;
+        }
+        catch(Exception ex) { }
+        //jLabelLinhaColuna.setText("linha: "+ linenum + "| coluna: "+  columnnum);
+        System.out.println("linha: "+ linenum + "| coluna: "+  columnnum);
     }
 	
 }

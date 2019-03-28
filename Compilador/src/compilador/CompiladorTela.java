@@ -8,7 +8,6 @@ package compilador;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
@@ -84,19 +83,7 @@ public class CompiladorTela extends javax.swing.JFrame {
         jTextEntrada.setRows(5);
         jTextEntrada.addCaretListener(new CaretListener() {
         	public void caretUpdate(CaretEvent e) {
-                JTextArea editArea = (JTextArea)e.getSource();
-                int linenum = 1;
-                int columnnum = 1;
-                try {
-
-                    int caretpos = editArea.getCaretPosition();
-                    linenum = editArea.getLineOfOffset(caretpos);
-                    columnnum = caretpos - editArea.getLineStartOffset(linenum);
-                    linenum += 1;
-                }
-                catch(Exception ex) { }
-                //jLabelLinhaColuna.setText("linha: "+ linenum + "| coluna: "+  columnnum);
-                System.out.println("linha: "+ linenum + "| coluna: "+  columnnum);
+        		controller.updateLineColumn(e);
             }
         });
         jScrollPane2.setViewportView(jTextEntrada);

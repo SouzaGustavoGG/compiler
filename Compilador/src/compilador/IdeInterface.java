@@ -2,9 +2,10 @@ package compilador;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 
+import javax.swing.JFrame;
 import javax.swing.JTextArea;
+import javax.swing.event.CaretEvent;
 
 public interface IdeInterface {
 
@@ -14,5 +15,6 @@ public interface IdeInterface {
 	public boolean arquivoAlterado(JTextArea entrada, String nome_arquivo);
         public ArrayList<String> abrir(JTextArea entrada, JTextArea saida, String nome_arquivo, String diretorio, JFrame tela);
         public void sair(JTextArea entrada, String nome_arquivo, String diretorio, JFrame tela);
+        public void updateLineColumn(CaretEvent e);
 	
 }
