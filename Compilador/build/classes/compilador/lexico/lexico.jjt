@@ -97,7 +97,7 @@ TOKEN : {
 	| < LESS_EQUAL: "<=" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 	| < GREATER: ">" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 	| < GREATER_EQUAL: ">=" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
-    | < DIFFERENT: "!=" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+        | < DIFFERENT: "!=" >{Dados.addDado("OPERADOR RELACIONAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 	| < AMPERSAND: "&" >{Dados.addDado("OPERADOR LOGICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 	| < PIPE: "|" >{Dados.addDado("OPERADOR LOGICO", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 	| < OPEN_PARENTHESIS: "(" >{Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
@@ -115,7 +115,7 @@ TOKEN : {
 // identificador
 TOKEN : {
 	  < LETTER:["A"-"Z", "a"-"z"]>
-	| < UNDER: "_">
+	| < UNDER: "_"> {Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 	| < #UNDERLINE_NOT_REPEAT: <UNDER> ((<DIGIT><LETTER>)| <LETTER>) >
 	| < #DIGIT_NOT_REPEAT: <DIGIT> ((<UNDER><LETTER>)|<LETTER>) >
 	| < #FINAL: (<LETTER>|<UNDER>) >
