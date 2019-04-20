@@ -16,8 +16,6 @@ private final int jjStopStringLiteralDfa_0(int pos, long active0)
       case 0:
          if ((active0 & 0x800000000L) != 0L)
             return 224;
-         if ((active0 & 0x60000000000000L) != 0L)
-            return 88;
          if ((active0 & 0x240L) != 0L)
          {
             jjmatchedKind = 66;
@@ -49,7 +47,7 @@ private int jjMoveStringLiteralDfa0_0()
          jjmatchedKind = 43;
          return jjMoveStringLiteralDfa1_0(0x100000000000L);
       case 38:
-         return jjStartNfaWithStates_0(0, 53, 88);
+         return jjStopAtPos(0, 53);
       case 40:
          return jjStopAtPos(0, 55);
       case 41:
@@ -82,7 +80,7 @@ private int jjMoveStringLiteralDfa0_0()
       case 123:
          return jjStopAtPos(0, 34);
       case 124:
-         return jjStartNfaWithStates_0(0, 54, 88);
+         return jjStopAtPos(0, 54);
       case 125:
          return jjStopAtPos(0, 36);
       default :
@@ -178,7 +176,7 @@ private int jjMoveNfa_0(int startState, int curPos)
             switch(jjstateSet[--i])
             {
                case 1:
-                  if ((0x840000d8ffffc9ffL & l) != 0L)
+                  if ((0x8c000098ffffc9ffL & l) != 0L)
                   {
                      if (kind > 66)
                         kind = 66;
@@ -217,7 +215,7 @@ private int jjMoveNfa_0(int startState, int curPos)
                      jjCheckNAddTwoStates(225, 219);
                   break;
                case 88:
-                  if ((0x840000d8ffffc9ffL & l) == 0L)
+                  if ((0x8c000098ffffc9ffL & l) == 0L)
                      break;
                   if (kind > 66)
                      kind = 66;
@@ -417,7 +415,7 @@ private int jjMoveNfa_0(int startState, int curPos)
                case 1:
                   if ((0x7fffffe87fffffeL & l) != 0L)
                      jjCheckNAddStates(12, 17);
-                  else if ((0xd000000150000001L & l) != 0L)
+                  else if ((0xc000000178000001L & l) != 0L)
                   {
                      if (kind > 66)
                         kind = 66;
@@ -865,7 +863,7 @@ private int jjMoveNfa_0(int startState, int curPos)
                      jjstateSet[jjnewStateCnt++] = 86;
                   break;
                case 88:
-                  if ((0xd000000150000001L & l) == 0L)
+                  if ((0xc000000178000001L & l) == 0L)
                      break;
                   if (kind > 66)
                      kind = 66;
@@ -1751,7 +1749,7 @@ void SkipLexicalActions(Token matchedToken)
          break;
       case 66 :
          image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                                                  Dados.addError("SIMBOLO INVALIDO", image.toString(), input_stream.getEndLine(),
+                                                                            Dados.addError("SIMBOLO INVALIDO", image.toString(), input_stream.getEndLine(),
      input_stream.getBeginColumn(), jjmatchedKind);
          break;
       case 67 :
