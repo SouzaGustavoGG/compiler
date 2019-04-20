@@ -75,7 +75,9 @@ TOKEN : {
 
 //constante literal
 TOKEN: {
-   <LITERAL_CONST: "\"" (~[ "\"", "\n", "\r"])* "\"">{Dados.addDado("CONSTANTE LITERAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+   <LITERAL_CONST_DOUBLE_QUOTES: "\"" (~[ "\"", "\n", "\r"])* "\"">{Dados.addDado("CONSTANTE LITERAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+   | <LITERAL_CONST_SINGLE_QUOTES: "\'" (~[ "\"", "\n", "\r"])* "\'">{Dados.addDado("CONSTANTE LITERAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+
 }
 
 //caracteres especiais
@@ -135,8 +137,10 @@ SPECIAL_TOKEN : {
        input_stream.getBeginColumn(), jjmatchedKind);}
     | <INVALID_REAL_NUMBER: (<DIGIT>)+<DOT>(<DIGIT>)*>{Dados.addError("NUMERO REAL INVALIDO", image.toString(), input_stream.getEndLine(),
       input_stream.getBeginColumn(), jjmatchedKind);}
-    | <INVALID_LITERAL_CONST: "\"" (~["\n","\r","\""])* ~["\""]>{Dados.addError("CONSTANTE LITERAL INVALIDA", image.toString(), input_stream.getEndLine(),
+    | <INVALID_LITERAL_CONST_DOUBLE: "\"" (~["\n","\r","\""])* ~["\""]>{Dados.addError("CONSTANTE LITERAL INVALIDA", image.toString(), input_stream.getEndLine(),
                                     input_stream.getBeginColumn(), jjmatchedKind);}
+    | <INVALID_LITERAL_CONST_SINGLE: "\'" (~["\n","\r","\""])* ~["\'"]>{Dados.addError("CONSTANTE LITERAL INVALIDA", image.toString(), input_stream.getEndLine(),
+                                          input_stream.getBeginColumn(), jjmatchedKind);}
     | <INVALID_IDENTIFIER: <DIGIT>(<LETTER>|<DIGIT>|<UNDER>)+
     | (<LETTER>|<DIGIT>|<UNDER>)*(<UNDER>){2}(<LETTER>|<DIGIT>|<UNDER>)*
     | (<LETTER>|<DIGIT>|<UNDER>)*(<DIGIT>){2}(<LETTER>|<DIGIT>|<UNDER>)*
