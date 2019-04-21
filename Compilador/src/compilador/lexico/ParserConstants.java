@@ -103,33 +103,35 @@ public interface ParserConstants {
   /** RegularExpression Id. */
   int DIGIT = 57;
   /** RegularExpression Id. */
-  int DECIMAL_NUMBER = 58;
+  int NOT_DIGIT = 58;
   /** RegularExpression Id. */
-  int NATURAL_NUMBER = 59;
+  int DECIMAL_NUMBER = 59;
   /** RegularExpression Id. */
-  int REAL_NUMBER = 60;
+  int NATURAL_NUMBER = 60;
   /** RegularExpression Id. */
-  int LETTER = 61;
+  int REAL_NUMBER = 61;
   /** RegularExpression Id. */
-  int UNDERLINE_NOT_REPEAT = 62;
+  int LETTER = 62;
   /** RegularExpression Id. */
-  int DIGIT_NOT_REPEAT = 63;
+  int UNDERLINE_NOT_REPEAT = 63;
   /** RegularExpression Id. */
-  int FINAL = 64;
+  int DIGIT_NOT_REPEAT = 64;
   /** RegularExpression Id. */
-  int IDENTIFIER = 65;
+  int FINAL = 65;
   /** RegularExpression Id. */
-  int INVALID_SYMBOLS = 66;
+  int IDENTIFIER = 66;
   /** RegularExpression Id. */
-  int INVALID_NATURAL_NUMBER = 67;
+  int INVALID_SYMBOLS = 67;
   /** RegularExpression Id. */
-  int INVALID_REAL_NUMBER = 68;
+  int INVALID_NATURAL_NUMBER = 68;
   /** RegularExpression Id. */
-  int INVALID_LITERAL_CONST_DOUBLE = 69;
+  int INVALID_REAL_NUMBER = 69;
   /** RegularExpression Id. */
-  int INVALID_LITERAL_CONST_SINGLE = 70;
+  int INVALID_LITERAL_CONST_DOUBLE = 70;
   /** RegularExpression Id. */
-  int INVALID_IDENTIFIER = 71;
+  int INVALID_LITERAL_CONST_SINGLE = 71;
+  /** RegularExpression Id. */
+  int INVALID_IDENTIFIER = 72;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -198,6 +200,7 @@ public interface ParserConstants {
     "\"(\"",
     "\")\"",
     "<DIGIT>",
+    "<NOT_DIGIT>",
     "<DECIMAL_NUMBER>",
     "<NATURAL_NUMBER>",
     "<REAL_NUMBER>",
