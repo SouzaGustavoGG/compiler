@@ -39,16 +39,17 @@ public class ControladorIde implements IdeInterface {
     @Override
     public String novoArquivo(JTextArea entrada, JTextArea saida, JFrame tela, String nome_arquivo, String diretorio) {
         if (nome_arquivo.equals("novo.djt")) {
+            
             if ("".equals(entrada.getText())) {
-                zeraDados(entrada, saida, nome_arquivo, tela);
+                nome_arquivo = zeraDados(entrada, saida, nome_arquivo, tela);
             } else {
                 int opcao = opcaoAlteracoes(nome_arquivo);
                 if (opcao == 0) 
                 {
                     salvar(nome_arquivo, diretorio, entrada, tela);
-                    zeraDados(entrada, saida, nome_arquivo, tela);
+                    nome_arquivo = zeraDados(entrada, saida, nome_arquivo, tela);
                 }else if (opcao == 1){
-                    zeraDados(entrada, saida, nome_arquivo, tela);
+                    nome_arquivo = zeraDados(entrada, saida, nome_arquivo, tela);
                 }
             }
         } else {
@@ -56,14 +57,14 @@ public class ControladorIde implements IdeInterface {
                     int opcao = opcaoAlteracoes(nome_arquivo);
                     if (opcao == 0) {
                         salvar(nome_arquivo, diretorio, entrada, tela);
-                        zeraDados(entrada, saida, nome_arquivo, tela);
+                        nome_arquivo = zeraDados(entrada, saida, nome_arquivo, tela);
                         diretorio = ("");
                     }else if (opcao == 1){
-                        zeraDados(entrada, saida, nome_arquivo, tela);
+                        nome_arquivo = zeraDados(entrada, saida, nome_arquivo, tela);
 			diretorio = ("");
                     }
 		}else{
-                    zeraDados(entrada, saida, nome_arquivo, tela);
+                    nome_arquivo = zeraDados(entrada, saida, nome_arquivo, tela);
                     diretorio = ("");
 		}
         }
@@ -71,11 +72,13 @@ public class ControladorIde implements IdeInterface {
         return nome_arquivo;
     }
     
-    public void zeraDados(JTextArea entrada, JTextArea saida, String nome_arquivo, JFrame tela){  
+    public String zeraDados(JTextArea entrada, JTextArea saida, String nome_arquivo, JFrame tela){  
         entrada.setText("");
         saida.setText("");
 	nome_arquivo = "novo.djt";
         tela.setTitle("Compilador - "+ nome_arquivo);
+        
+        return nome_arquivo;
     }
     
     @Override
@@ -103,7 +106,12 @@ public class ControladorIde implements IdeInterface {
         
     private boolean conteudoDiferente(ArrayList<String> original, ArrayList<String> atual, boolean modificado) {
         for (int i = 0; i < original.size(); i++) {
-            if (!original.get(i).equals(atual.get(i))) {
+            if(original.get(i)!=null && atual.get(i)!= null){
+                if (!original.get(i).equals(atual.get(i))) {
+                    modificado = true;
+                    return modificado;
+                }
+            }else if((original.get(i)!=null && atual.get(i)== null) || (original.get(i)==null && atual.get(i)!= null)){
                 modificado = true;
                 return modificado;
             }
@@ -150,6 +158,7 @@ public class ControladorIde implements IdeInterface {
                 diretorio = salvar_como.get(1);
 		salvar.add(nome_arquivo);
 		salvar.add(diretorio);
+                JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
             } else {
                 BufferedWriter buff_escrita = new BufferedWriter(new FileWriter(caminho));
                 Scanner leitor = new Scanner(entrada.getText());
@@ -159,6 +168,7 @@ public class ControladorIde implements IdeInterface {
                 }
                 buff_escrita.close();
                 tela.setTitle("Compilador - " + nome_arquivo);
+                JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
             }
         } catch (IOException ex) {
             Logger.getLogger(ControladorIde.class.getName()).log(Level.SEVERE, null, ex);

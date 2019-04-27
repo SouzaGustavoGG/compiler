@@ -412,8 +412,9 @@ public class CompiladorTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExecutarIconActionPerformed
 //ok
     private void jButtonNovoIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoIconActionPerformed
-        controller.novoArquivo(jTextEntrada,jTextSaída, this, nome_arquivo, diretorio);
-        diretorio = "";
+        nome_arquivo = controller.novoArquivo(jTextEntrada,jTextSaída, this, nome_arquivo, diretorio);
+        
+//diretorio = "";
     }//GEN-LAST:event_jButtonNovoIconActionPerformed
 //ok
     private void jMenuNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoActionPerformed
