@@ -21,6 +21,117 @@ public class Parser{
 }
 PARSER_END(Parser)
 
+// INICIO SINTATICO
+
+void FormaPrograma() : {} {
+    Programa()IdentificadorOpcional()
+}
+
+void IdentificadorOpcional(): {} {
+    <IDENTIFIER> | {}
+}
+
+void Programa() : {} {
+    <PROGRAM><OPEN_KEY>FormaDeclaracao()CorpoPrograma()<CLOSE_KEY>
+}
+
+void CorpoPrograma(): {} {
+    <EXECUTE>ListaComandos()
+}
+
+void ListaComandos(): {} {
+    Comando()<DOT>ListaComandos2()
+}
+
+void ListaComandos2(): {} {
+    ListaComandos() | {}
+}
+
+void Comando(): {} {
+    Atribuicao() | EntradaDados() | SaidaDados() | Selecao() | Repeticao()
+}
+
+void Atribuicao(): {} {
+    <SET>Expressao()<TO>ListaIdentificadores()
+}
+
+void EntradaDados(): {} {
+    <GET><OPEN_KEY>ListaIdentificadores()<CLOSE_KEY>
+}
+
+void SaidaDados(): {} {
+    <PUT><OPEN_KEY>ListaIdentificadoresConst()<CLOSE_KEY>
+}
+
+void Selecao(): {} {
+    <VERIFY>Expressao()Clausula()
+}
+
+void Repeticao(): {} {
+    Loop() | While()
+}
+
+void Loop(): {} {
+    <LOOP><OPEN_KEY>ListaComandos()<CLOSE_KEY><WHILE>Expressao()<IS><TRUE>
+}
+
+void While(): {} {
+    <WHILE>Expressao()<IS><TRUE><DO><OPEN_KEY>ListaComandos()<CLOSE_KEY>
+}
+
+// ------------------------------------------INICIO DECLARACAO-------------------------------------------------
+void FormaDeclaracao(): {} {
+    <DEFINE><OPEN_KEY>Declaracao()<CLOSE_KEY> | {}
+}
+
+void Tipo(): {} {
+    <REAL> | <NATURAL> | <BOOLEAN> | <CHAR>
+}
+
+void Declaracao(): {} {
+    DeclaracaoConst()Declaracao2()|DeclaracaoVar()Declaracao3()
+}
+
+void Declaracao2(): {} {
+    DeclaracaoVar() | {}
+}
+
+void Declaracao3(): {} {
+    DeclaracaoConst() | {}
+}
+
+void DeclaracaoVar(): {} {
+    <VARIABLE>ListaDeclaracaoVar()
+}
+
+void ListaDeclaracaoVar(): {} {
+    PrefixoDeclaracaoVar()ListaDeclaracaoVar2()
+}
+
+void PrefixoDeclaracaoVar(): {} {
+    Tipo()<IS>ListaIdentificadoresVar()
+}
+
+void ListaIdentificadoresVar(): {} {
+    {} // ARRUMAR
+}
+
+void ListaDeclaracaoVar2(): {} {
+    {} // ARRUMAR
+}
+
+void DeclaracaoConst(): {} {
+    <NOT><VARIABLE>ListaDeclaracaoConst2()
+}
+
+void ListaDeclaracaoConst2(): {} {
+    {} // ARRUMAR
+}
+// ------------------------------------------FIM DECLARACAO-------------------------------------------------
+
+
+
+// INICIO LEXICO
 //ignorar
 SKIP : {
     " "
