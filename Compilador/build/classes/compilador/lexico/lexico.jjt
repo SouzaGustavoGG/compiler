@@ -114,22 +114,21 @@ TOKEN : {
 
 // identificador
 TOKEN : {
-	  < LETTER:["A"-"Z", "a"-"z"]>
-	| < UNDER: "_"> {Dados.addDado("SIMBOLO ESPECIAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
-	| < #UNDERLINE_NOT_REPEAT: <UNDER> ((<DIGIT><LETTER>)| <LETTER>) >
-	| < #DIGIT_NOT_REPEAT: <DIGIT> ((<UNDER><LETTER>)|<LETTER>) >
-	| < #FINAL: (<LETTER>|<UNDER>) >
-
-	| < IDENTIFIER : <LETTER> (( <LETTER> | <UNDERLINE_NOT_REPEAT> | <DIGIT_NOT_REPEAT> )* <FINAL>)?
-	|  <UNDER> (( <LETTER> | <DIGIT_NOT_REPEAT>) ( <LETTER> | <UNDERLINE_NOT_REPEAT> | <DIGIT_NOT_REPEAT> )* <FINAL>)?
-	|  <UNDER> (( <LETTER> | <DIGIT>) <FINAL>)? > {Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
-	
+     < LETTER:["A"-"Z", "a"-"z"]> {Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+    | < UNDER: "_"> {Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
+    |< IDENTIFIER:
+((<LETTER>)+((<UNDER>|(<DIGIT>((<LETTER>)+|<UNDER>))+) | (<UNDER>((<DIGIT>((<LETTER>)+|<UNDER>))+|(<LETTER>)+))+)?)+ 
+    | (<UNDER>((<DIGIT>((<LETTER>)+|<UNDER>))+|  ((<LETTER>)+((<UNDER>|(<DIGIT>((<LETTER>)+|<UNDER>))+) | (<UNDER>((<DIGIT>((<LETTER>)+|<UNDER>))+|(<LETTER>)+))+)?)+)+) 
+    |<UNDER>
+    |<LETTER>
+    > 
+{Dados.addDado("IDENTIFICADOR", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 }
 
 // erros
 SPECIAL_TOKEN : {
     <INVALID_SYMBOLS: (~["a"-"z", "A"-"Z", "0"-"9", "\"", "(", ")", "[", "]", "{", "}", ";", ",", ".", "=", ">", "<", "!",
-    "+", "-", "_", "*", "/", "%", "\n", "\r", "\f", "\t", " "])+>{Dados.addError("SIMBOLO INVALIDO", image.toString(), input_stream.getEndLine(),
+    "+", "-", "*", "/", "%", "\n", "\r", "\f", "\t", " "])+>{Dados.addError("SIMBOLO INVALIDO", image.toString(), input_stream.getEndLine(),
      input_stream.getBeginColumn(), jjmatchedKind);}
     |<INVALID_NATURAL_NUMBER: (<DIGIT>)+>{Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
        input_stream.getBeginColumn(), jjmatchedKind);}
@@ -137,9 +136,10 @@ SPECIAL_TOKEN : {
       input_stream.getBeginColumn(), jjmatchedKind);}
     | <INVALID_LITERAL_CONST: "\"" (~["\n","\r","\""])* ~["\""]>{Dados.addError("CONSTANTE LITERAL INVALIDA", image.toString(), input_stream.getEndLine(),
                                     input_stream.getBeginColumn(), jjmatchedKind);}
-    | <INVALID_IDENTIFIER: <DIGIT>(<LETTER>|<DIGIT>|<UNDER>)+
-    | (<LETTER>|<DIGIT>|<UNDER>)*(<UNDER>){2}(<LETTER>|<DIGIT>|<UNDER>)*
-    | (<LETTER>|<DIGIT>|<UNDER>)*(<DIGIT>){2}(<LETTER>|<DIGIT>|<UNDER>)*
-    | (<LETTER>|<DIGIT>|<UNDER>)+<DIGIT>> {Dados.addError("IDENTIFICADOR INVALIDO", image.toString(), input_stream.getEndLine(),
+    | <INVALID_IDENTIFIER: <DIGIT>(<LETTER>|<DIGIT>|<UNDER>)* //digito no inicio
+    | (<LETTER>|<DIGIT>|<UNDER>)*(<UNDER>){2}(<LETTER>|<DIGIT>|<UNDER>)* //underlines consecutivos
+    | (<LETTER>|<DIGIT>|<UNDER>)*(<DIGIT>){2}(<LETTER>|<DIGIT>|<UNDER>)* //digitos consecutivos
+    | (<LETTER>|<DIGIT>|<UNDER>)*<DIGIT>//digito no final
+> {Dados.addError("IDENTIFICADOR INVALIDO", image.toString(), input_stream.getEndLine(),
                                                                                                       input_stream.getBeginColumn(), jjmatchedKind);}
 }
