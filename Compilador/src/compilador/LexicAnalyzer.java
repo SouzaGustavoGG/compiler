@@ -21,10 +21,9 @@ public class LexicAnalyzer {
         StringBuilder output = new StringBuilder();
         try{
             parser.executarAnalise();
-            for(String a: compilador.lexico.Dados.getDados())
+            for(String a: compilador.lexico.Dados.getDadosErros())
                 output.append(a).append("\n");
             output.append("Número de erros: ").append(compilador.lexico.Dados.getErros()).append("\n");
-            output.append("Número de oks: ").append(compilador.lexico.Dados.getOks());
             compilador.lexico.Dados.limpar();
         }catch(Exception e){}
 

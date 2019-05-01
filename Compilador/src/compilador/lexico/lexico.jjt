@@ -353,7 +353,7 @@ TOKEN : {
 // numbers
 TOKEN : {
 	< #DIGIT: ["0"-"9"] >
-	| < #NOT_DIGIT: (~["0"-"9"])+ >
+	| < #NOT_DIGIT: (~["0"-"9", " ", "+", "-", "*", "/", "<", ">", "%", "=", "&", "|"])+ >
 	| < #DECIMAL_NUMBER: <DOT><DIGIT>(<DIGIT>)?>
 	| < NATURAL_NUMBER: <DIGIT>(<DIGIT>)?(<DIGIT>)? >{Dados.addDado("NUMERO NATURAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
 	| < REAL_NUMBER: <DIGIT>((<DIGIT>)?){4}<DECIMAL_NUMBER> >{Dados.addDado("NUMERO REAL", image.toString(), input_stream.getEndLine(), input_stream.getBeginColumn(), jjmatchedKind);}
@@ -377,8 +377,7 @@ SPECIAL_TOKEN : {
     <INVALID_SYMBOLS: (~["a"-"z", "A"-"Z", "0"-"9", "\"", "(", ")", "{", "}", ",", ".", "=", ">", "<", "!",
     "+", "-", "_", "*", "&", "/", "%", "|", "\n", "\r", "\f", "\t", " "])+>{Dados.addError("SIMBOLO INVALIDO", image.toString(), input_stream.getEndLine(),
      input_stream.getBeginColumn(), jjmatchedKind);}
-    | <INVALID_NATURAL_NUMBER: <DIGIT>(<DIGIT>)?(<DIGIT>)?((<DIGIT>)*|(<UNDER>)|<LETTER>|(~["+", "-", "*", "/"]))+
->{Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
+    | <INVALID_NATURAL_NUMBER: <DIGIT>(<DIGIT>)?(<DIGIT>)?<NOT_DIGIT>>{Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
        input_stream.getBeginColumn(), jjmatchedKind);}
     | <INVALID_REAL_NUMBER: (<DIGIT>)+<DOT>(<DIGIT>)*>{Dados.addError("NUMERO REAL INVALIDO", image.toString(), input_stream.getEndLine(),
       input_stream.getBeginColumn(), jjmatchedKind);}

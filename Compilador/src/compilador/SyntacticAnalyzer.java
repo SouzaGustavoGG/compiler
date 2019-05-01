@@ -26,8 +26,9 @@ public class SyntacticAnalyzer {
     	StringBuilder output = new StringBuilder();
     	try {
 			parser.executarAnaliseSintatica();
+			output.append("Success!");
 		} catch (ParseException e) {
-			e.printStackTrace();
+			output.append(e.getMessage());
 		}
     	return output.toString();
     }

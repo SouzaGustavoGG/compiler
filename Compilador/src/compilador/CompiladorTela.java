@@ -408,12 +408,7 @@ public class CompiladorTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuAbrirActionPerformed
 //ok
     private void jButtonExecutarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExecutarIconActionPerformed
-        if("".equals(jTextEntrada.getText())){
-            JOptionPane.showMessageDialog(null, "Um arquivo vazio não pode ser compilado!");
-        }else{    
-            SyntacticAnalyzer analyzer = SyntacticAnalyzer.getInstance();
-            jTextSaída.setText(analyzer.analyze(jTextEntrada.getText()));
-        }
+        JOptionPane.showMessageDialog(null, "A opção Executar será especificada posteriormente");
     }//GEN-LAST:event_jButtonExecutarIconActionPerformed
 //ok
     private void jButtonNovoIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoIconActionPerformed
@@ -442,8 +437,16 @@ public class CompiladorTela extends javax.swing.JFrame {
         if("".equals(jTextEntrada.getText())){
             JOptionPane.showMessageDialog(null, "Um arquivo vazio não pode ser compilado!");
         }else{    
-            LexicAnalyzer analyzer = new LexicAnalyzer();
-            jTextSaída.setText(analyzer.analyze(jTextEntrada.getText()));
+            LexicAnalyzer lexic_analyzer = new LexicAnalyzer();
+            String output = lexic_analyzer.analyze(jTextEntrada.getText());
+
+            if (output.equals("")){
+                jTextSaída.setText(output);
+            } else {
+                SyntacticAnalyzer syntatic_analyzer = SyntacticAnalyzer.getInstance();
+                jTextSaída.setText(syntatic_analyzer.analyze(jTextEntrada.getText()));
+            }
+
         }
     }//GEN-LAST:event_jButtonCopiarIconActionPerformed
 //ok
