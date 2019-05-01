@@ -18,6 +18,11 @@ public class Parser{
             token = getNextToken();
         }
     }
+    
+    public void executarAnaliseSintatica() throws ParseException{
+        System.out.println("Analidor sintatico");
+    	FormaPrograma();
+    }
 }
 PARSER_END(Parser)
 

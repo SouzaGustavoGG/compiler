@@ -408,7 +408,12 @@ public class CompiladorTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuAbrirActionPerformed
 //ok
     private void jButtonExecutarIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExecutarIconActionPerformed
-        JOptionPane.showMessageDialog(null, "A opção Executar será especificada posteriormente");
+        if("".equals(jTextEntrada.getText())){
+            JOptionPane.showMessageDialog(null, "Um arquivo vazio não pode ser compilado!");
+        }else{    
+            SyntacticAnalyzer analyzer = SyntacticAnalyzer.getInstance();
+            jTextSaída.setText(analyzer.analyze(jTextEntrada.getText()));
+        }
     }//GEN-LAST:event_jButtonExecutarIconActionPerformed
 //ok
     private void jButtonNovoIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoIconActionPerformed
