@@ -51,6 +51,14 @@ void Comando(): {} {
     Atribuicao() | EntradaDados() | SaidaDados() | Selecao() | Repeticao()
 }
 
+void ListaIdentificadores(): {} {
+    <IDENTIFIER> ListaIdentificadores2()
+}
+
+void ListaIdentificadores2(): {} {
+    <COMMA>ListaIdentificadores() | {}
+}
+
 void Atribuicao(): {} {
     <SET>Expressao()<TO>ListaIdentificadores()
 }
@@ -63,8 +71,47 @@ void SaidaDados(): {} {
     <PUT><OPEN_KEY>ListaIdentificadoresConst()<CLOSE_KEY>
 }
 
+void ListaIdentificadoresConst(): {} {
+    <IDENTIFIER> ListaIdentificadoresConst2()| Constante() ListaIdentificadoresConst2()
+}
+
+void ListaIdentificadoresConst2(): {} {
+    <COMMA> ListaIdentificadoresConst() | {}
+}
+
+void Constante(): {} {
+    <NATURAL_NUMBER>
+    | <REAL_NUMBER>
+    | <LITERAL_CONST_SINGLE_QUOTES>
+    | <LITERAL_CONST_DOUBLE_QUOTES>
+}
+
 void Selecao(): {} {
     <VERIFY>Expressao()Clausula()
+}
+
+void Clausula(): {} {
+    <IS> ClausulaLinha()
+}
+
+void ClausulaLinha(): {} {
+    <TRUE><OPEN_KEY>ListaComandos()<CLOSE_KEY>Clausula2() | <FALSE><OPEN_KEY>ListaComandos()<CLOSE_KEY>Clausula3()
+}
+
+void Clausula2(): {} {
+    IsFalse() | {}
+}
+
+void Clausula3(): {} {
+    IsTrue() | {}
+}
+
+void IsFalse(): {} {
+    <IS><FALSE><OPEN_KEY>ListaComandos()<CLOSE_KEY>
+}
+
+void IsTrue(): {} {
+    <IS><TRUE><OPEN_KEY>ListaComandos()<CLOSE_KEY>
 }
 
 void Repeticao(): {} {
@@ -77,6 +124,65 @@ void Loop(): {} {
 
 void While(): {} {
     <WHILE>Expressao()<IS><TRUE><DO><OPEN_KEY>ListaComandos()<CLOSE_KEY>
+}
+
+void Expressao(): {} {
+    ExpressaoAritmeticaLogica()ExpressaoLinha()
+}
+
+void ExpressaoLinha(): {} {
+    ExpressaoAritmeticaLogica()
+    | <DIFFERENT> ExpressaoAritmeticaLogica()
+    | <LESS> ExpressaoAritmeticaLogica()
+    | <GREATER> ExpressaoAritmeticaLogica()
+    | <LESS_EQUAL> ExpressaoAritmeticaLogica()
+    | <GREATER_EQUAL> ExpressaoAritmeticaLogica()
+    | {}
+}
+
+void ExpressaoAritmeticaLogica(): {} {
+    Termo2() MenorPrioridade()
+}
+
+void MenorPrioridade(): {} {
+    <PLUS> Termo2() MenorPrioridade()
+    | <MINUS> Termo2() MenorPrioridade()
+    | <PIPE> Termo2() MenorPrioridade()
+    | {}
+}
+
+void Termo2(): {} {
+    Termo1() MediaPrioridade()
+}
+
+void MediaPrioridade(): {} {
+    <MULTIPLY> Termo1() MediaPrioridade()
+    | <DIVIDER> Termo1() MediaPrioridade()
+    | <PERCENT> Termo1() MediaPrioridade()
+    | <MOD> Termo1() MediaPrioridade()
+    | <AMPERSAND> Termo1() MediaPrioridade()
+    | {}
+}
+
+void Termo1(): {} {
+    Elemento() MaiorPrioridade()
+}
+
+void MaiorPrioridade(): {} {
+    <POW> Elemento() MaiorPrioridade() | {}
+}
+
+void Elemento(): {} {
+    <IDENTIFIER> Indice()
+    | Constante()
+    | <TRUE>
+    | <FALSE>
+    | <OPEN_PARENTHESIS> Expressao() <CLOSE_PARENTHESIS>
+    | <NOT> <OPEN_PARENTHESIS> Expressao() <CLOSE_PARENTHESIS>
+}
+
+void Indice(): {} {
+    <OPEN_KEY> <NATURAL_NUMBER> <CLOSE_KEY> | {}
 }
 
 // ------------------------------------------INICIO DECLARACAO-------------------------------------------------
@@ -113,20 +219,41 @@ void PrefixoDeclaracaoVar(): {} {
 }
 
 void ListaIdentificadoresVar(): {} {
-    {} // ARRUMAR
+    <IDENTIFIER> ListaIdentificadoresVar3()
+}
+
+void ListaIdentificadoresVar2(): {} {
+    ListaIdentificadoresVar() | {}
+}
+
+void ListaIdentificadoresVar3(): {} {
+    <IDENTIFIER> ListaIdentificadoresVar4() | {}
+}
+
+void ListaIdentificadoresVar4(): {} {
+    ListaIdentificadoresVar3() | <NATURAL_NUMBER> ListaIdentificadoresVar2()
 }
 
 void ListaDeclaracaoVar2(): {} {
-    {} // ARRUMAR
+    ListaDeclaracaoVar() | {}
 }
 
 void DeclaracaoConst(): {} {
-    <NOT><VARIABLE>ListaDeclaracaoConst2()
+    <NOT><VARIABLE>ListaDeclaracaoConst()
+}
+
+void ListaDeclaracaoConst(): {} {
+    ListaDeclaracaoConst2() | {}
 }
 
 void ListaDeclaracaoConst2(): {} {
-    {} // ARRUMAR
+    PrefixoDeclaracaoConst()<DOT>ListaDeclaracaoConst()
 }
+
+void PrefixoDeclaracaoConst(): {} {
+    Tipo() <IS> ListaIdentificadores()
+}
+
 // ------------------------------------------FIM DECLARACAO-------------------------------------------------
 
 
