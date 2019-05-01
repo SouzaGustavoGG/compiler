@@ -17,8 +17,11 @@ public class Parser{
         while(token.kind != 0){
             token = getNextToken();
         }
-		System.out.println("Sintatico");
-
+    }
+    
+    public void executarAnaliseSintatica() throws ParseException{
+        System.out.println("Analidor sintatico");
+    	FormaPrograma();
     }
 }
 PARSER_END(Parser)
@@ -374,7 +377,8 @@ SPECIAL_TOKEN : {
     <INVALID_SYMBOLS: (~["a"-"z", "A"-"Z", "0"-"9", "\"", "(", ")", "{", "}", ",", ".", "=", ">", "<", "!",
     "+", "-", "_", "*", "&", "/", "%", "|", "\n", "\r", "\f", "\t", " "])+>{Dados.addError("SIMBOLO INVALIDO", image.toString(), input_stream.getEndLine(),
      input_stream.getBeginColumn(), jjmatchedKind);}
-    | <INVALID_NATURAL_NUMBER: <DIGIT>(<DIGIT>)?(<DIGIT>)?<NOT_DIGIT>>{Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
+    | <INVALID_NATURAL_NUMBER: <DIGIT>(<DIGIT>)?(<DIGIT>)?((<DIGIT>)*|(<UNDER>)|<LETTER>|(~["+", "-", "*", "/"]))+
+>{Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
        input_stream.getBeginColumn(), jjmatchedKind);}
     | <INVALID_REAL_NUMBER: (<DIGIT>)+<DOT>(<DIGIT>)*>{Dados.addError("NUMERO REAL INVALIDO", image.toString(), input_stream.getEndLine(),
       input_stream.getBeginColumn(), jjmatchedKind);}
@@ -383,9 +387,10 @@ SPECIAL_TOKEN : {
 
     | <INVALID_LITERAL_CONST_SINGLE: "\'" (~["\n","\r","\""])* ~["\'"]>{Dados.addError("CONSTANTE LITERAL INVALIDA", image.toString(), input_stream.getEndLine(),
                                           input_stream.getBeginColumn(), jjmatchedKind);}
-    | <INVALID_IDENTIFIER: <DIGIT>(<LETTER>|<DIGIT>|<UNDER>)+
-    | (<LETTER>|<DIGIT>|<UNDER>)*(<UNDER>){2}(<LETTER>|<DIGIT>|<UNDER>)*
-    | (<LETTER>|<DIGIT>|<UNDER>)*(<DIGIT>){2}(<LETTER>|<DIGIT>|<UNDER>)*
-    | (<LETTER>|<DIGIT>|<UNDER>)+<DIGIT>> {Dados.addError("IDENTIFICADOR INVALIDO", image.toString(), input_stream.getEndLine(),
+    | <INVALID_IDENTIFIER: //(<LETTER>|<DIGIT>|<UNDER>)*(<UNDER>){2}(<LETTER>|<DIGIT>|<UNDER>)*
+     (<LETTER>|<UNDER>)+(<LETTER>|<DIGIT>|<UNDER>)*(<UNDER>){2}(<LETTER>|<DIGIT>|<UNDER>)*
+    |(<UNDER>){2}(<LETTER>|<DIGIT>|<UNDER>)*//__ __a122 __aaaa
+    | (<LETTER>|<UNDER>)+(<LETTER>|<DIGIT>|<UNDER>)*(<DIGIT>){2}(<LETTER>|<DIGIT>|<UNDER>)*
+    | (<LETTER>|<UNDER>)+(<LETTER>|<DIGIT>|<UNDER>)*<DIGIT>> {Dados.addError("IDENTIFICADOR INVALIDO", image.toString(), input_stream.getEndLine(),
                                                                                                       input_stream.getBeginColumn(), jjmatchedKind);}
 }
