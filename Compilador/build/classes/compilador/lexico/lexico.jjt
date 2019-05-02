@@ -33,7 +33,7 @@ void FormaPrograma() : {} {
 }
 
 void IdentificadorOpcional(): {} {
-    <IDENTIFIER> | {}
+    (<IDENTIFIER>)?
 }
 
 void Programa() : {} {
@@ -41,7 +41,7 @@ void Programa() : {} {
 }
 
 void CorpoPrograma(): {} {
-    <EXECUTE><OPEN_KEY>ListaComandos()<OPEN_KEY>
+    <EXECUTE><OPEN_KEY>ListaComandos()<CLOSE_KEY>
 }
 
 void ListaComandos(): {} {
@@ -49,7 +49,7 @@ void ListaComandos(): {} {
 }
 
 void ListaComandos2(): {} {
-    ListaComandos() | {}
+    (ListaComandos())?
 }
 
 void Comando(): {} {
@@ -150,10 +150,9 @@ void ExpressaoAritmeticaLogica(): {} {
 }
 
 void MenorPrioridade(): {} {
-    <PLUS> Termo2() MenorPrioridade()
+    (<PLUS> Termo2() MenorPrioridade()
     | <MINUS> Termo2() MenorPrioridade()
-    | <PIPE> Termo2() MenorPrioridade()
-    | {}
+    | <PIPE> Termo2() MenorPrioridade())?
 }
 
 void Termo2(): {} {
@@ -161,12 +160,11 @@ void Termo2(): {} {
 }
 
 void MediaPrioridade(): {} {
-    <MULTIPLY> Termo1() MediaPrioridade()
+    (<MULTIPLY> Termo1() MediaPrioridade()
     | <DIVIDER> Termo1() MediaPrioridade()
     | <PERCENT> Termo1() MediaPrioridade()
     | <MOD> Termo1() MediaPrioridade()
-    | <AMPERSAND> Termo1() MediaPrioridade()
-    | {}
+    | <AMPERSAND> Termo1() MediaPrioridade())?
 }
 
 void Termo1(): {} {
@@ -192,7 +190,7 @@ void Indice(): {} {
 
 // ------------------------------------------INICIO DECLARACAO-------------------------------------------------
 void FormaDeclaracao(): {} {
-    <DEFINE><OPEN_KEY>Declaracao()<CLOSE_KEY> | {}
+    (<DEFINE><OPEN_KEY>Declaracao()<CLOSE_KEY>)?
 }
 
 void Tipo(): {} {
@@ -200,7 +198,7 @@ void Tipo(): {} {
 }
 
 void Declaracao(): {} {
-    DeclaracaoConst()Declaracao2()|DeclaracaoVar()Declaracao3()
+    ((DeclaracaoConst()Declaracao2())|(DeclaracaoVar()Declaracao3()))
 }
 
 void Declaracao2(): {} {

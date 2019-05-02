@@ -36,7 +36,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[0] = jj_gen;
-
+      ;
     }
   }
 
@@ -52,7 +52,7 @@ void FormaPrograma() throws ParseException {
     jj_consume_token(EXECUTE);
     jj_consume_token(OPEN_KEY);
     ListaComandos();
-    jj_consume_token(OPEN_KEY);
+    jj_consume_token(CLOSE_KEY);
   }
 
   final public void ListaComandos() throws ParseException {
@@ -74,7 +74,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[1] = jj_gen;
-
+      ;
     }
   }
 
@@ -379,27 +379,38 @@ void FormaPrograma() throws ParseException {
 
   final public void MenorPrioridade() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case PLUS:{
-      jj_consume_token(PLUS);
-      Termo2();
-      MenorPrioridade();
-      break;
-      }
-    case MINUS:{
-      jj_consume_token(MINUS);
-      Termo2();
-      MenorPrioridade();
-      break;
-      }
+    case PLUS:
+    case MINUS:
     case PIPE:{
-      jj_consume_token(PIPE);
-      Termo2();
-      MenorPrioridade();
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case PLUS:{
+        jj_consume_token(PLUS);
+        Termo2();
+        MenorPrioridade();
+        break;
+        }
+      case MINUS:{
+        jj_consume_token(MINUS);
+        Termo2();
+        MenorPrioridade();
+        break;
+        }
+      case PIPE:{
+        jj_consume_token(PIPE);
+        Termo2();
+        MenorPrioridade();
+        break;
+        }
+      default:
+        jj_la1[12] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
       break;
       }
     default:
-      jj_la1[12] = jj_gen;
-
+      jj_la1[13] = jj_gen;
+      ;
     }
   }
 
@@ -410,39 +421,52 @@ void FormaPrograma() throws ParseException {
 
   final public void MediaPrioridade() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case MULTIPLY:{
-      jj_consume_token(MULTIPLY);
-      Termo1();
-      MediaPrioridade();
-      break;
-      }
-    case DIVIDER:{
-      jj_consume_token(DIVIDER);
-      Termo1();
-      MediaPrioridade();
-      break;
-      }
-    case PERCENT:{
-      jj_consume_token(PERCENT);
-      Termo1();
-      MediaPrioridade();
-      break;
-      }
-    case MOD:{
-      jj_consume_token(MOD);
-      Termo1();
-      MediaPrioridade();
-      break;
-      }
+    case MULTIPLY:
+    case DIVIDER:
+    case PERCENT:
+    case MOD:
     case AMPERSAND:{
-      jj_consume_token(AMPERSAND);
-      Termo1();
-      MediaPrioridade();
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case MULTIPLY:{
+        jj_consume_token(MULTIPLY);
+        Termo1();
+        MediaPrioridade();
+        break;
+        }
+      case DIVIDER:{
+        jj_consume_token(DIVIDER);
+        Termo1();
+        MediaPrioridade();
+        break;
+        }
+      case PERCENT:{
+        jj_consume_token(PERCENT);
+        Termo1();
+        MediaPrioridade();
+        break;
+        }
+      case MOD:{
+        jj_consume_token(MOD);
+        Termo1();
+        MediaPrioridade();
+        break;
+        }
+      case AMPERSAND:{
+        jj_consume_token(AMPERSAND);
+        Termo1();
+        MediaPrioridade();
+        break;
+        }
+      default:
+        jj_la1[14] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
       break;
       }
     default:
-      jj_la1[13] = jj_gen;
-
+      jj_la1[15] = jj_gen;
+      ;
     }
   }
 
@@ -460,7 +484,7 @@ void FormaPrograma() throws ParseException {
       break;
       }
     default:
-      jj_la1[14] = jj_gen;
+      jj_la1[16] = jj_gen;
       ;
     }
   }
@@ -501,7 +525,7 @@ void FormaPrograma() throws ParseException {
       break;
       }
     default:
-      jj_la1[15] = jj_gen;
+      jj_la1[17] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -516,7 +540,7 @@ void FormaPrograma() throws ParseException {
       break;
       }
     default:
-      jj_la1[16] = jj_gen;
+      jj_la1[18] = jj_gen;
       ;
     }
   }
@@ -532,8 +556,8 @@ void FormaPrograma() throws ParseException {
       break;
       }
     default:
-      jj_la1[17] = jj_gen;
-
+      jj_la1[19] = jj_gen;
+      ;
     }
   }
 
@@ -556,7 +580,7 @@ void FormaPrograma() throws ParseException {
       break;
       }
     default:
-      jj_la1[18] = jj_gen;
+      jj_la1[20] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -575,7 +599,7 @@ void FormaPrograma() throws ParseException {
       break;
       }
     default:
-      jj_la1[19] = jj_gen;
+      jj_la1[21] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -588,7 +612,7 @@ void FormaPrograma() throws ParseException {
       break;
       }
     default:
-      jj_la1[20] = jj_gen;
+      jj_la1[22] = jj_gen;
       ;
     }
   }
@@ -600,7 +624,7 @@ void FormaPrograma() throws ParseException {
       break;
       }
     default:
-      jj_la1[21] = jj_gen;
+      jj_la1[23] = jj_gen;
       ;
     }
   }
@@ -634,7 +658,7 @@ void FormaPrograma() throws ParseException {
       break;
       }
     default:
-      jj_la1[22] = jj_gen;
+      jj_la1[24] = jj_gen;
       ;
     }
   }
@@ -647,7 +671,7 @@ void FormaPrograma() throws ParseException {
       break;
       }
     default:
-      jj_la1[23] = jj_gen;
+      jj_la1[25] = jj_gen;
       ;
     }
   }
@@ -666,7 +690,7 @@ void FormaPrograma() throws ParseException {
       break;
       }
     default:
-      jj_la1[24] = jj_gen;
+      jj_la1[26] = jj_gen;
       ;
     }
   }
@@ -687,7 +711,7 @@ void FormaPrograma() throws ParseException {
       break;
       }
     default:
-      jj_la1[25] = jj_gen;
+      jj_la1[27] = jj_gen;
       ;
     }
   }
@@ -729,14 +753,14 @@ void FormaPrograma() throws ParseException {
         break;
         }
       default:
-        jj_la1[26] = jj_gen;
+        jj_la1[28] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
       break;
       }
     default:
-      jj_la1[27] = jj_gen;
+      jj_la1[29] = jj_gen;
       ;
     }
   }
@@ -750,7 +774,7 @@ void FormaPrograma() throws ParseException {
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[28];
+  final private int[] jj_la1 = new int[30];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -760,13 +784,13 @@ void FormaPrograma() throws ParseException {
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x0,0x8f400000,0x8f400000,0x0,0x0,0x0,0x0,0x30000000,0x10000,0x10000,0xc000000,0x30004000,0x0,0x0,0x0,0x30004000,0x0,0x2000,0x1e0000,0xc000,0x8000,0x4000,0x0,0x0,0x1e0000,0x1e0000,0x0,0x0,};
+      jj_la1_0 = new int[] {0x0,0x8f400000,0x8f400000,0x0,0x0,0x0,0x0,0x30000000,0x10000,0x10000,0xc000000,0x30004000,0x0,0x0,0x0,0x0,0x0,0x30004000,0x0,0x2000,0x1e0000,0xc000,0x8000,0x4000,0x0,0x0,0x1e0000,0x1e0000,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x80000000,0x0,0x0,0x20,0x98000003,0x20,0x18000003,0x0,0x0,0x0,0x0,0x984f8003,0x2000c0,0x100f00,0x1000,0x98400003,0x4,0x0,0x0,0x0,0x0,0x0,0x80000000,0x80000000,0x0,0x0,0x18000003,0x18000003,};
+      jj_la1_1 = new int[] {0x80000000,0x0,0x0,0x20,0x98000003,0x20,0x18000003,0x0,0x0,0x0,0x0,0x984f8003,0x2000c0,0x2000c0,0x100f00,0x100f00,0x1000,0x98400003,0x4,0x0,0x0,0x0,0x0,0x0,0x80000000,0x80000000,0x0,0x0,0x18000003,0x18000003,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -780,7 +804,7 @@ void FormaPrograma() throws ParseException {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 30; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -794,7 +818,7 @@ void FormaPrograma() throws ParseException {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 30; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -804,7 +828,7 @@ void FormaPrograma() throws ParseException {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 30; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -814,7 +838,7 @@ void FormaPrograma() throws ParseException {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 30; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -823,7 +847,7 @@ void FormaPrograma() throws ParseException {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 30; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -832,7 +856,7 @@ void FormaPrograma() throws ParseException {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 30; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -888,7 +912,7 @@ void FormaPrograma() throws ParseException {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 28; i++) {
+    for (int i = 0; i < 30; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
