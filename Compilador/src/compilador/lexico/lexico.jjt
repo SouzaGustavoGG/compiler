@@ -61,7 +61,7 @@ void ListaIdentificadores(): {} {
 }
 
 void ListaIdentificadores2(): {} {
-    <COMMA>ListaIdentificadores() | {}
+    (<COMMA>ListaIdentificadores())?
 }
 
 void Atribuicao(): {} {
@@ -81,7 +81,7 @@ void ListaIdentificadoresConst(): {} {
 }
 
 void ListaIdentificadoresConst2(): {} {
-    <COMMA> ListaIdentificadoresConst() | {}
+    (<COMMA> ListaIdentificadoresConst())?
 }
 
 void Constante(): {} {
@@ -104,11 +104,11 @@ void ClausulaLinha(): {} {
 }
 
 void Clausula2(): {} {
-    IsFalse() | {}
+    (IsFalse())?
 }
 
 void Clausula3(): {} {
-    IsTrue() | {}
+    (IsTrue())?
 }
 
 void IsFalse(): {} {
@@ -174,7 +174,7 @@ void Termo1(): {} {
 }
 
 void MaiorPrioridade(): {} {
-    <POW> Elemento() MaiorPrioridade() | {}
+    (<POW> Elemento() MaiorPrioridade())?
 }
 
 void Elemento(): {} {
@@ -187,7 +187,7 @@ void Elemento(): {} {
 }
 
 void Indice(): {} {
-    <OPEN_KEY> <NATURAL_NUMBER> <CLOSE_KEY> | {}
+    (<OPEN_KEY> <NATURAL_NUMBER> <CLOSE_KEY>)?
 }
 
 // ------------------------------------------INICIO DECLARACAO-------------------------------------------------
@@ -204,11 +204,11 @@ void Declaracao(): {} {
 }
 
 void Declaracao2(): {} {
-    DeclaracaoVar() | {}
+    (DeclaracaoVar())?
 }
 
 void Declaracao3(): {} {
-    DeclaracaoConst() | {}
+    (DeclaracaoConst())?
 }
 
 void DeclaracaoVar(): {} {
@@ -216,7 +216,7 @@ void DeclaracaoVar(): {} {
 }
 
 void ListaDeclaracaoVar(): {} {
-    PrefixoDeclaracaoVar()<DOT>ListaDeclaracaoVar2()
+    PrefixoDeclaracaoVar()ListaDeclaracaoVar2()
 }
 
 void PrefixoDeclaracaoVar(): {} {
@@ -228,11 +228,11 @@ void ListaIdentificadoresVar(): {} {
 }
 
 void ListaIdentificadoresVar2(): {} {
-    ListaIdentificadoresVar() | {}
+    (ListaIdentificadoresVar())?
 }
 
 void ListaIdentificadoresVar3(): {} {
-    <IDENTIFIER> ListaIdentificadoresVar4() | {}
+    (<IDENTIFIER> ListaIdentificadoresVar4())?
 }
 
 void ListaIdentificadoresVar4(): {} {
@@ -240,7 +240,7 @@ void ListaIdentificadoresVar4(): {} {
 }
 
 void ListaDeclaracaoVar2(): {} {
-    ListaDeclaracaoVar() | {}
+    (ListaDeclaracaoVar())?
 }
 
 void DeclaracaoConst(): {} {
@@ -248,11 +248,11 @@ void DeclaracaoConst(): {} {
 }
 
 void ListaDeclaracaoConst(): {} {
-    ListaDeclaracaoConst2() | {}
+    (ListaDeclaracaoConst2())?
 }
 
 void ListaDeclaracaoConst2(): {} {
-    PrefixoDeclaracaoConst()<DOT>ListaDeclaracaoConst()
+    PrefixoDeclaracaoConst()ListaDeclaracaoConst()
 }
 
 void PrefixoDeclaracaoConst(): {} {
@@ -260,7 +260,7 @@ void PrefixoDeclaracaoConst(): {} {
 }
 
 void ValorConst(): {} {
-    <NATURAL_NUMBER> | <REAL_NUMBER> | <LITERAL_CONST_DOUBLE_QUOTES> | <LITERAL_CONST_SINGLE_QUOTES> | {}
+    (<NATURAL_NUMBER> | <REAL_NUMBER> | <LITERAL_CONST_DOUBLE_QUOTES> | <LITERAL_CONST_SINGLE_QUOTES>)?
 }
 
 // ------------------------------------------FIM DECLARACAO-------------------------------------------------
@@ -379,8 +379,8 @@ SPECIAL_TOKEN : {
     <INVALID_SYMBOLS: (~["a"-"z", "A"-"Z", "0"-"9", "\"", "(", ")", "{", "}", ",", ".", "=", ">", "<", "!",
     "+", "-", "_", "*", "&", "/", "%", "|", "\n", "\r", "\f", "\t", " "])+>{Dados.addError("SIMBOLO INVALIDO", image.toString(), input_stream.getEndLine(),
      input_stream.getBeginColumn(), jjmatchedKind);}
-    | <INVALID_NATURAL_NUMBER: <DIGIT>(<DIGIT>)?(<DIGIT>)?<NOT_DIGIT>>{Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
-       input_stream.getBeginColumn(), jjmatchedKind);}
+    //| <INVALID_NATURAL_NUMBER: <DIGIT>(<DIGIT>)?(<DIGIT>)?<NOT_DIGIT>>{Dados.addError("NUMERO NATURAL INVALIDO", image.toString(), input_stream.getEndLine(),
+    //   input_stream.getBeginColumn(), jjmatchedKind);}
     | <INVALID_REAL_NUMBER: (<DIGIT>)+<DOT>(<DIGIT>)*>{Dados.addError("NUMERO REAL INVALIDO", image.toString(), input_stream.getEndLine(),
       input_stream.getBeginColumn(), jjmatchedKind);}
     | <INVALID_LITERAL_CONST_DOUBLE: "\"" (~["\n","\r","\""])* ~["\""]>{Dados.addError("CONSTANTE LITERAL INVALIDA", image.toString(), input_stream.getEndLine(),

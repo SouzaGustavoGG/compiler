@@ -122,7 +122,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[3] = jj_gen;
-
+      ;
     }
   }
 
@@ -178,7 +178,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[5] = jj_gen;
-
+      ;
     }
   }
 
@@ -251,7 +251,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[8] = jj_gen;
-
+      ;
     }
   }
 
@@ -263,7 +263,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[9] = jj_gen;
-
+      ;
     }
   }
 
@@ -461,7 +461,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[14] = jj_gen;
-
+      ;
     }
   }
 
@@ -517,7 +517,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[16] = jj_gen;
-
+      ;
     }
   }
 
@@ -589,7 +589,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[20] = jj_gen;
-
+      ;
     }
   }
 
@@ -601,7 +601,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[21] = jj_gen;
-
+      ;
     }
   }
 
@@ -612,7 +612,6 @@ void FormaPrograma() throws ParseException {
 
   final public void ListaDeclaracaoVar() throws ParseException {
     PrefixoDeclaracaoVar();
-    jj_consume_token(DOT);
     ListaDeclaracaoVar2();
   }
 
@@ -636,7 +635,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[22] = jj_gen;
-
+      ;
     }
   }
 
@@ -649,7 +648,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[23] = jj_gen;
-
+      ;
     }
   }
 
@@ -668,7 +667,7 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[24] = jj_gen;
-
+      ;
     }
   }
 
@@ -689,13 +688,12 @@ void FormaPrograma() throws ParseException {
       }
     default:
       jj_la1[25] = jj_gen;
-
+      ;
     }
   }
 
   final public void ListaDeclaracaoConst2() throws ParseException {
     PrefixoDeclaracaoConst();
-    jj_consume_token(DOT);
     ListaDeclaracaoConst();
   }
 
@@ -709,25 +707,37 @@ void FormaPrograma() throws ParseException {
 
   final public void ValorConst() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case NATURAL_NUMBER:{
-      jj_consume_token(NATURAL_NUMBER);
-      break;
-      }
+    case LITERAL_CONST_DOUBLE_QUOTES:
+    case LITERAL_CONST_SINGLE_QUOTES:
+    case NATURAL_NUMBER:
     case REAL_NUMBER:{
-      jj_consume_token(REAL_NUMBER);
-      break;
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case NATURAL_NUMBER:{
+        jj_consume_token(NATURAL_NUMBER);
+        break;
+        }
+      case REAL_NUMBER:{
+        jj_consume_token(REAL_NUMBER);
+        break;
+        }
+      case LITERAL_CONST_DOUBLE_QUOTES:{
+        jj_consume_token(LITERAL_CONST_DOUBLE_QUOTES);
+        break;
+        }
+      case LITERAL_CONST_SINGLE_QUOTES:{
+        jj_consume_token(LITERAL_CONST_SINGLE_QUOTES);
+        break;
+        }
+      default:
+        jj_la1[26] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
-    case LITERAL_CONST_DOUBLE_QUOTES:{
-      jj_consume_token(LITERAL_CONST_DOUBLE_QUOTES);
-      break;
-      }
-    case LITERAL_CONST_SINGLE_QUOTES:{
-      jj_consume_token(LITERAL_CONST_SINGLE_QUOTES);
       break;
       }
     default:
-      jj_la1[26] = jj_gen;
-
+      jj_la1[27] = jj_gen;
+      ;
     }
   }
 
@@ -740,7 +750,7 @@ void FormaPrograma() throws ParseException {
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[27];
+  final private int[] jj_la1 = new int[28];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -750,13 +760,13 @@ void FormaPrograma() throws ParseException {
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x0,0x8f400000,0x8f400000,0x0,0x0,0x0,0x0,0x30000000,0x10000,0x10000,0xc000000,0x30004000,0x0,0x0,0x0,0x30004000,0x0,0x2000,0x1e0000,0xc000,0x8000,0x4000,0x0,0x0,0x1e0000,0x1e0000,0x0,};
+      jj_la1_0 = new int[] {0x0,0x8f400000,0x8f400000,0x0,0x0,0x0,0x0,0x30000000,0x10000,0x10000,0xc000000,0x30004000,0x0,0x0,0x0,0x30004000,0x0,0x2000,0x1e0000,0xc000,0x8000,0x4000,0x0,0x0,0x1e0000,0x1e0000,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x80000000,0x0,0x0,0x20,0x98000003,0x20,0x18000003,0x0,0x0,0x0,0x0,0x984f8003,0x2000c0,0x100f00,0x1000,0x98400003,0x4,0x0,0x0,0x0,0x0,0x0,0x80000000,0x80000000,0x0,0x0,0x18000003,};
+      jj_la1_1 = new int[] {0x80000000,0x0,0x0,0x20,0x98000003,0x20,0x18000003,0x0,0x0,0x0,0x0,0x984f8003,0x2000c0,0x100f00,0x1000,0x98400003,0x4,0x0,0x0,0x0,0x0,0x0,0x80000000,0x80000000,0x0,0x0,0x18000003,0x18000003,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -770,7 +780,7 @@ void FormaPrograma() throws ParseException {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 27; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 28; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -784,7 +794,7 @@ void FormaPrograma() throws ParseException {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 27; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 28; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -794,7 +804,7 @@ void FormaPrograma() throws ParseException {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 27; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 28; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -804,7 +814,7 @@ void FormaPrograma() throws ParseException {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 27; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 28; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -813,7 +823,7 @@ void FormaPrograma() throws ParseException {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 27; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 28; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -822,7 +832,7 @@ void FormaPrograma() throws ParseException {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 27; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 28; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -873,12 +883,12 @@ void FormaPrograma() throws ParseException {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[70];
+    boolean[] la1tokens = new boolean[69];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 27; i++) {
+    for (int i = 0; i < 28; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -893,7 +903,7 @@ void FormaPrograma() throws ParseException {
         }
       }
     }
-    for (int i = 0; i < 70; i++) {
+    for (int i = 0; i < 69; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
