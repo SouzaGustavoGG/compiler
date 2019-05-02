@@ -23,7 +23,6 @@ public class LexicAnalyzer {
             parser.executarAnalise();
             for(String a: compilador.lexico.Dados.getDadosErros())
                 output.append(a).append("\n");
-            output.append("Número de erros: ").append(compilador.lexico.Dados.getErros()).append("\n");
             compilador.lexico.Dados.limpar();
         }catch(Exception e){}
 

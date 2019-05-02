@@ -441,10 +441,10 @@ public class CompiladorTela extends javax.swing.JFrame {
             String output = lexic_analyzer.analyze(jTextEntrada.getText());
 
             if (output.equals("")){
-                jTextSaída.setText(output);
-            } else {
                 SyntacticAnalyzer syntatic_analyzer = SyntacticAnalyzer.getInstance();
                 jTextSaída.setText(syntatic_analyzer.analyze(jTextEntrada.getText()));
+            } else {
+                jTextSaída.setText(output);
             }
 
         }

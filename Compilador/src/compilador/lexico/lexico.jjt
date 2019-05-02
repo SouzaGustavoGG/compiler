@@ -216,7 +216,7 @@ void DeclaracaoVar(): {} {
 }
 
 void ListaDeclaracaoVar(): {} {
-    PrefixoDeclaracaoVar()ListaDeclaracaoVar2()
+    PrefixoDeclaracaoVar()<DOT>ListaDeclaracaoVar2()
 }
 
 void PrefixoDeclaracaoVar(): {} {
@@ -256,7 +256,11 @@ void ListaDeclaracaoConst2(): {} {
 }
 
 void PrefixoDeclaracaoConst(): {} {
-    Tipo() <IS> ListaIdentificadores()
+    Tipo() <IS> ListaIdentificadores() ValorConst()
+}
+
+void ValorConst(): {} {
+    <NATURAL_NUMBER> | <REAL_NUMBER> | <LITERAL_CONST_DOUBLE_QUOTES> | <LITERAL_CONST_SINGLE_QUOTES> | {}
 }
 
 // ------------------------------------------FIM DECLARACAO-------------------------------------------------
