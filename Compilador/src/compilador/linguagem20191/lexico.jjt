@@ -4,6 +4,7 @@ options{
 
 PARSER_BEGIN(Parser)
 package compilador.linguagem20191;
+import compilador.AnaliseSemantica.AcoesSemanticas;
 
 public class Parser{
 
@@ -21,252 +22,100 @@ public class Parser{
     
     public void executarAnaliseSintatica() throws ParseException{
         System.out.println("Analisador sintatico");
-    	FormaPrograma();
+    	Programa();
     }
 }
 PARSER_END(Parser)
 
 // INICIO SINTATICO
 
-void FormaPrograma() : {} {
-    Programa()IdentificadorOpcional()
-}
-
-void IdentificadorOpcional(): {} {
-    (<IDENTIFIER>)?
-}
-
 void Programa() : {} {
-    <PROGRAM><OPEN_KEY>FormaDeclaracao()CorpoPrograma()<CLOSE_KEY>
+    Comentario()<PROGRAM><OPEN_KEY>DeclaracaoConstVar()CorpoPrograma()<CLOSE_KEY>IdentificadorPrograma()
 }
 
-void CorpoPrograma(): {} {
-    <EXECUTE><OPEN_KEY>ListaComandos()<CLOSE_KEY>
+void Comentario(): {} {
+    <LITERAL_CONST_SINGLE_QUOTES>|<LITERAL_CONST_SINGLE_QUOTES> | {}
 }
 
-void ListaComandos(): {} {
-    Comando()<DOT>ListaComandos2()
+void IdentificadorPrograma(): {} {
+    <IDENTIFIER> | {}
 }
 
-void ListaComandos2(): {} {
-    (ListaComandos())?
+void DeclaracaoConstVar(): {} {
+    <DEFINE><OPEN_KEY>ConstantesVariaveis()<CLOSE_KEY> | {}
 }
 
-void Comando(): {} {
-    Atribuicao() | EntradaDados() | SaidaDados() | Selecao() | Repeticao()
-}
-
-void ListaIdentificadores(): {} {
-    <IDENTIFIER> ListaIdentificadores2()
-}
-
-void ListaIdentificadores2(): {} {
-    (<COMMA>ListaIdentificadores())?
-}
-
-void Atribuicao(): {} {
-    <SET>Expressao()<TO>ListaIdentificadores()
-}
-
-void EntradaDados(): {} {
-    <GET><OPEN_KEY>ListaIdentificadores()<CLOSE_KEY>
-}
-
-void SaidaDados(): {} {
-    <PUT><OPEN_KEY>ListaIdentificadoresConst()<CLOSE_KEY>
-}
-
-void ListaIdentificadoresConst(): {} {
-    <IDENTIFIER> ListaIdentificadoresConst2()| Constante() ListaIdentificadoresConst2()
-}
-
-void ListaIdentificadoresConst2(): {} {
-    (<COMMA> ListaIdentificadoresConst())?
-}
-
-void Constante(): {} {
-    <NATURAL_NUMBER>
-    | <REAL_NUMBER>
-    | <LITERAL_CONST_SINGLE_QUOTES>
-    | <LITERAL_CONST_DOUBLE_QUOTES>
-}
-
-void Selecao(): {} {
-    <VERIFY>Expressao()Clausula()
-}
-
-void Clausula(): {} {
-    <IS> ClausulaLinha()
-}
-
-void ClausulaLinha(): {} {
-    <TRUE><OPEN_KEY>ListaComandos()<CLOSE_KEY>Clausula2() | <FALSE><OPEN_KEY>ListaComandos()<CLOSE_KEY>Clausula3()
-}
-
-void Clausula2(): {} {
-    (IsFalse())?
-}
-
-void Clausula3(): {} {
-    (IsTrue())?
-}
-
-void IsFalse(): {} {
-    <IS><FALSE><OPEN_KEY>ListaComandos()<CLOSE_KEY>
-}
-
-void IsTrue(): {} {
-    <IS><TRUE><OPEN_KEY>ListaComandos()<CLOSE_KEY>
-}
-
-void Repeticao(): {} {
-    Loop() | While()
-}
-
-void Loop(): {} {
-    <LOOP><OPEN_KEY>ListaComandos()<CLOSE_KEY><WHILE>Expressao()<IS><TRUE>
-}
-
-void While(): {} {
-    <WHILE>Expressao()<IS><TRUE><DO><OPEN_KEY>ListaComandos()<CLOSE_KEY>
-}
-
-void Expressao(): {} {
-    ExpressaoAritmeticaLogica()ExpressaoLinha()
-}
-
-void ExpressaoLinha(): {} {
-    ExpressaoAritmeticaLogica()
-    | <DIFFERENT> ExpressaoAritmeticaLogica()
-    | <LESS> ExpressaoAritmeticaLogica()
-    | <GREATER> ExpressaoAritmeticaLogica()
-    | <LESS_EQUAL> ExpressaoAritmeticaLogica()
-    | <GREATER_EQUAL> ExpressaoAritmeticaLogica()
-    | {}
-}
-
-void ExpressaoAritmeticaLogica(): {} {
-    Termo2() MenorPrioridade()
-}
-
-void MenorPrioridade(): {} {
-    (<PLUS> Termo2() MenorPrioridade()
-    | <MINUS> Termo2() MenorPrioridade()
-    | <PIPE> Termo2() MenorPrioridade())?
-}
-
-void Termo2(): {} {
-    Termo1() MediaPrioridade()
-}
-
-void MediaPrioridade(): {} {
-    (<MULTIPLY> Termo1() MediaPrioridade()
-    | <DIVIDER> Termo1() MediaPrioridade()
-    | <PERCENT> Termo1() MediaPrioridade()
-    | <MOD> Termo1() MediaPrioridade()
-    | <AMPERSAND> Termo1() MediaPrioridade())?
-}
-
-void Termo1(): {} {
-    Elemento() MaiorPrioridade()
-}
-
-void MaiorPrioridade(): {} {
-    (<POW> Elemento() MaiorPrioridade())?
-}
-
-void Elemento(): {} {
-    <IDENTIFIER> Indice()
-    | Constante()
-    | <TRUE>
-    | <FALSE>
-    | <OPEN_PARENTHESIS> Expressao() <CLOSE_PARENTHESIS>
-    | <NOT> <OPEN_PARENTHESIS> Expressao() <CLOSE_PARENTHESIS>
-}
-
-void Indice(): {} {
-    (<OPEN_KEY> <NATURAL_NUMBER> <CLOSE_KEY>)?
-}
-
-// ------------------------------------------INICIO DECLARACAO-------------------------------------------------
-void FormaDeclaracao(): {} {
-    (<DEFINE><OPEN_KEY>Declaracao()<CLOSE_KEY>)?
-}
-
-void Tipo(): {} {
-    <REAL> | <NATURAL> | <BOOLEAN> | <CHAR>
-}
-
-void Declaracao(): {} {
-    ((DeclaracaoConst()Declaracao2())|(DeclaracaoVar()Declaracao3()))
-}
-
-void Declaracao2(): {} {
-    (DeclaracaoVar())?
-}
-
-void Declaracao3(): {} {
-    (DeclaracaoConst())?
-}
-
-void DeclaracaoVar(): {} {
-    <VARIABLE>ListaDeclaracaoVar()
-}
-
-void ListaDeclaracaoVar(): {} {
-    PrefixoDeclaracaoVar()ListaDeclaracaoVar2()
-}
-
-void PrefixoDeclaracaoVar(): {} {
-    Tipo()<IS>ListaIdentificadoresVar()<DOT>
-}
-
-void ListaIdentificadoresVar(): {} {
-    <IDENTIFIER> ListaIdentificadoresVar3()
-}
-
-void ListaIdentificadoresVar2(): {} {
-    (ListaIdentificadoresVar())?
-}
-
-void ListaIdentificadoresVar3(): {} {
-    (<IDENTIFIER> ListaIdentificadoresVar4())?
-}
-
-void ListaIdentificadoresVar4(): {} {
-    ListaIdentificadoresVar3() | <NATURAL_NUMBER> ListaIdentificadoresVar2()
-}
-
-void ListaDeclaracaoVar2(): {} {
-    (ListaDeclaracaoVar())?
+void ConstantesVariaveis(): {} {
+    DeclaracaoConst()Variaveis2()|DeclaracaoVar()Constantes2()
 }
 
 void DeclaracaoConst(): {} {
-    <NOT><VARIABLE>ListaDeclaracaoConst()
+    <NOT><VARIABLE>Constantes()
 }
 
-void ListaDeclaracaoConst(): {} {
-    (ListaDeclaracaoConst2())?
+void Constantes(): {} {
+    Tipo()<IS>ListaIdentConst()Valor()<DOT>Constantes1()
 }
 
-void ListaDeclaracaoConst2(): {} {
-    PrefixoDeclaracaoConst()ListaDeclaracaoConst()
+void Constantes1(): {} {
+    Constantes() | {}
 }
 
-void PrefixoDeclaracaoConst(): {} {
-    Tipo() <IS> ListaIdentificadores() ValorConst()<DOT>
+void Constantes2(): {} {
+    DeclaracaoConst() | {}
 }
 
-void ValorConst(): {} {
-    (<NATURAL_NUMBER> | <REAL_NUMBER> | <LITERAL_CONST_DOUBLE_QUOTES> | <LITERAL_CONST_SINGLE_QUOTES>)?
+void DeclaracaoVar(): {} {
+    <VARIABLE>Variaveis()
 }
+
+void Variaveis(): {} {
+    Tipo()<IS>ListaIdentVar()Valor()<DOT>Variaveis1()
+}
+
+void Variaveis1(): {} {
+    Variaveis() | {}
+}
+
+void Variaveis2(): {} {
+    DeclaracaoVar() | {}
+}
+
+void Tipo(): {} {
+    <NATURAL> | <REAL> | <CHAR> | <BOOLEAN>
+}
+
+void ListaIdentConst(): {} {
+    <IDENTIFIER>ListaIdentConst1()
+}
+
+void ListaIdentConst1(): {} {
+    <COMMA>ListaIdentConst() | {}
+}
+
+void ListaIdentVar(): {} {
+    <IDENTIFIER>Indice()ListaIdentVar1()
+}
+
+void ListaIdentVar1(): {} {
+    <COMMA>ListaIdentVar() | {}
+}
+
+void Indice(): {} {
+    <OPEN_KEY><NATURAL_NUMBER><CLOSE_KEY> | {}
+}
+
+void Valor(): {} {
+    <LITERAL_CONST_DOUBLE_QUOTES> | <LITERAL_CONST_SINGLE_QUOTES> | <NATURAL_NUMBER> | <REAL_NUMBER>
+}
+
 
 // ------------------------------------------FIM DECLARACAO-------------------------------------------------
 
 // INICIO LEXICO
 //ignorar
 SKIP : {
-    " "
+    "q "
 	| "\t"
     | "\n"
     | "\r"
