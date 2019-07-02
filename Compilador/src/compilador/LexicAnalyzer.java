@@ -1,7 +1,7 @@
 package compilador;
 
 import java.io.StringReader;
-import compilador.lexico.Parser;
+import compilador.linguagem20191.Parser;
 
 public class LexicAnalyzer {
 
@@ -21,9 +21,9 @@ public class LexicAnalyzer {
         StringBuilder output = new StringBuilder();
         try{
             parser.executarAnalise();
-            for(String a: compilador.lexico.Dados.getDadosErros())
+            for(String a: compilador.linguagem20191.Dados.getDadosErros())
                 output.append(a).append("\n");
-            compilador.lexico.Dados.limpar();
+            compilador.linguagem20191.Dados.limpar();
         }catch(Exception e){}
 
 

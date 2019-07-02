@@ -3,7 +3,7 @@ options{
 }
 
 PARSER_BEGIN(Parser)
-package compilador.lexico;
+package compilador.linguagem20191;
 
 public class Parser{
 

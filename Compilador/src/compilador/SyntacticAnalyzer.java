@@ -2,8 +2,8 @@ package compilador;
 
 import java.io.StringReader;
 
-import compilador.lexico.ParseException;
-import compilador.lexico.Parser;
+import compilador.linguagem20191.ParseException;
+import compilador.linguagem20191.Parser;
 
 public class SyntacticAnalyzer {
 

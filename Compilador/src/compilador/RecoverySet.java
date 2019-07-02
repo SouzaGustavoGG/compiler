@@ -1,7 +1,6 @@
 
 package compilador;
 
-import compilador.lexico.Parser;
 import java.util.HashSet;
 import java.util.Iterator;
 
