@@ -242,3 +242,108 @@ SPECIAL_TOKEN : {
     | (<LETTER>|<UNDER>)+(<LETTER>|<DIGIT>|<UNDER>)*<DIGIT>> {Dados.addError("IDENTIFICADOR INVALIDO", image.toString(), input_stream.getEndLine(),
                                                                                                       input_stream.getBeginColumn(), jjmatchedKind);}
 }
+
+//------------M3-GUSTAVO-------------
+
+//ANALISAR PARAMETROS FUNCAO
+
+void Item() throws ErroSemantico: {} {
+	(<IDENTIFIER> compilador.AnaliseSemantica.identificadorComandoSaida_18(ec, ts, codigo, t.image) Indice() compilador.AnaliseSemantica.variavelArrayComandoDeSaida_19(ec, ts, codigo)
+	| <NATURAL_NUMBER> compilador.AnaliseSemantica.constanteInteiraComandoSaida_20(ec,codigo,valor.image)
+	| <REAL_NUMBER> compilador.AnaliseSemantica.constanteRealComandoSaida_21(ec,codigo,valor.image)
+	| (<LITERAL_CONST_DOUBLE_QUOTES | <LITERAL_CONST_SINGLE_QUOTES>) compilador.AnaliseSemantica.constanteLiteralComandoSaida_22(ec,codigo,valor.image))
+}
+
+void Selecao() throws ErroSemantico {} {
+ 	<VERIFY> Expressao() <IS> Clausulas() compilador.AnaliseSemantica.fimComandoSelecao_23(ec,codigo)
+}
+
+void Clausulas() throws ErroSemantico {} {
+	<TRUE> compilador.AnaliseSemantica.palavraReservadaTrue_24(ec,codigo,ts) { ListaDeComandos() } Falsa()
+	|<FALSE> compilador.AnaliseSemantica.palavraReservadaUntrue_25(ec,codigo,ts) { ListaDeComandos() } <verdadeira>
+}
+
+void Verdadeira() throws ErroSemantico {} {
+	(<IS><TRUE> compilador.AnaliseSemantica.palavraReservadaTrueOuUntrue_26(ec,codigo,ts) { ListaDeComandos() })?
+}
+
+void Falsa() throws ErroSemantico {} {
+	(<IS><FALSE> compilador.AnaliseSemantica.palavraReservadaTrueOuUntrue_26(ec,codigo,ts) { ListaDeComandos() })? 
+}
+
+void Repeticao() throws ErroSemantico {} { 
+	<LOOP> compilador.AnaliseSemantica.comandoRepeticao_27(ec) { ListaDeComandos() } <WHILE> Expressao() compilador.AnaliseSemantica.fimComandoRepeticao_28(ec,codigo) <IS> <TRUE>
+	|<WHILE> compilador.AnaliseSemantica.inicioComandoRepeticao_29(ec) Expressao() compilador.AnaliseSemantica.comandoRepeticao_30(ec,codigo) <IS> <TRUE> <DO> { ListaDeComandos() } compilador.AnaliseSemantica.fimComandoRepeticao_31(ec,codigo)
+}
+
+void Expressao() throws ErroSemantico {} {
+	ExpressaoAritmeticaOuLogica() Expressao1()
+}
+
+void Expressao1() throws ErroSemantico {} { 
+	(<EQUALS> ExpressaoAritmeticaOuLogica() compilador.AnaliseSemantica.operacaoRelacionalIgual_32(ec, codigo)
+	|<DIFFERENT> ExpressaoAritmeticaOuLogica() compilador.AnaliseSemantica.operacaoRelacionalDiferente_33(ec, codigo)
+	|<LESS> ExpressaoAritmeticaOuLogica() compilador.AnaliseSemantica.operacaoRelacionalMenor_34(ec, codigo)
+	|<GREATER> ExpressaoAritmeticaOuLogica() compilador.AnaliseSemantica.operacaoRelacionalMaior_35(ec, codigo)
+	|<LESS_EQUAL> ExpressaoAritmeticaOuLogica() compilador.AnaliseSemantica.operacaoRelacionalMenorIgual_36(ec, codigo)
+	|<GREATER_EQUAL> ExpressaoAritmeticaOuLogica() compilador.AnaliseSemantica.operacaoRelacionalMaiorIgual_37(ec, codigo))?
+}
+
+void ExpressaoAritmeticaOuLogica() throws ErroSemantico {} {
+	Termo2()  MenorPrioridade()
+}
+
+void MenorPrioridade() throws ErroSemantico {} {
+	(<PLUS> Termo2() MenorPrioridade() compilador.AnaliseSemantica.operacaoAritmeticaAdicao_38(ec,codigo)
+	|<MINUS> Termo2() MenorPrioridade() compilador.AnaliseSemantica.operacaoAritmeticaSubtracao_39(ec,codigo)
+	|<PIPE> Termo2() MenorPrioridade() compilador.AnaliseSemantica.operacaoLogicaOU_40(ec,codigo))?
+}
+
+void Termo2() throws ErroSemantico {} {
+	 Termo1() MediaPrioridade()
+}
+	 
+void MediaPrioridade() throws ErroSemantico {} {
+	(<MULTIPLY> Termo1() MediaPrioridade() compilador.AnaliseSemantica.operacaoAritmeticaMultiplicao_41(ec,codigo)
+	|<DIVIDER> Termo1() MediaPrioridade() compilador.AnaliseSemantica.operacaoAritmeticaDivReal_42(ec,codigo)
+	|<PERCENT> Termo1() MediaPrioridade() compilador.AnaliseSemantica.operacaoAritmeticaDivInteira_43(ec,codigo)
+	|<MOD> Termo1() MediaPrioridade() compilador.AnaliseSemantica.operacaoAritmeticaRestoDivInteira_44(ec,codigo)
+	|<AMPERSAND> Termo1() MediaPrioridade() compilador.AnaliseSemantica.operacaoLogicaE_45(ec, codigo))?
+}
+
+void Termo1() throws ErroSemantico {} { 
+	Elemento() MaiorPrioridade()
+}
+
+void MaiorPrioridade() throws ErroSemantico {} {
+	(<POW> Elemento() MaiorPrioridade() compilador.AnaliseSemantica.operacaoAritmeticaPotencia_46(ec,codigo))?
+}
+	
+void Elemento() throws ErroSemantico {} {
+	 <IDENTIFIER> compilador.AnaliseSemantica.aidentificadorComandoSaida_18(ec, ts, codigo, t.image) Indice() compilador.AnaliseSemantica.variavelArrayComandoDeSaida_19(ec, ts, codigo)
+	| <NATURAL_NUMBER> compilador.AnaliseSemantica.constanteInteiraComandoSaida_20(ec, codigo, valor.image)
+	| <REAL_NUMBER> compilador.AnaliseSemantica.constanteRealComandoSaida_21(ec, codigo, valor.image)
+	| (<LITERAL_CONST_DOUBLE_QUOTES | <LITERAL_CONST_SINGLE_QUOTES>) compilador.AnaliseSemantica.constanteLiteralComandoSaida_22(ec,codigo, valor.image)
+	| <TRUE> compilador.AnaliseSemantica.constanteLogicaTrue_47(ec,codigo)
+	| <FALSE> compilador.AnaliseSemantica.constanteLogicaUntrue_48(ec,codigo)
+	| (Expressao())
+	| <EXCLAMATION> (Expressao()) compilador.AnaliseSemantica.operacaoLogicaNao_49(ec,codigo)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
