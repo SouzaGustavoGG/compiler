@@ -393,3 +393,106 @@ SPECIAL_TOKEN : {
     | (<LETTER>|<UNDER>)+(<LETTER>|<DIGIT>|<UNDER>)*<DIGIT>> {Dados.addError("IDENTIFICADOR INVALIDO", image.toString(), input_stream.getEndLine(),
                                                                                                       input_stream.getBeginColumn(), jjmatchedKind);}
 }
+
+//------------M3-GUSTAVO-------------
+
+void Item() throws ErroSemantico: {} {
+	(<IDENTIFIER> #18 Indice() #19
+	| <NATURAL_NUMBER> #20
+	| <REAL_NUMBER> #21
+	| (<LITERAL_CONST_DOUBLE_QUOTES | <LITERAL_CONST_SINGLE_QUOTES>) #22)
+}
+
+void Selecao() throws ErroSemantico {} {
+ 	<VERIFY> Expressao() <IS> Clausulas() #23
+}
+
+void Clausulas() throws ErroSemantico {} {
+	<TRUE> #24 { ListaDeComandos() } Falsa()
+	|<FALSE> #25 { ListaDeComandos() } <verdadeira>
+}
+
+void Verdadeira() throws ErroSemantico {} {
+	(<IS><TRUE> #26 { ListaDeComandos() })?
+}
+
+void Falsa() throws ErroSemantico {} {
+	(<IS><FALSE> #26 { ListaDeComandos() })? 
+}
+
+void Repeticao() throws ErroSemantico {} { 
+	<LOOP> #27 { ListaDeComandos() } <WHILE> Expressao() #28 <IS> <TRUE>
+	|<WHILE> #29 Expressao() #30 <IS> <TRUE> <DO> { ListaDeComandos() } #31
+}
+
+void Expressao() throws ErroSemantico {} {
+	ExpressaoAritmeticaOuLogica() Expressao1()
+}
+
+void Expressao1() throws ErroSemantico {} { 
+	(<EQUALS> ExpressaoAritmeticaOuLogica() #32
+	|<DIFFERENT> ExpressaoAritmeticaOuLogica() #33
+	|<LESS> ExpressaoAritmeticaOuLogica() #34
+	|<GREATER> ExpressaoAritmeticaOuLogica() #35
+	|<LESS_EQUAL> ExpressaoAritmeticaOuLogica() #36
+	|<GREATER_EQUAL> ExpressaoAritmeticaOuLogica() #37)?
+}
+
+void ExpressaoAritmeticaOuLogica() throws ErroSemantico {} {
+	Termo2()  MenorPrioridade()
+}
+
+void MenorPrioridade() throws ErroSemantico {} {
+	(<PLUS> Termo2() MenorPrioridade() #38
+	|<MINUS> Termo2() MenorPrioridade() #39
+	|<PIPE> Termo2() MenorPrioridade() #40)?
+}
+
+void Termo2() throws ErroSemantico {} {
+	 Termo1() MediaPrioridade()
+}
+	 
+void MediaPrioridade() throws ErroSemantico {} {
+	(<MULTIPLY> Termo1() MediaPrioridade() #41
+	|<DIVIDER> Termo1() MediaPrioridade() #42
+	|<PERCENT> Termo1() MediaPrioridade() #43
+	|<MOD> Termo1() MediaPrioridade() #44
+	|<AMPERSAND> Termo1() MediaPrioridade() #45)?
+}	
+
+void Termo1() throws ErroSemantico {} { 
+	Elemento() MaiorPrioridade()
+}
+
+void MaiorPrioridade() throws ErroSemantico {} {
+	(<POW> Elemento() MaiorPrioridade() #46)?
+}
+	
+void Elemento() throws ErroSemantico {} {
+	 <IDENTIFIER> #18 Indice() #19
+	| <NATURAL_NUMBER> #20
+	| <REAL_NUMBER> #21
+	| (<LITERAL_CONST_DOUBLE_QUOTES | <LITERAL_CONST_SINGLE_QUOTES>) #22
+	| <TRUE> #47
+	| <FALSE> #48
+	| ( Expressao() )
+	| ! ( Expressao() ) #49
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
