@@ -1,4 +1,4 @@
-package compilador.lexico;
+package compilador.linguagem20191;
 
 import java.util.ArrayList;
 
