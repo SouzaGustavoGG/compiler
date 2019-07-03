@@ -26,7 +26,11 @@ public class Parser{
     
     public void executarAnaliseSintatica() throws ParseException{
         System.out.println("Analisador sintatico");
-    	Programa();
+        try{
+    		Programa();
+    	} catch(Exception ex){
+			System.out.println(ex.toString());
+    	}
     }
 }
 PARSER_END(Parser)
@@ -49,7 +53,7 @@ void Comentario() throws ErroSemantico: {} {
 }
 
 void IdentificadorPrograma() throws ErroSemantico: {} {
-    <IDENTIFIER> | {}
+    <IDENTIFIER>{AcoesSemanticas.fimPrograma_1(EstruturaControle ec, TabelaSimbolos ts, codigo, identificador);} | {}
 }
 
 void DeclaracaoConstVar() throws ErroSemantico: {} {
@@ -61,11 +65,12 @@ void ConstantesVariaveis() throws ErroSemantico: {} {
 }
 
 void DeclaracaoConst() throws ErroSemantico: {} {
-    <NOT><VARIABLE>Constantes()
+    <NOT><VARIABLE>{AcoesSemanticas.palavraReservadaUnchangeable_2(ec);}Constantes()
 }
 
+//olhar parametros
 void Constantes() throws ErroSemantico: {} {
-    Tipo()<IS>ListaIdentConst()Valor()<DOT>Constantes1()
+    Tipo()<IS>ListaIdentConst(){AcoesSemanticas.terminoDeclConstVariavel_3(ec,codigo);}Valor(){AcoesSemanticas.valorNaDeclaracaoContante_4(ec,codigo,valor);}<DOT>Constantes1()
 }
 
 void Constantes1() throws ErroSemantico: {} {
@@ -81,7 +86,7 @@ void DeclaracaoVar() throws ErroSemantico: {} {
 }
 
 void Variaveis() throws ErroSemantico: {} {
-    Tipo()<IS>ListaIdentVar()Valor()<DOT>Variaveis1()
+    Tipo()<IS>ListaIdentVar(){AcoesSemanticas.terminoDeclConstVariavel_3(ec,codigo);}<DOT>Variaveis1()
 }
 
 void Variaveis1() throws ErroSemantico: {} {
@@ -93,11 +98,14 @@ void Variaveis2() throws ErroSemantico: {} {
 }
 
 void Tipo() throws ErroSemantico: {} {
-    <NATURAL> | <REAL> | <CHAR> | <BOOLEAN>
+    <NATURAL> {AcoesSemanticas.palavraReservadaInteger_6(ec);} 
+    | <REAL> {AcoesSemanticas.palavraReservadaFloat_7(ec);}
+    | <CHAR> {AcoesSemanticas.palavraReservadaString_8(ec);}
+    | <BOOLEAN> {AcoesSemanticas.palavraReservadaLogic_9(ec);}
 }
 
 void ListaIdentConst() throws ErroSemantico: {} {
-    <IDENTIFIER>ListaIdentConst1()
+    <IDENTIFIER>{AcoesSemanticas.identificadorConstante_10(ec, ts, t.image);}ListaIdentConst1()
 }
 
 void ListaIdentConst1() throws ErroSemantico: {} {
@@ -105,15 +113,16 @@ void ListaIdentConst1() throws ErroSemantico: {} {
 }
 
 void ListaIdentVar() throws ErroSemantico: {} {
-    <IDENTIFIER>Indice()ListaIdentVar1()
+    <IDENTIFIER>{AcoesSemanticas.identificadorVariavel_11(ec, ts, t.image);}Indice(){AcoesSemanticas.identificadorVariavelETamanhoIndexado_12(ec, ts, codigo);} ListaIdentVar1()
 }
 
 void ListaIdentVar1() throws ErroSemantico: {} {
     <COMMA>ListaIdentVar() | {}
 }
 
+//olhar parametro funcao
 void Indice() throws ErroSemantico: {} {
-    <OPEN_KEY><NATURAL_NUMBER><CLOSE_KEY> | {}
+    <OPEN_KEY><NATURAL_NUMBER>{AcoesSemanticas.constanteIntComoTamanhoArray_13(ec,Integer.parseInt(t.image));}<CLOSE_KEY> | {}
 }
 
 void Valor() throws ErroSemantico: {} {
@@ -121,11 +130,39 @@ void Valor() throws ErroSemantico: {} {
 }
 
 void CorpoPrograma() throws ErroSemantico: {} {
-    {}
+    <EXECUTE><OPEN_KEY>ListaDeComandos()<CLOSE_KEY>
 }
 
-void ListaComandos() throws ErroSemantico: {} {
-    {}
+void ListaDeComandos() throws ErroSemantico: {} {
+    Comando()<DOT>ListaDeComandos2()
+}
+
+void ListaDeComandos2() throws ErroSemantico: {} {
+	ListaDeComandos() | {}
+}
+
+void Comando() throws ErroSemantico: {} {
+	Atribuicao() | Entrada() | Saida() | Selecao() | Repeticao()
+}
+
+void Atribuicao () throws ErroSemantico: {} {
+	<SET>{AcoesSemanticas.comandoAtribuicao_14(ec);}Expressao()<TO>ListaIdentVar(){AcoesSemanticas.fimComandoAtribuicao_15(ec,codigo);}
+}
+
+void Entrada() throws ErroSemantico: {} {
+	<GET> {AcoesSemanticas.comandoEntradaDados_16(ec);} <OPEN_KEY> ListaIdentVar() <CLOSE_KEY>
+}	
+	
+void Saida() throws ErroSemantico: {} {
+	<PUT><OPEN_KEY> ListaIdentEOuConst() <CLOSE_KEY>
+}
+
+void ListaIdentEOuConst() throws ErroSemantico: {} {
+	Item() {AcoesSemanticas.mensagemEmComandoSaida_17(ec,codigo);} ListaIdentEOuConst2()
+}
+
+void ListaIdentEOuConst2() throws ErroSemantico: {} {
+	<COMMA> ListaIdentEOuConst() | {}
 }
 
 void Item() throws ErroSemantico: {} {
